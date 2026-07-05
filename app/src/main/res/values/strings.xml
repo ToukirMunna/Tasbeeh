@@ -1,0 +1,269 @@
+<resources>
+    <string name="app_name">Tasbeeh</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_tasbeehs">Tasbeehs</string>
+    <string name="nav_profile">Dashboard</string>
+    
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
+    <string name="create">Create</string>
+    <string name="remove">Remove</string>
+    <string name="close">Close</string>
+    <string name="details">Details</string>
+    <string name="meaning">Meaning</string>
+    <string name="user">User</string>
+    <string name="greeting">Assalamu Alaikum,</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">Tasbeeh</string>
+    <string name="goals_section">Goals:</string>
+    <string name="no_goals">No goals set. Add a goal to get started!</string>
+    <string name="add_goal_btn">Add Goal</string>
+    <string name="today_total">Today\'s Total</string>
+
+    <!-- Counter Screen -->
+    <string name="pure_black">Pure Black</string>
+    <string name="recite_now">Recite Now</string>
+    
+    <!-- Tasbeehs List -->
+    <string name="library_title">Library</string>
+    <string name="my_tasbeehs_title">My Tasbeehs</string>
+    <string name="no_tasbeehs">No tasbeehs found.</string>
+    <string name="active_goal_label">Active Goal</string>
+    <string name="today_label">Today: %1$s</string>
+    <string name="all_time_label">All time: %1$s</string>
+    <string name="days_active">%1$s days active</string>
+    
+    <!-- Profile Screen -->
+    <string name="profile_title">Dashboard</string>
+    <string name="weekly_activity">Weekly Activity</string>
+    <string name="btn_statistics">Statistics</string>
+    <string name="btn_settings">Settings</string>
+    <string name="top_used_tasbeeh">Top Used Tasbeeh</string>
+    <string name="no_tasbeeh_msg">You have no tasbeeh yet, add a few.</string>
+    <string name="history_by_month">History by Month</string>
+    <string name="no_history">No history available yet.</string>
+    <string name="points_label">Points:</string>
+    <string name="day_streak">Day Streak</string>
+    <string name="label_male">Male</string>
+    <string name="label_female">Female</string>
+    <string name="label_your_name">Your Name</string>
+    <string name="personalize_exp">Personalize your experience.</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="points_breakdown">Points Breakdown</string>
+    <string name="points_rules">How points are calculated:</string>
+    <string name="rule_1">• 0.25 points per Tasbeeh count</string>
+    <string name="rule_2">• +10 points for daily activity</string>
+    <string name="rule_3">• +20 points for 1000+ daily count</string>
+    <string name="achievements_title">Achievements</string>
+    <string name="see_all">See All</string>
+    <string name="badges_title">Badges</string>
+    <string name="total_earned">Total Earned: %1$s</string>
+    <string name="earned_times">Earned %1$s time(s)</string>
+    <string name="locked">Locked</string>
+    <string name="no_detailed_breakdown">No detailed breakdown available.</string>
+    <string name="total_label">Total: %1$s</string>
+
+    <string name="daily_history">Daily History</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="page_format">Page %1$d of %2$d</string>
+    <string name="tab_daily">Daily</string>
+    <string name="tab_monthly">Monthly</string>
+
+    <!-- Statistics Screen -->
+    <string name="stats_title">Statistics</string>
+    <string name="history_title">History</string>
+    <string name="leaderboard_title">Leaderboard</string>
+    <string name="period_daily">Daily</string>
+    <string name="period_weekly">Weekly</string>
+    <string name="period_monthly">Monthly</string>
+    <string name="leaderboard_username">Leaderboard Name</string>
+    <string name="anonymous">Stay Anonymous</string>
+    <string name="rank">Rank</string>
+    <string name="points">Counts</string>
+    <string name="leaderboard_empty">No rankings available yet.</string>
+    <string name="leaderboard_settings">Leaderboard Profile</string>
+    <string name="you">You</string>
+    <string name="leaderboard_toggle_label">Participate in Leaderboard</string>
+    <string name="leaderboard_opt_in_msg">Join the global community to see rankings and share your progress.</string>
+    <string name="leaderboard_opt_in_btn">Enable Leaderboard</string>
+    <string name="leaderboard_off_msg">Leaderboard is disabled. Your name and counts are not visible to others.</string>
+    <string name="stats_today">Today:</string>
+    <string name="stats_week">This Week:</string>
+    <string name="stats_month">This Month:</string>
+    <string name="stats_total">Total:</string>
+    <string name="stats_average">Average:</string>
+    <string name="avg_daily">Daily</string>
+    <string name="avg_weekly">Weekly</string>
+    <string name="avg_monthly">Monthly</string>
+    <string name="label_tasbeeh_count">Tasbeeh Count</string>
+    <string name="label_days">Days:</string>
+    <string name="label_tasbeehs">Tasbeehs:</string>
+    <string name="no_data_period">No data available for this period.</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="group_appearance">Appearance</string>
+    <string name="setting_theme">App Theme</string>
+    <string name="setting_show_circle">Show Counter Circle</string>
+    <string name="setting_show_circle_desc">Show the circular progress on Home screen</string>
+    <string name="setting_gradient">Counter Gradient</string>
+    <string name="setting_thickness">Circle Thickness</string>
+    <string name="group_sound">Sound &amp; Feedback</string>
+    <string name="setting_tap_sound">Tap Sound</string>
+    <string name="setting_vibrate_tap">Vibrate on Tap</string>
+    <string name="setting_vibrate_tap_desc">Light vibration for each count</string>
+    <string name="setting_vibrate_100">Vibrate at 100</string>
+    <string name="setting_vibrate_100_desc">Strong vibration every 100 counts</string>
+    <string name="group_toast">Toast Reminder</string>
+    <string name="setting_toast_enable">Enable Toast Reminder</string>
+    <string name="setting_toast_desc">Shows a small message periodically when screen is on</string>
+    <string name="setting_toast_text">Reminder Text</string>
+    <string name="setting_toast_interval">Interval (minutes)</string>
+    <string name="group_data">Data Management</string>
+    <string name="setting_backup_restore">Backup &amp; Restore</string>
+    <string name="btn_backup">Backup</string>
+    <string name="btn_restore">Restore</string>
+    <string name="logout_confirm_title">Logout</string>
+    <string name="logout_confirm_message">Are you sure you want to logout? Automatic cloud sync will be disabled until you login again.</string>
+    <string name="logout_btn">Logout</string>
+    <string name="group_about">About</string>
+    <string name="setting_version">App Version</string>
+    <string name="about_text">This Tasbeeh &amp; Adhkar app is designed to support daily remembrance through a calm, distraction-free experience. With a minimal and elegant interface, it helps users maintain consistency in dhikr and adhkar with ease and focus.\n\nDeveloped with care and attention to detail by Toukir Ahmed, this app prioritizes simplicity, reliability, and a peaceful spiritual experience.</string>
+    <string name="group_language">Language</string>
+    <string name="setting_language">App Language</string>
+    <string name="lang_english">English</string>
+    <string name="lang_bangla">বাংলা</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_add_goal_title">Add Goal</string>
+    <string name="dialog_create_tasbeeh_title">Create New Tasbeeh</string>
+    <string name="dialog_from_library">From Your Library</string>
+    <string name="btn_activate">Activate</string>
+    <string name="dialog_or_separator">- OR -</string>
+    <string name="dialog_create_custom">Create Custom</string>
+    <string name="label_tasbeeh_name">Tasbeeh Name</string>
+    <string name="btn_add_track">Add &amp; Track</string>
+    <string name="dialog_manage_goal">Manage Goal</string>
+    <string name="dialog_edit_tasbeeh">Edit Tasbeeh</string>
+    <string name="dialog_remove_confirm">Remove this goal from your home screen? It will remain in your library.</string>
+    <string name="btn_remove_goal">Remove Goal</string>
+    <string name="dialog_manage_goals_title">Manage Goals</string>
+    <string name="dialog_manage_goals_desc">Reorder, edit limits, or remove goals</string>
+    <string name="label_limit">Limit</string>
+    <string name="dialog_edit_details">Edit Details</string>
+    <string name="label_arabic">Arabic Text</string>
+    <string name="label_translation">Translation / Meaning</string>
+    <string name="label_virtue">Virtue / Benefit</string>
+    
+    <!-- Tasbeeh Details -->
+    <string name="details_meaning">Meaning</string>
+    <string name="details_virtue">Virtue</string>
+    <string name="details_total_count">Total Count</string>
+    <string name="details_days_used">Days Used</string>
+    <string name="details_history">History</string>
+
+    <!-- Adhkar Library Items -->
+    <string name="adhkar_subhanallah">SubhanAllah</string>
+    <string name="adhkar_subhanallah_trans">Glory be to Allah</string>
+    <string name="adhkar_subhanallah_virtue">A tree is planted for the reciter in Paradise.</string>
+    
+    <string name="adhkar_alhamdulillah">Alhamdulillah</string>
+    <string name="adhkar_alhamdulillah_trans">All praise is due to Allah</string>
+    <string name="adhkar_alhamdulillah_virtue">It fills the scales of good deeds.</string>
+    
+    <string name="adhkar_allahuakbar">Allahu Akbar</string>
+    <string name="adhkar_allahuakbar_trans">Allah is the Greatest</string>
+    <string name="adhkar_allahuakbar_virtue">Fills the space between the heavens and the earth with rewards.</string>
+    
+    <string name="adhkar_lailahaillallah">La Ilaha Illallah</string>
+    <string name="adhkar_lailahaillallah_trans">There is no god but Allah</string>
+    <string name="adhkar_lailahaillallah_virtue">The best form of remembrance (Dhikr).</string>
+    
+    <string name="adhkar_astaghfirullah">Astaghfirullah</string>
+    <string name="adhkar_astaghfirullah_trans">I seek forgiveness from Allah</string>
+    <string name="adhkar_astaghfirullah_virtue">Removes anxiety and opens doors to provision.</string>
+    
+    <string name="adhkar_subhanallah_bihamdihi">SubhanAllahi wa bihamdihi</string>
+    <string name="adhkar_subhanallah_bihamdihi_trans">Glory be to Allah and His is the praise</string>
+    <string name="adhkar_subhanallah_bihamdihi_virtue">Whoever says this 100 times a day, their sins are forgiven even if they are as much as the foam of the sea.</string>
+    
+    <string name="adhkar_subhanallah_azeem">SubhanAllahil Azeem</string>
+    <string name="adhkar_subhanallah_azeem_trans">Glory be to Allah, the Magnificent</string>
+    <string name="adhkar_subhanallah_azeem_virtue">One of the two phrases that are light on the tongue but heavy on the scale.</string>
+    
+    <string name="adhkar_lahawla">La hawla wa la quwwata illa billah</string>
+    <string name="adhkar_lahawla_trans">There is no power and no strength except with Allah</string>
+    <string name="adhkar_lahawla_virtue">A treasure from the treasures of Paradise.</string>
+    
+    <string name="adhkar_four_phrases">The Four Phrases</string>
+    <string name="adhkar_four_phrases_trans">SubhanAllah, wal-hamdulillah, wa la ilaha illallah, wallahu akbar</string>
+    <string name="adhkar_four_phrases_virtue">The most beloved words to Allah.</string>
+
+    <string name="adhkar_hasbunallah">HasbunAllahu wa ni\'mal wakil</string>
+    <string name="adhkar_hasbunallah_trans">Sufficient for us is Allah, and [He is] the best Disposer of affairs</string>
+    <string name="adhkar_hasbunallah_virtue">Protection against fear and harm.</string>
+
+    <string name="adhkar_ayatul">Ayatul Kursi</string>
+    <string name="adhkar_ayatul_trans">Verse of the Throne (2:255)</string>
+    <string name="adhkar_ayatul_virtue">Greatest verse in the Quran; protection from Shaytan.</string>
+
+    <string name="adhkar_malikil_quddus">Subhanal Malikil Quddus</string>
+    <string name="adhkar_malikil_quddus_trans">Glory be to the Sovereign, the Most Holy</string>
+    <string name="adhkar_malikil_quddus_virtue">Recited by the Prophet (ﷺ) three times after the Witr prayer to conclude the night\'s worship with praise.</string>
+
+    <string name="adhkar_dhul_jalali">Ya Dhul Jalali wal Ikram</string>
+    <string name="adhkar_dhul_jalali_trans">O Possessor of Majesty and Honor</string>
+    <string name="adhkar_dhul_jalali_virtue">The Prophet (ﷺ) said, \"Persist (in calling upon Allah) with Ya Dhul-Jalali wal-Ikram.\" It is a powerful way to start any Dua.</string>
+
+    <string name="adhkar_ajirni_nar">Allahumma Ajirni minan Nar</string>
+    <string name="adhkar_ajirni_nar_trans">O Allah, protect me from the Fire</string>
+    <string name="adhkar_ajirni_nar_virtue">Reciting this 7 times after Fajr and Maghrib prayer ensures protection from Hellfire if one dies that day/night.</string>
+
+    <string name="adhkar_as_alukal_jannah">Allahumma inni as-alukal Jannah</string>
+    <string name="adhkar_as_alukal_jannah_trans">O Allah, I ask You for Paradise</string>
+    <string name="adhkar_as_alukal_jannah_virtue">If a person asks Allah for Paradise three times, Paradise itself says: \"O Allah, admit him into Paradise.\"</string>
+
+    <string name="adhkar_rabbighfir_li">Rabbighfir li</string>
+    <string name="adhkar_rabbighfir_li_trans">My Lord, forgive me</string>
+    <string name="adhkar_rabbighfir_li_virtue">A very short yet heavy Istighfar recited between the two prostrations (Sajdah) in prayer.</string>
+
+    <!-- Achievements -->
+    <string name="ach_bismillah">Bismillah</string>
+    <string name="ach_bismillah_desc">Complete your first Tasbeeh</string>
+    <string name="ach_starter">The Starter</string>
+    <string name="ach_starter_desc">Reach 100 Total Count</string>
+    <string name="ach_sunnah">Sunnah Step</string>
+    <string name="ach_sunnah_desc">33 counts in one day</string>
+    <string name="ach_devotion">Daily Devotion</string>
+    <string name="ach_devotion_desc">100 counts in one day</string>
+    <string name="ach_heating">Heating Up</string>
+    <string name="ach_heating_desc">3 Day Streak</string>
+    <string name="ach_on_fire">On Fire</string>
+    <string name="ach_on_fire_desc">7 Day Streak</string>
+    <string name="ach_two_weeks">Two Weeks</string>
+    <string name="ach_two_weeks_desc">14 Day Streak</string>
+    <string name="ach_habitual">Habitual</string>
+    <string name="ach_habitual_desc">30 Day Streak</string>
+    <string name="ach_spiritual">Spiritual 40</string>
+    <string name="ach_spiritual_desc">40 Day Streak</string>
+    <string name="ach_bronze">Bronze Counter</string>
+    <string name="ach_bronze_desc">Reach 1,000 Total Count</string>
+    <string name="ach_dedicated">Dedicated</string>
+    <string name="ach_dedicated_desc">1,000 counts in one day</string>
+    <string name="ach_silver">Silver Counter</string>
+    <string name="ach_silver_desc">Reach 10,000 Total Count</string>
+    <string name="ach_gold">Gold Counter</string>
+    <string name="ach_gold_desc">Reach 100,000 Total Count</string>
+    <string name="ach_platinum">Platinum Counter</string>
+    <string name="ach_platinum_desc">Reach 500,000 Total Count</string>
+
+</resources>

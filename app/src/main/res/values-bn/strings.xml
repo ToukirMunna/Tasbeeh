@@ -1,0 +1,274 @@
+<resources>
+    <string name="app_name">তাসবীহ</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">হোম</string>
+    <string name="nav_tasbeehs">তাসবীহ</string>
+    <string name="nav_profile">ড্যাশবোর্ড</string>
+    
+    <!-- Common -->
+    <string name="back">ব্যাক</string>
+    <string name="cancel">বাতিল</string>
+    <string name="save">সেভ করুন</string>
+    <string name="delete">মুছুন</string>
+    <string name="edit">এডিট করুন</string>
+    <string name="add">যোগ করুন</string>
+    <string name="create">তৈরি করুন</string>
+    <string name="remove">সরান</string>
+    <string name="close">বন্ধ করুন</string>
+    <string name="details">বিস্তারিত</string>
+    <string name="meaning">অর্থ</string>
+    <string name="user">ব্যবহারকারী</string>
+    <string name="greeting">আসসালামু আলাইকুম,</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">তাসবীহ</string>
+    <string name="goals_section">লক্ষ্যসমূহ:</string>
+    <string name="no_goals">কোন লক্ষ্য নির্ধারণ করা হয়নি। শুরু করতে একটি লক্ষ্য যোগ করুন!</string>
+    <string name="add_goal_btn">লক্ষ্য যোগ করুন</string>
+    <string name="today_total">আজকের মোট</string>
+
+    <!-- Counter Screen -->
+    <string name="pure_black">কালো স্ক্রিন</string>
+    <string name="recite_now">এখন পড়ুন</string>
+    
+    <!-- Tasbeehs List -->
+    <string name="library_title">লাইব্রেরি</string>
+    <string name="my_tasbeehs_title">আমার তাসবীহসমূহ</string>
+    <string name="no_tasbeehs">কোন তাসবীহ পাওয়া যায়নি।</string>
+    <string name="active_goal_label">সক্রিয় লক্ষ্য</string>
+    <string name="today_label">আজ: %1$s</string>
+    <string name="all_time_label">সর্বমোট: %1$s</string>
+    
+    <!-- Profile Screen -->
+    <string name="profile_title">ড্যাশবোর্ড</string>
+    <string name="weekly_activity">সাপ্তাহিক কার্যকলাপ</string>
+    <string name="btn_statistics">পরিসংখ্যান</string>
+    <string name="btn_settings">সেটিংস</string>
+    <string name="top_used_tasbeeh">সর্বাধিক পঠিত তাসবীহ</string>
+    <string name="no_tasbeeh_msg">আপনার এখনও কোন তাসবীহ নেই, কিছু যোগ করুন।</string>
+    <string name="history_by_month">মাসিক ইতিহাস</string>
+    <string name="no_history">এখনও কোন ইতিহাস নেই।</string>
+    <string name="points_label">পয়েন্ট:</string>
+    <string name="day_streak">একটানা</string>
+    <string name="label_male">পুরুষ</string>
+    <string name="label_female">মহিলা</string>
+    <string name="label_your_name">আপনার নাম</string>
+    <string name="personalize_exp">আপনার অভিজ্ঞতা পারসোনালাইজ করুন।</string>
+    <string name="edit_profile">প্রোফাইল এডিট</string>
+    <string name="points_breakdown">পয়েন্ট বিভাজন</string>
+    <string name="points_rules">পয়েন্ট কিভাবে গণনা করা হয়:</string>
+    <string name="rule_1">• ০.২৫ পয়েন্ট প্রতি তাসবীহ গণনার জন্য</string>
+    <string name="rule_2">• +১০ পয়েন্ট প্রতিদিন এপ ব্যবহার করার জন্য</string>
+    <string name="rule_3">• +২০ পয়েন্ট ১০০০+ দৈনিক গণনার জন্য</string>
+    <string name="achievements_title">অর্জনসমূহ</string>
+    <string name="see_all">সব দেখুন</string>
+    <string name="badges_title">ব্যাজসমূহ</string>
+    <string name="total_earned">মোট অর্জিত: %1$s</string>
+    <string name="earned_times">%1$s বার অর্জিত</string>
+    <string name="locked">লক করা</string>
+    <string name="no_detailed_breakdown">বিস্তারিত পাওয়া যায় নি।</string>
+    <string name="total_label">মোট: %1$s</string>
+
+    <string name="daily_history">দৈনিক ইতিহাস</string>
+    <string name="next">পরবর্তী</string>
+    <string name="previous">পূর্ববর্তী</string>
+    <string name="page_format">পৃষ্ঠা %1$d এর %2$d</string>
+    <string name="tab_daily">দৈনিক</string>
+    <string name="tab_monthly">মাসিক</string>
+
+    <!-- Statistics Screen -->
+    <string name="stats_title">পরিসংখ্যান</string>
+    <string name="history_title">ইতিহাস</string>
+    <string name="leaderboard_title">লিডারবোর্ড</string>
+    <string name="period_daily">দৈনিক</string>
+    <string name="period_weekly">সাপ্তাহিক</string>
+    <string name="period_monthly">মাসিক</string>
+    <string name="leaderboard_username">লিডারবোর্ড নাম</string>
+    <string name="anonymous">নাম প্রকাশ না করা</string>
+    <string name="rank">র‍্যাঙ্ক</string>
+    <string name="points">গণনা</string>
+    <string name="leaderboard_empty">এখনও কোন র‍্যাঙ্কিং উপলব্ধ নেই।</string>
+    <string name="leaderboard_settings">লিডারবোর্ড প্রোফাইল</string>
+    <string name="you">আপনি</string>
+    <string name="leaderboard_toggle_label">লিডারবোর্ডে অংশগ্রহণ করুন</string>
+    <string name="leaderboard_opt_in_msg">র‍্যাঙ্কিং দেখতে এবং আপনার অগ্রগতি সবার সাথে শেয়ার করতে গ্লোবাল কমিউনিটিতে যোগ দিন।</string>
+    <string name="leaderboard_opt_in_btn">লিডারবোর্ড চালু করুন</string>
+    <string name="leaderboard_off_msg">লিডারবোর্ড বন্ধ আছে। আপনার নাম এবং গণনা অন্যদের কাছে দৃশ্যমান নয়।</string>
+    <string name="stats_today">আজ:</string>
+    <string name="stats_week">এই সপ্তাহ:</string>
+    <string name="stats_month">এই মাস:</string>
+    <string name="stats_total">সর্বমোট:</string>
+    <string name="stats_average">গড়:</string>
+    <string name="avg_daily">দৈনিক</string>
+    <string name="avg_weekly">সাপ্তাহিক</string>
+    <string name="avg_monthly">মাসিক</string>
+    <string name="label_tasbeeh_count">তাসবীহ সংখ্যা</string>
+    <string name="label_days">দিন:</string>
+    <string name="label_tasbeehs">তাসবীহসমূহ:</string>
+    <string name="no_data_period">কোন তথ্য নেই।</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">সেটিংস</string>
+    <string name="group_appearance">থিম</string>
+    <string name="setting_theme">অ্যাপ থিম</string>
+    <string name="setting_show_circle">কাউন্টার সার্কেল দেখান</string>
+    <string name="setting_show_circle_desc">হোম স্ক্রিনে বৃত্তাকার অগ্রগতি দেখান</string>
+    <string name="setting_gradient">বৃত্তের রঙ</string>
+    <string name="setting_thickness">বৃত্তের পুরুত্ব</string>
+    <string name="group_sound">শব্দ এবং প্রতিক্রিয়া</string>
+    <string name="setting_tap_sound">ট্যাপ সাউন্ড</string>
+    <string name="setting_vibrate_tap">ট্যাপে ভাইব্রেশন</string>
+    <string name="setting_vibrate_tap_desc">প্রতিটি গণনার জন্য হালকা কম্পন</string>
+    <string name="setting_vibrate_100">১০০-তে ভাইব্রেশন</string>
+    <string name="setting_vibrate_100_desc">প্রতি ১০০ গণনায় শক্তিশালী কম্পন</string>
+    <string name="group_toast">টোস্ট রিমাইন্ডার</string>
+    <string name="setting_toast_enable">টোস্ট রিমাইন্ডার চালু করুন</string>
+    <string name="setting_toast_desc">স্ক্রিন অন থাকলে মাঝে মাঝে ছোট বার্তা দেখায়</string>
+    <string name="setting_toast_text">রিমাইন্ডার টেক্সট</string>
+    <string name="setting_toast_interval">বিরতি (মিনিট)</string>
+    <string name="group_data">ডেটা ম্যানেজমেন্ট</string>
+    <string name="setting_backup_restore">ব্যাকআপ এবং রিস্টোর</string>
+    <string name="btn_backup">ব্যাকআপ</string>
+    <string name="btn_restore">রিস্টোর</string>
+    <string name="logout_confirm_title">লগআউট</string>
+    <string name="logout_confirm_message">আপনি কি নিশ্চিত যে আপনি লগআউট করতে চান? পুনরায় লগইন না করা পর্যন্ত স্বয়ংক্রিয় ক্লাউড সিঙ্ক বন্ধ থাকবে।</string>
+    <string name="logout_btn">লগআউট</string>
+    <string name="group_about">সম্পর্কে</string>
+    <string name="setting_version">অ্যাপ ভার্সন</string>
+    <string name="about_text">এটি শুধু একটি তাসবীহ অ্যাপ নয় — বরং মনকে শান্ত করার ছোট্ট সঙ্গী।
+দিনের ব্যস্ততার মাঝেও জিকির করতে চান? টোকা দিলেই সংখ্যাগুলো এগোবে, আর পরিষ্কার মিনিমাল ডিজাইনে মন থাকবে হালকা। কোনো জটিলতা নেই, শুধু তাসবীহ… যেমন হওয়ার কথা।
+
+আজকার পড়তে চান? এক জায়গাতেই সাজানো। রাতের অন্ধকারে স্ক্রিন জ্বালা করবে না, দিনে চোখ ক্লান্ত করবে না — এমনভাবে বানানো হয়েছে।
+\n\
+তৌকির আহমেদের হাতের তৈরি এই অ্যাপের মূল উদ্দেশ্য একটাই:
+জিকিরকে সহজ করা, মনোযোগকে টিকিয়ে রাখা, আর আপনাকে আল্লাহর স্মরণে একটু বেশি সময় দেয়া। শান্তভাবে। ধীরে। ভালোবাসা নিয়ে।</string>
+    <string name="group_language">ভাষা</string>
+    <string name="setting_language">অ্যাপের ভাষা</string>
+    <string name="lang_english">English</string>
+    <string name="lang_bangla">বাংলা</string>
+    
+    <!-- Dialogs -->
+    <string name="dialog_add_goal_title">লক্ষ্য যোগ করুন</string>
+    <string name="dialog_create_tasbeeh_title">নতুন তাসবীহ তৈরি করুন</string>
+    <string name="dialog_from_library">আপনার লাইব্রেরি থেকে</string>
+    <string name="btn_activate">সক্রিয় করুন</string>
+    <string name="dialog_or_separator">- অথবা -</string>
+    <string name="dialog_create_custom">নিজে তৈরি করুন</string>
+    <string name="label_tasbeeh_name">তাসবীহর নাম</string>
+    <string name="btn_add_track">যোগ করুন এবং ট্র্যাক করুন</string>
+    <string name="dialog_manage_goal">লক্ষ্য পরিচালনা</string>
+    <string name="dialog_edit_tasbeeh">তাসবীহ সম্পাদনা</string>
+    <string name="dialog_remove_confirm">আপনার হোম স্ক্রিন থেকে এই লক্ষ্যটি সরিয়ে দেবেন? এটি আপনার লাইব্রেরিতে থাকবে।</string>
+    <string name="btn_remove_goal">লক্ষ্য সরান</string>
+    <string name="dialog_manage_goals_title">লক্ষ্যসমূহ পরিচালনা</string>
+    <string name="dialog_manage_goals_desc">নিজের মতো সাজান</string>
+    <string name="label_limit">সীমা</string>
+    <string name="dialog_edit_details">বিস্তারিত সম্পাদনা</string>
+    <string name="label_arabic">আরবি লেখা</string>
+    <string name="label_translation">অনুবাদ / অর্থ</string>
+    <string name="label_virtue">ফজিলত / উপকারিতা</string>
+    
+    <!-- Tasbeeh Details -->
+    <string name="details_meaning">অর্থ</string>
+    <string name="details_virtue">ফজিলত</string>
+    <string name="details_total_count">মোট গণনা</string>
+    <string name="details_days_used">ব্যবহৃত দিন</string>
+    <string name="details_history">ইতিহাস</string>
+
+    <!-- Adhkar Library Items -->
+    <string name="adhkar_subhanallah">সুবহানাল্লাহ</string>
+    <string name="adhkar_subhanallah_trans">আল্লাহর পবিত্রতা ঘোষণা করছি</string>
+    <string name="adhkar_subhanallah_virtue">জান্নাতে পাঠকারীর জন্য একটি গাছ রোপণ করা হয়।</string>
+    
+    <string name="adhkar_alhamdulillah">আলহামদুলিল্লাহ</string>
+    <string name="adhkar_alhamdulillah_trans">সকল প্রশংসা আল্লাহর জন্য</string>
+    <string name="adhkar_alhamdulillah_virtue">এটি নেক আমলের পাল্লা পূর্ণ করে।</string>
+    
+    <string name="adhkar_allahuakbar">আল্লাহু আকবার</string>
+    <string name="adhkar_allahuakbar_trans">আল্লাহ মহান</string>
+    <string name="adhkar_allahuakbar_virtue">আসমান ও জমিনের মধ্যবর্তী স্থান পুরস্কারে পূর্ণ করে দেয়।</string>
+    
+    <string name="adhkar_lailahaillallah">লা ইলাহা ইল্লাল্লাহ</string>
+    <string name="adhkar_lailahaillallah_trans">আল্লাহ ছাড়া কোন মাবুদ নেই</string>
+    <string name="adhkar_lailahaillallah_virtue">সর্বোত্তম জিকির।</string>
+    
+    <string name="adhkar_astaghfirullah">আস্তাগফিরুল্লাহ</string>
+    <string name="adhkar_astaghfirullah_trans">আমি আল্লাহর কাছে ক্ষমা প্রার্থনা করছি</string>
+    <string name="adhkar_astaghfirullah_virtue">দুশ্চিন্তা দূর করে এবং রিজিকের দরজা খুলে দেয়।</string>
+    
+    <string name="adhkar_subhanallah_bihamdihi">সুবহানাল্লাহি ওয়া বিহামদিহি</string>
+    <string name="adhkar_subhanallah_bihamdihi_trans">আল্লাহর পবিত্রতা ঘোষণা করছি এবং তাঁর প্রশংসা করছি</string>
+    <string name="adhkar_subhanallah_bihamdihi_virtue">যে ব্যক্তি এটি দিনে ১০০ বার পাঠ করবে, তার গুনাহ মাফ করে দেওয়া হবে যদিও তা সমুদ্রের ফেনার সমান হয়।</string>
+    
+    <string name="adhkar_subhanallah_azeem">সুবহানাল্লাহিল আজিম</string>
+    <string name="adhkar_subhanallah_azeem_trans">মহান আল্লাহর পবিত্রতা ঘোষণা করছি</string>
+    <string name="adhkar_subhanallah_azeem_virtue">দুটি বাক্যের মধ্যে একটি যা জিহ্বায় হালকা কিন্তু পাল্লায় ভারী।</string>
+    
+    <string name="adhkar_lahawla">লা হাওলা ওয়া লা কুওয়াতা ইল্লা বিল্লাহ</string>
+    <string name="adhkar_lahawla_trans">আল্লাহ ছাড়া কোন শক্তি ও সামর্থ্য নেই</string>
+    <string name="adhkar_lahawla_virtue">জান্নাতের ভান্ডার সমূহের একটি ভান্ডার।</string>
+    
+    <string name="adhkar_four_phrases">চারটি বাক্য</string>
+    <string name="adhkar_four_phrases_trans">সুবহানাল্লাহ, আলহামদুলিল্লাহ, লা ইলাহা ইল্লাল্লাহ, আল্লাহু আকবার</string>
+    <string name="adhkar_four_phrases_virtue">আল্লাহর কাছে সবচেয়ে প্রিয় কথা।</string>
+
+    <string name="adhkar_hasbunallah">হাসবুনাল্লাহু ওয়া নিমাল ওয়াকিল</string>
+    <string name="adhkar_hasbunallah_trans">আমাদের জন্য আল্লাহই যথেষ্ট এবং তিনি কতই না উত্তম কর্মবিধায়ক</string>
+    <string name="adhkar_hasbunallah_virtue">ভয় এবং ক্ষতি থেকে সুরক্ষা।</string>
+
+    <string name="adhkar_ayatul">আয়াতুল কুরসী</string>
+    <string name="adhkar_ayatul_trans">আয়াতুল কুরসী (২:২৫৫)</string>
+    <string name="adhkar_ayatul_virtue">কুরআনের সর্বশ্রেষ্ঠ আয়াত; শয়তান থেকে সুরক্ষা।</string>
+
+    <string name="adhkar_malikil_quddus">সুবহানাল মালিকিল কুদ্দুস</string>
+    <string name="adhkar_malikil_quddus_trans">মহা-পবিত্র রাজাধিরাজ আল্লাহর পবিত্রতা ঘোষণা করছি</string>
+    <string name="adhkar_malikil_quddus_virtue">নবী করীম (সা.) বিতর নামাজের পর তিনবার এটি পাঠ করতেন। এটি রাতের ইবাদত শেষ করার এক চমৎকার মাধ্যম।</string>
+
+    <string name="adhkar_dhul_jalali">ইয়া যাল জালালি ওয়াল ইকরম</string>
+    <string name="adhkar_dhul_jalali_trans">হে মহিমাময় ও মহানুভব</string>
+    <string name="adhkar_dhul_jalali_virtue">রাসূলুল্লাহ (সা.) এই বাক্যটি বেশি বেশি পাঠ করার নির্দেশ দিয়েছেন। এটি দোয়ার কবুলিয়াতের জন্য অত্যন্ত শক্তিশালী একটি নাম।</string>
+
+    <string name="adhkar_ajirni_nar">আল্লাহুম্মা আজিরনি মিনান নার</string>
+    <string name="adhkar_ajirni_nar_trans">হে আল্লাহ, আমাকে জাহান্নামের আগুন থেকে রক্ষা করুন</string>
+    <string name="adhkar_ajirni_nar_virtue">ফজর ও মাগরিবের পর ৭ বার এটি পাঠ করলে, ওই দিন বা রাতে মৃত্যু হলে জাহান্নাম থেকে মুক্তির ঘোষণা রয়েছে।</string>
+
+    <string name="adhkar_as_alukal_jannah">আল্লাহুম্মা ইন্নি আসআলুকাল জান্নাহ</string>
+    <string name="adhkar_as_alukal_jannah_trans">হে আল্লাহ, আমি আপনার কাছে জান্নাত প্রার্থনা করছি</string>
+    <string name="adhkar_as_alukal_jannah_virtue">কোনো ব্যক্তি ৩ বার জান্নাত চাইলে জান্নাত স্বয়ং আল্লাহর কাছে ওই ব্যক্তির জন্য সুপারিশ করে।</string>
+
+    <string name="adhkar_rabbighfir_li">রাব্বিগফির লি</string>
+    <string name="adhkar_rabbighfir_li_trans">হে আমার রব, আমাকে ক্ষমা করুন</string>
+    <string name="adhkar_rabbighfir_li_virtue">নামাজের দুই সিজদাহর মাঝে পড়ার অত্যন্ত ফজিলতপূর্ণ একটি ছোট ইস্তিগফার।</string>
+
+    <!-- Achievements -->
+    <string name="ach_bismillah">বিসমিল্লাহ</string>
+    <string name="ach_bismillah_desc">আপনার প্রথম তাসবীহ সম্পন্ন করুন</string>
+    <string name="ach_starter">শুরুকারী</string>
+    <string name="ach_starter_desc">১০০ মোট গণনা অর্জন করুন</string>
+    <string name="ach_sunnah">সুন্নাহ স্টেপ</string>
+    <string name="ach_sunnah_desc">এক দিনে ৩৩ বার গণনা</string>
+    <string name="ach_devotion">দৈনিক ভক্তি</string>
+    <string name="ach_devotion_desc">এক দিনে ১০০ বার গণনা</string>
+    <string name="ach_heating">গরম হচ্ছে</string>
+    <string name="ach_heating_desc">৩ দিনের স্ট্রিক</string>
+    <string name="ach_on_fire">আগুনের মতো</string>
+    <string name="ach_on_fire_desc">৭ দিনের স্ট্রিক</string>
+    <string name="ach_two_weeks">দুই সপ্তাহ</string>
+    <string name="ach_two_weeks_desc">১৪ দিনের স্ট্রিক</string>
+    <string name="ach_habitual">অভ্যাসগত</string>
+    <string name="ach_habitual_desc">৩০ দিনের স্ট্রিক</string>
+    <string name="ach_spiritual">আধ্যাত্মিক ৪০</string>
+    <string name="ach_spiritual_desc">৪০ দিনের স্ট্রিক</string>
+    <string name="ach_bronze">ব্রোঞ্জ কাউন্টার</string>
+    <string name="ach_bronze_desc">১,০০০ মোট গণনা অর্জন করুন</string>
+    <string name="ach_dedicated">নিবেদিত</string>
+    <string name="ach_dedicated_desc">এক দিনে ১,০০০ গণনা</string>
+    <string name="ach_silver">সিলভার কাউন্টার</string>
+    <string name="ach_silver_desc">১০,০০০ মোট গণনা অর্জন করুন</string>
+    <string name="ach_gold">গোল্ড কাউন্টার</string>
+    <string name="ach_gold_desc">১০০,০০০ মোট গণনা অর্জন করুন</string>
+    <string name="ach_platinum">প্লাটিনাম কাউন্টার</string>
+    <string name="ach_platinum_desc">৫০০,০০০ মোট গণনা অর্জন করুন</string>
+
+</resources>
