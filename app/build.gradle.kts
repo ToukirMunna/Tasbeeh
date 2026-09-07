@@ -61,7 +61,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     
     // DataStore Preferences
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")
     // Coil
