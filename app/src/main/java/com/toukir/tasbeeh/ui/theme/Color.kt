@@ -2,38 +2,46 @@ package com.toukir.tasbeeh.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Day / Light Theme (Redesigned Lavender)
-val DayPrimary = Color(0xFF673AB7) // Deep Purple
-val DayOnPrimary = Color(0xFFFFFFFF)
-val DayPrimaryContainer = Color(0xFFEDE7F6) // Very Light Lavender
-val DayOnPrimaryContainer = Color(0xFF311B92)
-val DayBackground = Color(0xFFF8F9FF) // Extremely light blue/lavender tint
-val DayOnBackground = Color(0xFF1C1B1F)
-val DaySurface = Color(0xFFFFFFFF)
-val DayOnSurface = Color(0xFF1C1B1F)
-val DaySurfaceVariant = Color(0xFFF3F0F8)
-val DayOnSurfaceVariant = Color(0xFF49454F)
+// Toukir Studio Unified Design System (TDS) Palette
+// 90% Neutral Workhorses + 10% Toukir Mint Category Brand Signature
 
-// Night / Dark Theme (Deep Charcoal & Neon Purple)
-val NightPrimary = Color(0xFFA594F9) // Glowing Purple
-val NightOnPrimary = Color(0xFF130E33)
-val NightPrimaryContainer = Color(0xFF2E245E)
-val NightOnPrimaryContainer = Color(0xFFD1C4E9)
-val NightBackground = Color(0xFF0A090F) // Ultra Deep
-val NightOnBackground = Color(0xFFE6E1E5)
-val NightSurface = Color(0xFF15141B) // Balanced Charcoal
-val NightOnSurface = Color(0xFFE6E1E5)
-val NightSurfaceVariant = Color(0xFF24232C)
-val NightOnSurfaceVariant = Color(0xFFB0AEC0)
+// Light Theme (Cool Slate & Toukir Mint)
+val LightCanvas = Color(0xFFF0F2F5) // Cool Slate Canvas
+val LightSurface = Color(0xFFFFFFFF) // Pure Luminous Card
+val LightInset = Color(0xFFE4E8EE) // Recessed Slate (Tracks/Bars)
+val LightHairlineRim = Color(0xFFD2D8E2) // 1dp Tactile Rim
+val LightTextPrimary = Color(0xFF111827) // Deep Ink (16.5:1 AAA)
+val LightTextSecondary = Color(0xFF4B5563) // Muted Slate (5.8:1 AA)
 
-// Sepia Theme (Vintage Parchment & Warm Cocoa)
-val SepiaPrimary = Color(0xFF6D4C41) // Strong Cocoa
-val SepiaOnPrimary = Color(0xFFFFFFFF)
-val SepiaPrimaryContainer = Color(0xFFD7CCC8)
-val SepiaOnPrimaryContainer = Color(0xFF3E2723)
-val SepiaBackground = Color(0xFFF2EAD3) // Warm Vintage
-val SepiaOnBackground = Color(0xFF3E2723)
-val SepiaSurface = Color(0xFFE9DDB7) // Aged Paper
-val SepiaOnSurface = Color(0xFF4E342E)
-val SepiaSurfaceVariant = Color(0xFFD6CBA0)
-val SepiaOnSurfaceVariant = Color(0xFF5D4037)
+val ToukirMintLight = Color(0xFF0D9488) // Toukir Mint Primary Light
+val ToukirMintOnPrimaryLight = Color(0xFFFFFFFF)
+val ToukirMintContainerLight = Color(0xFFCCFBF1) // Pill Container Light
+val ToukirMintOnContainerLight = Color(0xFF134E4A)
+
+// Dark Theme (Deep Obsidian Slate & Glowing Mint)
+val DarkCanvas = Color(0xFF111317) // Deep Obsidian Slate Canvas
+val DarkSurface = Color(0xFF1A1D23) // Elevated Charcoal Card
+val DarkInset = Color(0xFF232730) // Recessed Dark (Tracks/Bars)
+val DarkHairlineRim = Color(0xFF2D323E) // 1dp Tactile Rim
+val DarkTextPrimary = Color(0xFFF3F4F6) // Luminous White (16.5:1 AAA)
+val DarkTextSecondary = Color(0xFF9CA3AF) // Muted Silver (5.8:1 AA)
+
+val ToukirMintDark = Color(0xFF14B8A6) // Toukir Mint Primary Dark
+val ToukirMintOnPrimaryDark = Color(0xFF111317)
+val ToukirMintContainerDark = Color(0xFF134E4A) // Pill Container Dark
+val ToukirMintOnContainerDark = Color(0xFFCCFBF1)
+
+// Alert Exception: Toukir Crimson
+val ToukirCrimsonLight = Color(0xFFDC2626)
+val ToukirCrimsonContainerLight = Color(0xFFFEE2E2)
+val ToukirCrimsonDark = Color(0xFFEF4444)
+val ToukirCrimsonContainerDark = Color(0xFF450A0A)
+
+// Backward-compatibility aliases if needed
+val DayPrimary = ToukirMintLight
+val DayBackground = LightCanvas
+val DaySurface = LightSurface
+val NightPrimary = ToukirMintDark
+val NightBackground = DarkCanvas
+val NightSurface = DarkSurface
+

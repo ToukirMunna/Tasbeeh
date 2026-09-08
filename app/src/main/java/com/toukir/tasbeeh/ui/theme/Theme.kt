@@ -9,52 +9,45 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
-// 1. Day (Light) Scheme
+// 1. Toukir Studio Light Scheme (Cool Slate & Toukir Mint)
 private val DayColorScheme = lightColorScheme(
-    primary = DayPrimary,
-    onPrimary = DayOnPrimary,
-    primaryContainer = DayPrimaryContainer,
-    onPrimaryContainer = DayOnPrimaryContainer,
-    background = DayBackground,
-    onBackground = DayOnBackground,
-    surface = DaySurface,
-    onSurface = DayOnSurface,
-    surfaceVariant = DaySurfaceVariant,
-    onSurfaceVariant = DayOnSurfaceVariant
+    primary = ToukirMintLight,
+    onPrimary = ToukirMintOnPrimaryLight,
+    primaryContainer = ToukirMintContainerLight,
+    onPrimaryContainer = ToukirMintOnContainerLight,
+    background = LightCanvas,
+    onBackground = LightTextPrimary,
+    surface = LightSurface,
+    onSurface = LightTextPrimary,
+    surfaceVariant = LightInset,
+    onSurfaceVariant = LightTextSecondary,
+    outline = LightHairlineRim,
+    outlineVariant = LightHairlineRim,
+    error = ToukirCrimsonLight,
+    errorContainer = ToukirCrimsonContainerLight
 )
 
-// 2. Night (Dark) Scheme
+// 2. Toukir Studio Dark Scheme (Deep Obsidian Slate & Glowing Mint)
 private val NightColorScheme = darkColorScheme(
-    primary = NightPrimary,
-    onPrimary = NightOnPrimary,
-    primaryContainer = NightPrimaryContainer,
-    onPrimaryContainer = NightOnPrimaryContainer,
-    background = NightBackground,
-    onBackground = NightOnBackground,
-    surface = NightSurface,
-    onSurface = NightOnSurface,
-    surfaceVariant = NightSurfaceVariant,
-    onSurfaceVariant = NightOnSurfaceVariant
-)
-
-// 3. Sepia Scheme (Warm)
-private val SepiaColorScheme = lightColorScheme(
-    primary = SepiaPrimary,
-    onPrimary = SepiaOnPrimary,
-    primaryContainer = SepiaPrimaryContainer,
-    onPrimaryContainer = SepiaOnPrimaryContainer,
-    background = SepiaBackground,
-    onBackground = SepiaOnBackground,
-    surface = SepiaSurface,
-    onSurface = SepiaOnSurface,
-    surfaceVariant = SepiaSurfaceVariant,
-    onSurfaceVariant = SepiaOnSurfaceVariant
+    primary = ToukirMintDark,
+    onPrimary = ToukirMintOnPrimaryDark,
+    primaryContainer = ToukirMintContainerDark,
+    onPrimaryContainer = ToukirMintOnContainerDark,
+    background = DarkCanvas,
+    onBackground = DarkTextPrimary,
+    surface = DarkSurface,
+    onSurface = DarkTextPrimary,
+    surfaceVariant = DarkInset,
+    onSurfaceVariant = DarkTextSecondary,
+    outline = DarkHairlineRim,
+    outlineVariant = DarkHairlineRim,
+    error = ToukirCrimsonDark,
+    errorContainer = ToukirCrimsonContainerDark
 )
 
 enum class AppTheme {
     Light,
-    Dark,
-    Sepia
+    Dark
 }
 
 enum class GradientStyle(val colors: List<Color>, val nameStr: String) {
@@ -80,7 +73,6 @@ fun TasbeehTheme(
     val colorScheme = when (theme) {
         AppTheme.Light -> DayColorScheme
         AppTheme.Dark -> NightColorScheme
-        AppTheme.Sepia -> SepiaColorScheme
     }
 
     MaterialTheme(

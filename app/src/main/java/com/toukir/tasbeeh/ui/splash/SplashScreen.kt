@@ -1,4 +1,4 @@
-﻿package com.toukir.tasbeeh.ui.splash
+package com.toukir.tasbeeh.ui.splash
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
@@ -36,11 +36,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.toukir.tasbeeh.R
 
-private val LightBarColor = Color(0xFF1A1C1E)
-private val DarkBarColor = Color(0xFFF1F3F5)
-private val DiamondTopColor = Color(0xFFFF5E3A)
-private val DiamondBottomColor = Color(0xFFE03E1A)
-private val DiamondGlowColor = Color(0x33FF5E3A)
+private val LightBarColor = Color(0xFF111827) // TDS Light Deep Ink
+private val DarkBarColor = Color(0xFFF3F4F6) // TDS Dark Luminous White
+private val DiamondTopColor = Color(0xFF14B8A6) // Toukir Mint
+private val DiamondBottomColor = Color(0xFF0D9488) // Toukir Mint Base
+private val DiamondGlowColor = Color(0x4014B8A6) // Toukir Mint Radiant Glow
 
 @Composable
 fun SplashScreen(

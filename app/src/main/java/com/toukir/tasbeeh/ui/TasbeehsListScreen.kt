@@ -126,18 +126,17 @@ fun TasbeehListCard(
             .fillMaxWidth()
             .pressClickEffect()
             .clickable { onClick() },
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.surface,
-        tonalElevation = 1.dp,
         border = BorderStroke(
-            width = 0.5.dp,
-            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+            width = 1.dp,
+            color = MaterialTheme.colorScheme.outlineVariant
         )
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -156,16 +155,16 @@ fun TasbeehListCard(
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                             activeDurations.forEach { duration ->
                                 val (color, label) = when (duration) {
-                                    GoalDuration.DAILY -> Color(0xFF9575CD) to "D"
-                                    GoalDuration.WEEKLY -> Color(0xFF4CAF50) to "W"
-                                    GoalDuration.MONTHLY -> Color(0xFF2196F3) to "M"
-                                    GoalDuration.YEARLY -> Color(0xFFFF9800) to "Y"
+                                    GoalDuration.DAILY -> MaterialTheme.colorScheme.primary to "D"
+                                    GoalDuration.WEEKLY -> Color(0xFF10B981) to "W"
+                                    GoalDuration.MONTHLY -> Color(0xFF3B82F6) to "M"
+                                    GoalDuration.YEARLY -> Color(0xFFF59E0B) to "Y"
                                 }
                                 Surface(
                                     shape = CircleShape,
-                                    color = color.copy(alpha = 0.2f),
+                                    color = MaterialTheme.colorScheme.surfaceVariant,
                                     modifier = Modifier.size(20.dp),
-                                    border = BorderStroke(1.dp, color.copy(alpha = 0.5f))
+                                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
                                 ) {
                                     Box(contentAlignment = Alignment.Center) {
                                         Text(
@@ -205,13 +204,13 @@ fun TasbeehListCard(
                         imageVector = Icons.Outlined.History,
                         contentDescription = null,
                         modifier = Modifier.size(14.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = formatNumber(goal.totalCount, currentLanguage),
                         style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                     )
                 }
                 
@@ -219,12 +218,12 @@ fun TasbeehListCard(
                 
                 Button(
                     onClick = onAddToGoal,
-                    modifier = Modifier.height(32.dp),
-                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
-                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.height(34.dp),
+                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 0.dp),
+                    shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                        contentColor = MaterialTheme.colorScheme.primary
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 ) {
                     Text(
@@ -239,14 +238,15 @@ fun TasbeehListCard(
             Surface(
                 onClick = onEditClick,
                 shape = CircleShape,
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                modifier = Modifier.size(40.dp)
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                modifier = Modifier.size(38.dp)
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,
                         contentDescription = "Edit",
-                        modifier = Modifier.size(20.dp),
+                        modifier = Modifier.size(18.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }

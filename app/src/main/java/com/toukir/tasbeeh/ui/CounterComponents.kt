@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -163,14 +164,15 @@ fun MeaningDisplay(
             .fillMaxWidth()
             .padding(horizontal = 24.dp, vertical = 8.dp),
         shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f)
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
         Text(
             text = translation,
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(16.dp),
-            color = MaterialTheme.colorScheme.onSecondaryContainer
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -222,16 +224,16 @@ fun CounterCircle(
                     )
             )
 
-            // 2. The Base (Physical Side Walls) - Softer transition
+            // 2. The Base (Physical Side Walls) - TDS Inset Surface
             Box(
                 modifier = Modifier
                     .size(size)
                     .offset(y = 12.dp)
                     .clip(SmoothOctagonShape)
-                    .background(themeColor.outlineVariant.copy(alpha = 0.6f))
+                    .background(themeColor.surfaceVariant)
             )
 
-            // 3. The smooth main key cap
+            // 3. The smooth main key cap (TDS Surface with 1dp Hairline Rim)
             Box(
                 modifier = Modifier
                     .size(size)
@@ -248,7 +250,7 @@ fun CounterCircle(
                     )
                     .border(
                         width = 1.dp,
-                        color = themeColor.outline.copy(alpha = 0.15f),
+                        color = themeColor.outlineVariant,
                         shape = SmoothOctagonShape
                     )
                     .clickable(
@@ -258,17 +260,17 @@ fun CounterCircle(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                // Inset detail area for the number
+                // Inset detail area for the number (TDS 1dp tactile inset)
                 Box(
                     modifier = Modifier
                         .fillMaxSize(0.88f)
                         .background(
-                            color = themeColor.onSurface.copy(alpha = 0.01f),
+                            color = themeColor.surfaceVariant.copy(alpha = 0.4f),
                             shape = SmoothOctagonShape
                         )
                         .border(
-                            width = 0.5.dp,
-                            color = themeColor.outlineVariant.copy(alpha = 0.2f),
+                            width = 1.dp,
+                            color = themeColor.outlineVariant.copy(alpha = 0.6f),
                             shape = SmoothOctagonShape
                         ),
                     contentAlignment = Alignment.Center
@@ -289,7 +291,7 @@ fun CounterCircle(
                             lineHeight = adjustedFontSize
                         ),
                         fontWeight = FontWeight.Bold,
-                        color = themeColor.onSurface.copy(alpha = 0.9f),
+                        color = if (isPressed) themeColor.primary else themeColor.onSurface,
                         textAlign = TextAlign.Center,
                         maxLines = 1,
                         softWrap = false

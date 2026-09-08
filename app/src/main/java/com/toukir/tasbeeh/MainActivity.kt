@@ -1,4 +1,4 @@
-﻿package com.toukir.tasbeeh
+package com.toukir.tasbeeh
 
 import android.os.Bundle
 import androidx.activity.SystemBarStyle
@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
             val isDark = when (settings.theme) {
                 AppTheme.Dark -> true
                 AppTheme.Light -> false
-                AppTheme.Sepia -> false
             }
 
             // 4. Dynamic system bar synchronization on theme changes

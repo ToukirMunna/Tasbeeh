@@ -104,10 +104,10 @@ fun ProfileScreen(
             SectionHeader(title = stringResource(R.string.weekly_activity))
             Spacer(modifier = Modifier.height(12.dp))
             Card(
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(240.dp)
@@ -120,18 +120,18 @@ fun ProfileScreen(
 
         // Navigation Buttons
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Button(
                         onClick = onStatisticsClick,
                         modifier = Modifier
                             .weight(1f)
-                            .height(56.dp)
+                            .height(48.dp)
                             .pressClickEffect(),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(12.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -140,57 +140,58 @@ fun ProfileScreen(
                         Icon(
                             Icons.Default.DateRange,
                             contentDescription = null,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(18.dp)
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(stringResource(R.string.stats_title), fontWeight = FontWeight.Bold)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(stringResource(R.string.stats_title), fontWeight = FontWeight.SemiBold)
                     }
 
                     Button(
                         onClick = onHistoryClick,
                         modifier = Modifier
                             .weight(1f)
-                            .height(56.dp)
+                            .height(48.dp)
                             .pressClickEffect(),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            contentColor = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.History,
                             contentDescription = null,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(18.dp)
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(stringResource(R.string.history_title), fontWeight = FontWeight.Bold)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(stringResource(R.string.history_title), fontWeight = FontWeight.SemiBold)
                     }
                 }
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Button(
                         onClick = onLeaderboardClick,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(56.dp)
+                            .height(48.dp)
                             .pressClickEffect(),
-                        shape = RoundedCornerShape(16.dp),
+                        shape = RoundedCornerShape(12.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     ) {
                         Icon(
                             Icons.Default.Leaderboard,
                             contentDescription = null,
-                            modifier = Modifier.size(20.dp)
+                            modifier = Modifier.size(18.dp)
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(stringResource(R.string.leaderboard_title), fontWeight = FontWeight.Bold)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(stringResource(R.string.leaderboard_title), fontWeight = FontWeight.SemiBold)
                     }
                 }
 
@@ -198,17 +199,18 @@ fun ProfileScreen(
                     onClick = onSettingsClick,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(56.dp)
+                        .height(48.dp)
                         .pressClickEffect(),
-                    shape = RoundedCornerShape(16.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant,
                         contentColor = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 ) {
-                    Icon(Icons.Default.Settings, contentDescription = null, modifier = Modifier.size(20.dp))
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(stringResource(R.string.settings_title), fontWeight = FontWeight.Bold)
+                    Icon(Icons.Default.Settings, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(stringResource(R.string.settings_title), fontWeight = FontWeight.SemiBold)
                 }
             }
         }

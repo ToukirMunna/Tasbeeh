@@ -3,6 +3,7 @@ package com.toukir.tasbeeh.ui
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -113,25 +114,26 @@ fun RedesignedCircularProgress(
         modifier = modifier.size(size),
         contentAlignment = Alignment.Center
     ) {
-        // Outer Glow/Shadow effect
+        // Outer Glow/Shadow effect with TDS 1dp tactile rim
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(10.dp)
-                .shadow(20.dp, CircleShape, spotColor = colorScheme.primary.copy(alpha = 0.5f))
+                .shadow(8.dp, CircleShape, spotColor = colorScheme.primary.copy(alpha = 0.2f))
+                .border(1.dp, colorScheme.outlineVariant, CircleShape)
                 .background(colorScheme.surface, CircleShape)
         )
 
         Canvas(modifier = Modifier.fillMaxSize().padding(strokeWidth / 2 + 10.dp)) {
-            // Background track
+            // Background track (TDS Inset)
             drawArc(
-                color = backgroundGray,
+                color = colorScheme.surfaceVariant,
                 startAngle = -90f,
                 sweepAngle = 360f,
                 useCenter = false,
                 style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
             )
-            // Progress arc
+            // Progress arc (Toukir Mint)
             drawArc(
                 brush = primaryGradient,
                 startAngle = -90f,

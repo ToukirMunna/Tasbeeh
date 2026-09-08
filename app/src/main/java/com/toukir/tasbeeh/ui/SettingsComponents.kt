@@ -143,10 +143,10 @@ fun SettingsGroup(
             letterSpacing = 1.sp
         )
         Surface(
-            shape = RoundedCornerShape(28.dp),
+            shape = RoundedCornerShape(16.dp),
             color = MaterialTheme.colorScheme.surface,
             tonalElevation = 1.dp,
-            border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(
@@ -198,15 +198,19 @@ fun LanguageChip(
     Surface(
         selected = selected,
         onClick = onClick,
-        shape = RoundedCornerShape(16.dp),
-        color = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+        shape = RoundedCornerShape(12.dp),
+        color = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+        border = BorderStroke(
+            1.dp,
+            if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant
+        ),
         modifier = modifier.height(48.dp)
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelLarge,
-                fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                fontWeight = if (selected) FontWeight.Bold else FontWeight.SemiBold,
                 color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
@@ -232,7 +236,7 @@ fun AppearanceSettings(
                 AppTheme.entries.forEach { theme ->
                     ThemeChip(
                         selected = theme == currentTheme,
-                        label = theme.name,
+                        label = if (theme == AppTheme.Light) "Light (Slate)" else "Dark (Obsidian)",
                         onClick = { onThemeChange(theme) },
                         modifier = Modifier.weight(1f)
                     )
@@ -262,15 +266,19 @@ fun ThemeChip(
     Surface(
         selected = selected,
         onClick = onClick,
-        shape = RoundedCornerShape(16.dp),
-        color = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+        shape = RoundedCornerShape(12.dp),
+        color = if (selected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+        border = BorderStroke(
+            1.dp,
+            if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant
+        ),
         modifier = modifier.height(48.dp)
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelMedium,
-                fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                fontWeight = if (selected) FontWeight.Bold else FontWeight.SemiBold,
                 color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
@@ -572,26 +580,121 @@ fun LeaderboardSettings(
 @Composable
 fun AboutSettings() {
     SettingsGroup(title = stringResource(R.string.group_about)) {
-        ListItem(
-            headlineContent = { Text(stringResource(R.string.setting_version)) },
-            supportingContent = { Text("4.1.0") },
-            leadingContent = {
-                Icon(
-                    Icons.Outlined.Info,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            },
-            colors = ListItemDefaults.colors(containerColor = Color.Transparent)
-        )
-        
-        Text(
-            text = stringResource(R.string.about_text),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            lineHeight = 18.sp
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            // Toukir Studio Monogram & App Header
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+                    modifier = Modifier.size(44.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(
+                            text = "TS",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Black,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                Column {
+                    Text(
+                        text = "Toukir Studio",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = "Tasbeeh • v4.1.0 (TDS Build)",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            // Privacy Pledge Card (TDS Universal Standard)
+            Surface(
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.VerifiedUser,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = "Zero Ads. Zero Telemetry. Crafted by Toukir Studio.",
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = stringResource(R.string.about_text),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                lineHeight = 18.sp
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Studio Fleet Siblings
+            Text(
+                text = "TOUKIR STUDIO APPS FLEET",
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+                letterSpacing = 1.sp
+            )
+            Spacer(modifier = Modifier.height(6.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                val studioSiblings = listOf("PhoneUsage", "LexiCore", "Audia", "DrinkWater")
+                studioSiblings.forEach { appName ->
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                        modifier = Modifier.weight(1f).height(32.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = appName,
+                                style = MaterialTheme.typography.labelSmall,
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -637,7 +740,7 @@ fun SettingsSwitchItem(
 fun SettingsDivider(modifier: Modifier = Modifier) {
     HorizontalDivider(
         modifier = modifier.padding(horizontal = 16.dp),
-        thickness = 0.5.dp,
-        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.outlineVariant
     )
 }

@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -170,99 +171,71 @@ fun TasbeehApp(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-             if (selectedGoalId == null && selectedTasbeehDetailId == null) {
-                 val colorScheme = MaterialTheme.colorScheme
-                 NavigationBar(
-                     containerColor = colorScheme.surface,
-                     tonalElevation = 0.dp
-                 ) {
-                     val navItemColors = NavigationBarItemDefaults.colors(
-                         selectedIconColor = colorScheme.primary,
-                         unselectedIconColor = colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                         selectedTextColor = colorScheme.primary,
-                         unselectedTextColor = colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                         indicatorColor = colorScheme.primary.copy(alpha = 0.12f)
-                     )
+              if (selectedGoalId == null && selectedTasbeehDetailId == null) {
+                  val colorScheme = MaterialTheme.colorScheme
+                  Column {
+                      HorizontalDivider(thickness = 1.dp, color = colorScheme.outlineVariant)
+                      NavigationBar(
+                          containerColor = colorScheme.surface,
+                          tonalElevation = 0.dp
+                      ) {
+                          val navItemColors = NavigationBarItemDefaults.colors(
+                              selectedIconColor = colorScheme.primary,
+                              unselectedIconColor = colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                              selectedTextColor = colorScheme.primary,
+                              unselectedTextColor = colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                              indicatorColor = colorScheme.primaryContainer
+                          )
 
-                     NavigationBarItem(
-                         icon = { 
-                            Box(contentAlignment = Alignment.Center) {
-                                if (currentScreen == "home") {
-                                    Surface(
-                                        modifier = Modifier.size(36.dp).shadow(8.dp, CircleShape, spotColor = colorScheme.primary),
-                                        shape = CircleShape,
-                                        color = colorScheme.primary.copy(alpha = 0.15f),
-                                        content = {}
-                                    )
-                                }
-                                Icon(Icons.Default.Home, contentDescription = null)
-                            }
-                         },
-                         label = { Text(stringResource(R.string.nav_home)) },
-                         selected = currentScreen == "home",
-                         colors = navItemColors,
-                         onClick = { 
-                            currentScreen = "home"
-                            selectedGoalId = null
-                            selectedTasbeehDetailId = null
-                         }
-                     )
-                     NavigationBarItem(
-                         icon = { 
-                            Box(contentAlignment = Alignment.Center) {
-                                if (currentScreen == "tasbeehs") {
-                                    Surface(
-                                        modifier = Modifier.size(36.dp).shadow(8.dp, CircleShape, spotColor = colorScheme.primary),
-                                        shape = CircleShape,
-                                        color = colorScheme.primary.copy(alpha = 0.15f),
-                                        content = {}
-                                    )
-                                }
-                                Icon(Icons.AutoMirrored.Filled.List, contentDescription = null)
-                            }
-                         },
-                         label = { Text(stringResource(R.string.nav_tasbeehs)) },
-                         selected = currentScreen == "tasbeehs",
-                         colors = navItemColors,
-                         onClick = { 
-                            currentScreen = "tasbeehs"
-                            selectedGoalId = null
-                            selectedTasbeehDetailId = null
-                         }
-                     )
-                     NavigationBarItem(
-                         icon = { 
-                            Box(contentAlignment = Alignment.Center) {
-                                if (currentScreen == "dashboard") {
-                                    Surface(
-                                        modifier = Modifier.size(36.dp).shadow(8.dp, CircleShape, spotColor = colorScheme.primary),
-                                        shape = CircleShape,
-                                        color = colorScheme.primary.copy(alpha = 0.15f),
-                                        content = {}
-                                    )
-                                }
-                                Icon(Icons.Default.Assessment, contentDescription = null)
-                            }
-                         },
-                         label = { Text(stringResource(R.string.nav_profile)) },
-                         selected = currentScreen == "dashboard",
-                         colors = navItemColors,
-                         onClick = { 
-                            currentScreen = "dashboard"
-                            selectedGoalId = null
-                            selectedTasbeehDetailId = null
-                         }
-                     )
+                          NavigationBarItem(
+                              icon = { Icon(Icons.Default.Home, contentDescription = null) },
+                              label = { Text(stringResource(R.string.nav_home), fontWeight = if (currentScreen == "home") FontWeight.Bold else FontWeight.Normal) },
+                              selected = currentScreen == "home",
+                              colors = navItemColors,
+                              onClick = { 
+                                 currentScreen = "home"
+                                 selectedGoalId = null
+                                 selectedTasbeehDetailId = null
+                              }
+                          )
+                          NavigationBarItem(
+                              icon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = null) },
+                              label = { Text(stringResource(R.string.nav_tasbeehs), fontWeight = if (currentScreen == "tasbeehs") FontWeight.Bold else FontWeight.Normal) },
+                              selected = currentScreen == "tasbeehs",
+                              colors = navItemColors,
+                              onClick = { 
+                                 currentScreen = "tasbeehs"
+                                 selectedGoalId = null
+                                 selectedTasbeehDetailId = null
+                              }
+                          )
+                          NavigationBarItem(
+                              icon = { Icon(Icons.Default.Assessment, contentDescription = null) },
+                              label = { Text(stringResource(R.string.nav_profile), fontWeight = if (currentScreen == "dashboard") FontWeight.Bold else FontWeight.Normal) },
+                              selected = currentScreen == "dashboard",
+                              colors = navItemColors,
+                              onClick = { 
+                                 currentScreen = "dashboard"
+                                 selectedGoalId = null
+                                 selectedTasbeehDetailId = null
+                              }
+                          )
+                      }
+                  }
+              }
+         },
+         floatingActionButton = {
+              if (currentScreen == "tasbeehs" && selectedGoalId == null && selectedTasbeehDetailId == null) {
+                 FloatingActionButton(
+                     onClick = { showAddGoalDialog = true },
+                     shape = CircleShape,
+                     containerColor = MaterialTheme.colorScheme.primary,
+                     contentColor = MaterialTheme.colorScheme.onPrimary
+                 ) {
+                     Icon(Icons.Default.Add, contentDescription = "Add Tasbeeh")
                  }
              }
-        },
-        floatingActionButton = {
-             if (currentScreen == "tasbeehs" && selectedGoalId == null && selectedTasbeehDetailId == null) {
-                FloatingActionButton(onClick = { showAddGoalDialog = true }) {
-                    Icon(Icons.Default.Add, contentDescription = "Add Tasbeeh")
-                }
-            }
-        }
+         }
     ) { innerPadding ->
         AnimatedContent(
             targetState = Triple(currentScreen, selectedGoalId, selectedTasbeehDetailId),

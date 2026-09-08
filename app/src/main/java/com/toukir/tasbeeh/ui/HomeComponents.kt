@@ -1,5 +1,6 @@
 package com.toukir.tasbeeh.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -110,13 +111,14 @@ fun SyncStatusIcon(
 fun DurationChip(duration: GoalDuration, color: Color) {
     val (text, chipColor) = when (duration) {
         GoalDuration.DAILY -> "Daily" to color
-        GoalDuration.WEEKLY -> "Weekly" to Color(0xFF4CAF50)
-        GoalDuration.MONTHLY -> "Monthly" to Color(0xFF2196F3)
-        GoalDuration.YEARLY -> "Yearly" to Color(0xFFFF9800)
+        GoalDuration.WEEKLY -> "Weekly" to MaterialTheme.colorScheme.primary
+        GoalDuration.MONTHLY -> "Monthly" to Color(0xFF3B82F6) // Toukir Cobalt nuance
+        GoalDuration.YEARLY -> "Yearly" to Color(0xFFF59E0B) // Toukir Amber nuance
     }
     Surface(
-        shape = RoundedCornerShape(8.dp),
-        color = chipColor.copy(alpha = 0.15f),
+        shape = RoundedCornerShape(6.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant),
         modifier = Modifier.padding(top = 4.dp)
     ) {
         Text(
@@ -184,11 +186,12 @@ fun HeaderSection(
             }
             
             Surface(
-                shape = RoundedCornerShape(16.dp),
-                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.primaryContainer,
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = "🔥", fontSize = 14.sp)
@@ -197,7 +200,7 @@ fun HeaderSection(
                         text = formatNumber(streak, currentLanguage),
                         style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
             }
@@ -207,13 +210,14 @@ fun HeaderSection(
 
 @Composable
 fun getIconForGoal(name: String): Pair<ImageVector, Color> {
+    val mint = MaterialTheme.colorScheme.primary
     return when {
-        name.contains("Allahu Akbar", true) -> Icons.Default.Flare to Color(0xFF9575CD)
-        name.contains("La Ilaha Illallah", true) -> Icons.Default.Eco to Color(0xFF81C784)
-        name.contains("Astaghfirullah", true) -> Icons.Default.Flare to Color(0xFFFFB74D)
-        name.contains("SubhanAllah", true) -> Icons.Default.Favorite to Color(0xFF64B5F6)
-        name.contains("Durood", true) -> Icons.Default.NightsStay to Color(0xFFF06292)
-        else -> Icons.Default.Spa to Color(0xFF4DB6AC)
+        name.contains("Allahu Akbar", true) -> Icons.Default.Flare to mint
+        name.contains("La Ilaha Illallah", true) -> Icons.Default.Eco to mint
+        name.contains("Astaghfirullah", true) -> Icons.Default.Flare to mint
+        name.contains("SubhanAllah", true) -> Icons.Default.Favorite to mint
+        name.contains("Durood", true) -> Icons.Default.NightsStay to mint
+        else -> Icons.Default.Spa to mint
     }
 }
 
@@ -222,35 +226,36 @@ fun GoalProgressItem(
     goal: TasbeehGoal,
     displayName: String = goal.name,
     icon: ImageVector = Icons.Default.Spa,
-    iconColor: Color = Color(0xFF9575CD),
+    iconColor: Color = MaterialTheme.colorScheme.primary,
     showDurationChip: Boolean = false,
     modifier: Modifier = Modifier,
     isCompact: Boolean = false,
     onClick: () -> Unit
 ) {
     val currentLanguage = Locale.getDefault().language
-    val verticalPadding = if (isCompact) 4.dp else 12.dp
-    val iconSize = if (isCompact) 36.dp else 48.dp
-    val spacing = if (isCompact) 8.dp else 16.dp
+    val verticalPadding = if (isCompact) 6.dp else 12.dp
+    val iconSize = if (isCompact) 36.dp else 44.dp
+    val spacing = if (isCompact) 8.dp else 14.dp
 
     Surface(
         modifier = modifier
             .fillMaxWidth()
             .pressClickEffect()
             .clickable { onClick() },
-        shape = RoundedCornerShape(if (isCompact) 12.dp else 20.dp),
+        shape = RoundedCornerShape(if (isCompact) 12.dp else 16.dp),
         color = MaterialTheme.colorScheme.surface,
-        shadowElevation = if (isCompact) 1.dp else 2.dp
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = verticalPadding),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Leading Icon
+            // Leading Icon (TDS Inset Container)
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Surface(
                     shape = RoundedCornerShape(if (isCompact) 8.dp else 12.dp),
-                    color = iconColor.copy(alpha = 0.1f),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                     modifier = Modifier.size(iconSize)
                 ) {
                     Box(contentAlignment = Alignment.Center) {
@@ -258,7 +263,7 @@ fun GoalProgressItem(
                             imageVector = icon,
                             contentDescription = null,
                             tint = iconColor,
-                            modifier = Modifier.size(if (isCompact) 18.dp else 24.dp)
+                            modifier = Modifier.size(if (isCompact) 18.dp else 22.dp)
                         )
                     }
                 }
@@ -279,12 +284,13 @@ fun GoalProgressItem(
                         text = displayName,
                         style = if (isCompact) MaterialTheme.typography.bodyLarge else MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1
                     )
                     Text(
                         text = "${formatNumber(goal.currentCount, currentLanguage)} / ${formatNumber(goal.targetCount, currentLanguage)}",
                         style = MaterialTheme.typography.bodySmall,
-                        color = iconColor,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
@@ -295,8 +301,8 @@ fun GoalProgressItem(
                         .fillMaxWidth()
                         .height(if (isCompact) 4.dp else 6.dp)
                         .clip(CircleShape),
-                    color = iconColor,
-                    trackColor = iconColor.copy(alpha = 0.1f),
+                    color = MaterialTheme.colorScheme.primary,
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
                     strokeCap = StrokeCap.Round
                 )
             }
