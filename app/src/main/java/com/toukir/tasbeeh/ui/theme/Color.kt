@@ -18,18 +18,18 @@ val ToukirMintOnPrimaryLight = Color(0xFFFFFFFF)
 val ToukirMintContainerLight = Color(0xFFCCFBF1) // Pill Container Light
 val ToukirMintOnContainerLight = Color(0xFF134E4A)
 
-// Dark Theme (Deep Obsidian Slate & Glowing Mint)
-val DarkCanvas = Color(0xFF111317) // Deep Obsidian Slate Canvas
-val DarkSurface = Color(0xFF1A1D23) // Elevated Charcoal Card
-val DarkInset = Color(0xFF232730) // Recessed Dark (Tracks/Bars)
-val DarkHairlineRim = Color(0xFF2D323E) // 1dp Tactile Rim
-val DarkTextPrimary = Color(0xFFF3F4F6) // Luminous White (16.5:1 AAA)
-val DarkTextSecondary = Color(0xFF9CA3AF) // Muted Silver (5.8:1 AA)
+// Dark Theme (Velvet Charcoal & Sacred Gold / Illuminated Amber)
+val DarkCanvas = Color(0xFF0C0D0E) // Deep Velvet Black Canvas
+val DarkSurface = Color(0xFF16181B) // Elevated Warm Charcoal Card
+val DarkInset = Color(0xFF212328) // Recessed Charcoal (Tracks/Bars)
+val DarkHairlineRim = Color(0xFF2E3137) // 1dp Tactile Rim
+val DarkTextPrimary = Color(0xFFF4F4F5) // Luminous Warm White (16.5:1 AAA)
+val DarkTextSecondary = Color(0xFFA1A1AA) // Muted Warm Silver (5.8:1 AA)
 
-val ToukirMintDark = Color(0xFF14B8A6) // Toukir Mint Primary Dark
-val ToukirMintOnPrimaryDark = Color(0xFF111317)
-val ToukirMintContainerDark = Color(0xFF134E4A) // Pill Container Dark
-val ToukirMintOnContainerDark = Color(0xFFCCFBF1)
+val ToukirAmberDark = Color(0xFFF59E0B) // Sacred Gold / Illuminated Amber Primary
+val ToukirAmberOnPrimaryDark = Color(0xFF0C0D0E) // Deep Velvet Charcoal on Gold
+val ToukirAmberContainerDark = Color(0xFF3B1F08) // Warm Chestnut Container Dark
+val ToukirAmberOnContainerDark = Color(0xFFFEF3C7) // Illuminated Parchment Gold
 
 // Alert Exception: Toukir Crimson
 val ToukirCrimsonLight = Color(0xFFDC2626)
@@ -37,11 +37,12 @@ val ToukirCrimsonContainerLight = Color(0xFFFEE2E2)
 val ToukirCrimsonDark = Color(0xFFEF4444)
 val ToukirCrimsonContainerDark = Color(0xFF450A0A)
 
-// Backward-compatibility aliases if needed
+// Backward-compatibility aliases
 val DayPrimary = ToukirMintLight
 val DayBackground = LightCanvas
 val DaySurface = LightSurface
-val NightPrimary = ToukirMintDark
+val NightPrimary = ToukirAmberDark
 val NightBackground = DarkCanvas
 val NightSurface = DarkSurface
+val ToukirMintDark = Color(0xFF14B8A6)
 

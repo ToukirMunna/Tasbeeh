@@ -27,12 +27,12 @@ private val DayColorScheme = lightColorScheme(
     errorContainer = ToukirCrimsonContainerLight
 )
 
-// 2. Toukir Studio Dark Scheme (Deep Obsidian Slate & Glowing Mint)
+// 2. Toukir Studio Dark Scheme (Velvet Charcoal & Sacred Gold)
 private val NightColorScheme = darkColorScheme(
-    primary = ToukirMintDark,
-    onPrimary = ToukirMintOnPrimaryDark,
-    primaryContainer = ToukirMintContainerDark,
-    onPrimaryContainer = ToukirMintOnContainerDark,
+    primary = ToukirAmberDark,
+    onPrimary = ToukirAmberOnPrimaryDark,
+    primaryContainer = ToukirAmberContainerDark,
+    onPrimaryContainer = ToukirAmberOnContainerDark,
     background = DarkCanvas,
     onBackground = DarkTextPrimary,
     surface = DarkSurface,
