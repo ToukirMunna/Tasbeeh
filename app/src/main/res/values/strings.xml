@@ -40,6 +40,8 @@
     <string name="today_label">Today: %1$s</string>
     <string name="all_time_label">All time: %1$s</string>
     <string name="days_active">%1$s days active</string>
+    <string name="active_days_label">Active Days</string>
+    <string name="recitations_count">%1$s total recitations</string>
     
     <!-- Profile Screen -->
     <string name="profile_title">Dashboard</string>

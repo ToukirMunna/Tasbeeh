@@ -1,5 +1,6 @@
 package com.toukir.tasbeeh.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -54,20 +55,22 @@ fun ProfileHeaderSection(
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
+                Surface(
                     modifier = Modifier
-                        .size(56.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.surface)
+                        .size(54.dp)
                         .clickable { onNameClick() },
-                    contentAlignment = Alignment.Center
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
                 ) {
-                    Image(
-                        painter = painterResource(if (isMale) R.drawable.male else R.drawable.female),
-                        contentDescription = "Profile Photo",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    Box(contentAlignment = Alignment.Center) {
+                        StudioIcon(
+                            iconRes = StudioIcons.AccountCircle,
+                            contentDescription = "Profile",
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.width(12.dp))
@@ -107,7 +110,7 @@ fun ProfileHeaderSection(
                         Brush.verticalGradient(
                             colors = listOf(
                                 MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.8f)
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
                             )
                         )
                     ),
@@ -127,13 +130,14 @@ fun ProfileHeaderSection(
                     Text(
                         formatNumber(currentStreak, language),
                         style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.Black,
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                     Text(
                         stringResource(R.string.day_streak),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }

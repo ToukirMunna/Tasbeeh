@@ -47,9 +47,7 @@ fun ProfileScreen(
 
     val uniqueGoals = remember(goals) { goals.uniqueByTasbeehName() }
     val totalAllTime = remember(uniqueGoals) { uniqueGoals.sumOf { it.totalCount } }
-    val topTasbeehName = remember(uniqueGoals) {
-        uniqueGoals.maxByOrNull { it.totalCount }?.let { AdhkarLibrary.getLocalizedName(context, it.name) } ?: ""
-    }
+    val activeDays = remember(history) { history.map { it.date }.distinct().size }
 
     Scaffold(
         modifier = modifier,
@@ -87,130 +85,77 @@ fun ProfileScreen(
                 )
             }
 
-        // "At a Glance" Stats
-        item {
-            SummaryStatsRow(
-                totalCount = totalAllTime,
-                bestTasbeeh = topTasbeehName,
-                language = language
-            )
-        }
-
-        // Weekly Activity
-        item {
-            SectionHeader(title = stringResource(R.string.weekly_activity))
-            Spacer(modifier = Modifier.height(12.dp))
-            Card(
-                shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(240.dp)
-            ) {
-                Box(modifier = Modifier.padding(20.dp)) {
-                    WeeklyBarChart(history = history, language = language)
-                }
+            // "At a Glance" Stats
+            item {
+                SummaryStatsRow(
+                    totalCount = totalAllTime,
+                    activeDays = activeDays,
+                    language = language
+                )
             }
-        }
 
-        // Navigation Buttons
-        item {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    Button(
-                        onClick = onStatisticsClick,
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(48.dp)
-                            .pressClickEffect(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    ) {
-                        StudioIcon(
-                            iconRes = StudioIcons.CalendarMonth,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(stringResource(R.string.stats_title), fontWeight = FontWeight.SemiBold)
-                    }
-
-                    Button(
-                        onClick = onHistoryClick,
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(48.dp)
-                            .pressClickEffect(),
-                        shape = RoundedCornerShape(12.dp),
-                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                            contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    ) {
-                        StudioIcon(
-                            iconRes = StudioIcons.History,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(stringResource(R.string.history_title), fontWeight = FontWeight.SemiBold)
-                    }
-                }
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    Button(
-                        onClick = onLeaderboardClick,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp)
-                            .pressClickEffect(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    ) {
-                        StudioIcon(
-                            iconRes = StudioIcons.Leaderboard,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(stringResource(R.string.leaderboard_title), fontWeight = FontWeight.SemiBold)
-                    }
-                }
-
-                Button(
-                    onClick = onSettingsClick,
+            // Weekly Activity
+            item {
+                SectionHeader(title = stringResource(R.string.weekly_activity))
+                Spacer(modifier = Modifier.height(12.dp))
+                Card(
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(48.dp)
-                        .pressClickEffect(),
-                    shape = RoundedCornerShape(12.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                        .height(240.dp)
                 ) {
-                    StudioIcon(iconRes = StudioIcons.Settings, contentDescription = null, modifier = Modifier.size(18.dp))
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(stringResource(R.string.settings_title), fontWeight = FontWeight.SemiBold)
+                    Box(modifier = Modifier.padding(20.dp)) {
+                        WeeklyBarChart(history = history, language = language)
+                    }
                 }
             }
-        }
+
+            // Navigation Buttons (Symmetrical 2x2 Grid)
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        ProfileNavButton(
+                            title = stringResource(R.string.stats_title),
+                            iconRes = StudioIcons.CalendarMonth,
+                            onClick = onStatisticsClick,
+                            isPrimary = true,
+                            modifier = Modifier.weight(1f)
+                        )
+                        ProfileNavButton(
+                            title = stringResource(R.string.history_title),
+                            iconRes = StudioIcons.History,
+                            onClick = onHistoryClick,
+                            isPrimary = false,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        ProfileNavButton(
+                            title = stringResource(R.string.leaderboard_title),
+                            iconRes = StudioIcons.Leaderboard,
+                            onClick = onLeaderboardClick,
+                            isPrimary = true,
+                            modifier = Modifier.weight(1f)
+                        )
+                        ProfileNavButton(
+                            title = stringResource(R.string.settings_title),
+                            iconRes = StudioIcons.Settings,
+                            onClick = onSettingsClick,
+                            isPrimary = false,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+            }
 
         // Top Used Tasbeeh
         item {
@@ -234,5 +179,35 @@ fun ProfileScreen(
 
         item { Spacer(modifier = Modifier.height(32.dp)) }
         }
+    }
+}
+
+@Composable
+private fun ProfileNavButton(
+    title: String,
+    @androidx.annotation.DrawableRes iconRes: Int,
+    onClick: () -> Unit,
+    isPrimary: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier
+            .height(48.dp)
+            .pressClickEffect(),
+        shape = RoundedCornerShape(12.dp),
+        border = if (!isPrimary) BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant) else null,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if (isPrimary) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+            contentColor = if (isPrimary) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    ) {
+        StudioIcon(
+            iconRes = iconRes,
+            contentDescription = null,
+            modifier = Modifier.size(18.dp)
+        )
+        Spacer(modifier = Modifier.width(6.dp))
+        Text(title, fontWeight = FontWeight.SemiBold)
     }
 }

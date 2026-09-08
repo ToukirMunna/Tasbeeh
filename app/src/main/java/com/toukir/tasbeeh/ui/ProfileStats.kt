@@ -16,7 +16,7 @@ import com.toukir.tasbeeh.utils.formatNumber
 @Composable
 fun SummaryStatsRow(
     totalCount: Int,
-    bestTasbeeh: String,
+    activeDays: Int,
     language: String = "en"
 ) {
     Row(
@@ -30,8 +30,8 @@ fun SummaryStatsRow(
             containerColor = MaterialTheme.colorScheme.secondaryContainer
         )
         ProfileStatCard(
-            label = stringResource(R.string.top_used_tasbeeh),
-            value = bestTasbeeh.ifEmpty { stringResource(R.string.locked) },
+            label = stringResource(R.string.active_days_label),
+            value = formatNumber(activeDays, language),
             modifier = Modifier.weight(1f),
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         )

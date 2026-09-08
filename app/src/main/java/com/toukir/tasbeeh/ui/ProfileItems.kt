@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.toukir.tasbeeh.R
 import com.toukir.tasbeeh.TasbeehGoal
 import com.toukir.tasbeeh.utils.formatNumber
 
@@ -38,7 +40,7 @@ fun TopTasbeehItem(goal: TasbeehGoal, displayName: String = goal.name, language:
                     fontWeight = FontWeight.SemiBold
                 )
                 Text(
-                    text = "${formatNumber(goal.totalCount, language)} total recitations",
+                    text = stringResource(R.string.recitations_count, formatNumber(goal.totalCount, language)),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                 )

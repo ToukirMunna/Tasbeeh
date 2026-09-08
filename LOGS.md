@@ -14,6 +14,17 @@
 
 <!-- PREPEND NEW ENTRIES BELOW THIS LINE -->
 
+### [2026-09-09 02:05 AM] - Dashboard Reorganization, Vector Avatar & Salam Localization
+* **Files Modified**: `ui/HomeComponents.kt`, `ui/ProfileHeader.kt`, `ui/ProfileScreen.kt`, `ui/ProfileStats.kt`, `ui/ProfileItems.kt`, `res/values/strings.xml`, `res/values-bn/strings.xml`
+* **Changes Made**:
+  - Replaced hardcoded English greeting in `HomeComponents.kt` with `stringResource(R.string.greeting)` so it properly displays in Bangla.
+  - Replaced static raster photos (`male`/`female`) with a theme-adaptive vector avatar badge (`StudioIcons.AccountCircle`) in `ProfileHeader.kt`.
+  - Fixed streak text visibility: Applied solid 100% opacity, `FontWeight.Bold`, and `onPrimary` color so "একটানা" is sharp and high-contrast against the Gold card.
+  - Reorganized Dashboard navigation buttons into a clean, balanced 2x2 grid (Statistics & History / Leaderboard & Settings).
+  - Replaced duplicate top tasbeeh stat card with Active Days ("সক্রিয় দিন").
+  - Localized the "total recitations" subtitle in `ProfileItems.kt`.
+* **Rationale & Impact**: Elevates visual polish and readability, achieves strict WCAG AA contrast, eliminates duplicate information, and ensures complete language localization across the app.
+
 ### [2026-09-09 01:54 AM] - Updated google-services.json with Debug SHA-1 OAuth Client
 * **Files Modified**: `app/google-services.json`
 * **Changes Made**:

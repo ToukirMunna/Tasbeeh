@@ -39,6 +39,8 @@
     <string name="active_goal_label">সক্রিয় লক্ষ্য</string>
     <string name="today_label">আজ: %1$s</string>
     <string name="all_time_label">সর্বমোট: %1$s</string>
+    <string name="active_days_label">সক্রিয় দিন</string>
+    <string name="recitations_count">%1$s বার পঠিত</string>
     
     <!-- Profile Screen -->
     <string name="profile_title">ড্যাশবোর্ড</string>

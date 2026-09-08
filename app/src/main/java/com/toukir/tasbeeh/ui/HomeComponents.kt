@@ -21,6 +21,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
@@ -28,6 +29,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.toukir.tasbeeh.R
 import com.toukir.tasbeeh.GoalDuration
 import com.toukir.tasbeeh.TasbeehGoal
 import com.toukir.tasbeeh.ui.common.StudioIcon
@@ -130,8 +132,10 @@ fun HeaderSection(
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 8.dp)) {
+            val greeting = stringResource(R.string.greeting)
+            val displayName = userName.ifEmpty { stringResource(R.string.user) }
             Text(
-                text = "Assalamu Alaikum, $userName",
+                text = "$greeting $displayName",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
