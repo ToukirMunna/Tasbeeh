@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.toukir.tasbeeh.R
+import com.toukir.tasbeeh.ui.theme.AppColorTheme
 import com.toukir.tasbeeh.ui.theme.AppTheme
 import androidx.compose.material3.AlertDialog
 
@@ -34,6 +35,8 @@ import androidx.compose.material3.AlertDialog
 fun SettingsDialog(
     currentTheme: AppTheme,
     onThemeChange: (AppTheme) -> Unit,
+    currentColorTheme: AppColorTheme = AppColorTheme.Gold,
+    onColorThemeChange: (AppColorTheme) -> Unit = {},
     isSoundEnabled: Boolean,
     onSoundEnabledChange: (Boolean) -> Unit,
     isVibrateTapEnabled: Boolean,
@@ -106,6 +109,8 @@ fun SettingsDialog(
                 modifier = Modifier.padding(innerPadding),
                 currentTheme = currentTheme,
                 onThemeChange = onThemeChange,
+                currentColorTheme = currentColorTheme,
+                onColorThemeChange = onColorThemeChange,
                 isSoundEnabled = isSoundEnabled,
                 onSoundEnabledChange = onSoundEnabledChange,
                 isVibrateTapEnabled = isVibrateTapEnabled,

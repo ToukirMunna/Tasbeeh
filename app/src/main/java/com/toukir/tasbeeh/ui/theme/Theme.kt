@@ -9,12 +9,92 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
-// 1. Toukir Studio Light Scheme (Cool Slate & Toukir Mint)
-private val DayColorScheme = lightColorScheme(
-    primary = ToukirMintLight,
-    onPrimary = ToukirMintOnPrimaryLight,
-    primaryContainer = ToukirMintContainerLight,
-    onPrimaryContainer = ToukirMintOnContainerLight,
+enum class AppColorTheme(
+    val displayName: String,
+    val primaryLight: Color,
+    val onPrimaryLight: Color,
+    val containerLight: Color,
+    val onContainerLight: Color,
+    val primaryDark: Color,
+    val onPrimaryDark: Color,
+    val containerDark: Color,
+    val onContainerDark: Color,
+    val previewColor: Color,
+    val onPreviewColor: Color
+) {
+    Gold(
+        displayName = "Gold",
+        primaryLight = Color(0xFFD97706),
+        onPrimaryLight = Color(0xFFFFFFFF),
+        containerLight = Color(0xFFFEF3C7),
+        onContainerLight = Color(0xFF78350F),
+        primaryDark = Color(0xFFF59E0B),
+        onPrimaryDark = Color(0xFF0C0D0E),
+        containerDark = Color(0xFF3B1F08),
+        onContainerDark = Color(0xFFFEF3C7),
+        previewColor = Color(0xFFF59E0B),
+        onPreviewColor = Color(0xFF0C0D0E)
+    ),
+    Mint(
+        displayName = "Mint",
+        primaryLight = Color(0xFF0D9488),
+        onPrimaryLight = Color(0xFFFFFFFF),
+        containerLight = Color(0xFFCCFBF1),
+        onContainerLight = Color(0xFF134E4A),
+        primaryDark = Color(0xFF14B8A6),
+        onPrimaryDark = Color(0xFF0C0D0E),
+        containerDark = Color(0xFF134E4A),
+        onContainerDark = Color(0xFFCCFBF1),
+        previewColor = Color(0xFF14B8A6),
+        onPreviewColor = Color(0xFFFFFFFF)
+    ),
+    Sapphire(
+        displayName = "Sapphire",
+        primaryLight = Color(0xFF2563EB),
+        onPrimaryLight = Color(0xFFFFFFFF),
+        containerLight = Color(0xFFDBEAFE),
+        onContainerLight = Color(0xFF1E3A8A),
+        primaryDark = Color(0xFF3B82F6),
+        onPrimaryDark = Color(0xFF0C0D0E),
+        containerDark = Color(0xFF172554),
+        onContainerDark = Color(0xFFDBEAFE),
+        previewColor = Color(0xFF3B82F6),
+        onPreviewColor = Color(0xFFFFFFFF)
+    ),
+    Amethyst(
+        displayName = "Amethyst",
+        primaryLight = Color(0xFF7C3AED),
+        onPrimaryLight = Color(0xFFFFFFFF),
+        containerLight = Color(0xFFF3E8FF),
+        onContainerLight = Color(0xFF4C1D95),
+        primaryDark = Color(0xFFA855F7),
+        onPrimaryDark = Color(0xFF0C0D0E),
+        containerDark = Color(0xFF3B0764),
+        onContainerDark = Color(0xFFF3E8FF),
+        previewColor = Color(0xFFA855F7),
+        onPreviewColor = Color(0xFFFFFFFF)
+    ),
+    Rose(
+        displayName = "Rose",
+        primaryLight = Color(0xFFE11D48),
+        onPrimaryLight = Color(0xFFFFFFFF),
+        containerLight = Color(0xFFFFE4E6),
+        onContainerLight = Color(0xFF881337),
+        primaryDark = Color(0xFFFB7185),
+        onPrimaryDark = Color(0xFF0C0D0E),
+        containerDark = Color(0xFF4C0519),
+        onContainerDark = Color(0xFFFFE4E6),
+        previewColor = Color(0xFFFB7185),
+        onPreviewColor = Color(0xFFFFFFFF)
+    )
+}
+
+// Dynamic Scheme Generators
+private fun getDayColorScheme(colorTheme: AppColorTheme) = lightColorScheme(
+    primary = colorTheme.primaryLight,
+    onPrimary = colorTheme.onPrimaryLight,
+    primaryContainer = colorTheme.containerLight,
+    onPrimaryContainer = colorTheme.onContainerLight,
     background = LightCanvas,
     onBackground = LightTextPrimary,
     surface = LightSurface,
@@ -27,12 +107,11 @@ private val DayColorScheme = lightColorScheme(
     errorContainer = ToukirCrimsonContainerLight
 )
 
-// 2. Toukir Studio Dark Scheme (Velvet Charcoal & Sacred Gold)
-private val NightColorScheme = darkColorScheme(
-    primary = ToukirAmberDark,
-    onPrimary = ToukirAmberOnPrimaryDark,
-    primaryContainer = ToukirAmberContainerDark,
-    onPrimaryContainer = ToukirAmberOnContainerDark,
+private fun getNightColorScheme(colorTheme: AppColorTheme) = darkColorScheme(
+    primary = colorTheme.primaryDark,
+    onPrimary = colorTheme.onPrimaryDark,
+    primaryContainer = colorTheme.containerDark,
+    onPrimaryContainer = colorTheme.onContainerDark,
     background = DarkCanvas,
     onBackground = DarkTextPrimary,
     surface = DarkSurface,
@@ -67,12 +146,13 @@ enum class GradientStyle(val colors: List<Color>, val nameStr: String) {
 @Composable
 fun TasbeehTheme(
     theme: AppTheme = AppTheme.Light,
+    colorTheme: AppColorTheme = AppColorTheme.Gold,
     typography: Typography = Typography,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when (theme) {
-        AppTheme.Light -> DayColorScheme
-        AppTheme.Dark -> NightColorScheme
+        AppTheme.Light -> getDayColorScheme(colorTheme)
+        AppTheme.Dark -> getNightColorScheme(colorTheme)
     }
 
     MaterialTheme(

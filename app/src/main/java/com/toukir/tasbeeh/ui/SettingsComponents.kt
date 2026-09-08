@@ -3,6 +3,8 @@ package com.toukir.tasbeeh.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.toukir.tasbeeh.R
+import com.toukir.tasbeeh.ui.theme.AppColorTheme
 import com.toukir.tasbeeh.ui.theme.AppTheme
 
 @Composable
@@ -36,6 +39,8 @@ fun SettingsScreenContent(
     modifier: Modifier = Modifier,
     currentTheme: AppTheme,
     onThemeChange: (AppTheme) -> Unit,
+    currentColorTheme: AppColorTheme = AppColorTheme.Gold,
+    onColorThemeChange: (AppColorTheme) -> Unit = {},
     isSoundEnabled: Boolean,
     onSoundEnabledChange: (Boolean) -> Unit,
     isVibrateTapEnabled: Boolean,
@@ -79,6 +84,8 @@ fun SettingsScreenContent(
         AppearanceSettings(
             currentTheme = currentTheme,
             onThemeChange = onThemeChange,
+            currentColorTheme = currentColorTheme,
+            onColorThemeChange = onColorThemeChange,
             showCounterCircle = showCounterCircle,
             onShowCounterCircleChange = onShowCounterCircleChange
         )
@@ -220,6 +227,8 @@ fun LanguageChip(
 fun AppearanceSettings(
     currentTheme: AppTheme,
     onThemeChange: (AppTheme) -> Unit,
+    currentColorTheme: AppColorTheme,
+    onColorThemeChange: (AppColorTheme) -> Unit,
     showCounterCircle: Boolean,
     onShowCounterCircleChange: (Boolean) -> Unit
 ) {
@@ -235,9 +244,34 @@ fun AppearanceSettings(
                 AppTheme.entries.forEach { theme ->
                     ThemeChip(
                         selected = theme == currentTheme,
-                        label = if (theme == AppTheme.Light) "Light (Slate)" else "Dark (Obsidian)",
+                        label = if (theme == AppTheme.Light) "Light" else "Dark",
                         onClick = { onThemeChange(theme) },
                         modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+        }
+        
+        SettingsDivider()
+
+        SettingsItem(
+            title = stringResource(R.string.setting_accent_color),
+            icon = StudioIcons.AutoAwesome
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                AppColorTheme.entries.forEach { colorOption ->
+                    ColorSwatch(
+                        color = colorOption.previewColor,
+                        onColor = colorOption.onPreviewColor,
+                        label = colorOption.displayName,
+                        isSelected = colorOption == currentColorTheme,
+                        onClick = { onColorThemeChange(colorOption) }
                     )
                 }
             }
@@ -251,6 +285,53 @@ fun AppearanceSettings(
             icon = StudioIcons.CheckCircle,
             checked = showCounterCircle,
             onCheckedChange = onShowCounterCircleChange
+        )
+    }
+}
+
+@Composable
+fun ColorSwatch(
+    color: Color,
+    onColor: Color,
+    label: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = modifier
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(onClick = onClick)
+            .padding(horizontal = 4.dp, vertical = 4.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .clip(CircleShape)
+                .background(color)
+                .border(
+                    width = if (isSelected) 2.5.dp else 1.dp,
+                    color = if (isSelected) MaterialTheme.colorScheme.onSurface else Color.Transparent,
+                    shape = CircleShape
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            if (isSelected) {
+                StudioIcon(
+                    StudioIcons.Check,
+                    contentDescription = "Selected",
+                    tint = onColor,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        }
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelSmall,
+            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+            color = if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

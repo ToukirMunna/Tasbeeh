@@ -17,6 +17,7 @@ import com.toukir.tasbeeh.data.LeaderboardEntry
 import com.toukir.tasbeeh.data.TasbeehHistory
 import com.toukir.tasbeeh.data.TasbeehRepository
 import com.toukir.tasbeeh.data.settingsDataStore
+import com.toukir.tasbeeh.ui.theme.AppColorTheme
 import com.toukir.tasbeeh.ui.theme.AppTheme
 import com.toukir.tasbeeh.ui.theme.GradientStyle
 import com.toukir.tasbeeh.utils.NetworkUtils
@@ -38,6 +39,7 @@ import java.time.LocalDate
 enum class SyncStatus { IDLE, SYNCING, SYNCED, ERROR }
 
 private val THEME_KEY = intPreferencesKey("app_theme")
+private val COLOR_THEME_KEY = intPreferencesKey("app_color_theme")
 private val GRADIENT_KEY = stringPreferencesKey("app_gradient")
 private val THICKNESS_KEY = floatPreferencesKey("app_thickness")
 private val SOUND_KEY = booleanPreferencesKey("app_sound")
@@ -48,6 +50,7 @@ private val SHOW_COUNTER_CIRCLE_KEY = booleanPreferencesKey("app_show_counter_ci
 
 data class AppSettings(
     val theme: AppTheme = AppTheme.Light,
+    val colorTheme: AppColorTheme = AppColorTheme.Gold,
     val gradient: GradientStyle = GradientStyle.Sunset,
     val thickness: Float = 20f,
     val isSoundEnabled: Boolean = true,
@@ -80,6 +83,7 @@ class MainViewModel(
             val prefs = context.settingsDataStore.data.first()
             AppSettings(
                 theme = AppTheme.entries.getOrElse(prefs[THEME_KEY] ?: 0) { AppTheme.Light },
+                colorTheme = AppColorTheme.entries.getOrElse(prefs[COLOR_THEME_KEY] ?: 0) { AppColorTheme.Gold },
                 gradient = try { GradientStyle.valueOf(prefs[GRADIENT_KEY] ?: GradientStyle.Sunset.name) } catch (e: Exception) { GradientStyle.Sunset },
                 thickness = prefs[THICKNESS_KEY] ?: 20f,
                 isSoundEnabled = prefs[SOUND_KEY] ?: true,
@@ -96,6 +100,7 @@ class MainViewModel(
     val settings: StateFlow<AppSettings> = context.settingsDataStore.data.map { prefs ->
         AppSettings(
             theme = AppTheme.entries.getOrElse(prefs[THEME_KEY] ?: 0) { AppTheme.Light },
+            colorTheme = AppColorTheme.entries.getOrElse(prefs[COLOR_THEME_KEY] ?: 0) { AppColorTheme.Gold },
             gradient = try { GradientStyle.valueOf(prefs[GRADIENT_KEY] ?: GradientStyle.Sunset.name) } catch (e: Exception) { GradientStyle.Sunset },
             thickness = prefs[THICKNESS_KEY] ?: 20f,
             isSoundEnabled = prefs[SOUND_KEY] ?: true,
@@ -293,6 +298,10 @@ class MainViewModel(
 
     suspend fun saveTheme(theme: AppTheme) {
         context.settingsDataStore.edit { it[THEME_KEY] = theme.ordinal }
+    }
+
+    suspend fun saveColorTheme(colorTheme: AppColorTheme) {
+        context.settingsDataStore.edit { it[COLOR_THEME_KEY] = colorTheme.ordinal }
     }
 
     suspend fun saveGradient(gradient: GradientStyle) {

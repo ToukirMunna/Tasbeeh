@@ -113,6 +113,7 @@
     <string name="settings_title">Settings</string>
     <string name="group_appearance">Appearance</string>
     <string name="setting_theme">App Theme</string>
+    <string name="setting_accent_color">Accent Color</string>
     <string name="setting_show_circle">Show Counter Circle</string>
     <string name="setting_show_circle_desc">Show the circular progress on Home screen</string>
     <string name="setting_gradient">Counter Gradient</string>

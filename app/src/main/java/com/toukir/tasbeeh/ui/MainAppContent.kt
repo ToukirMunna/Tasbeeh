@@ -433,6 +433,8 @@ fun TasbeehApp(
             SettingsDialog(
                 currentTheme = settings.theme,
                 onThemeChange = { theme -> viewModel.updateSetting { viewModel.saveTheme(theme) } },
+                currentColorTheme = settings.colorTheme,
+                onColorThemeChange = { colorTheme -> viewModel.updateSetting { viewModel.saveColorTheme(colorTheme) } },
                 isSoundEnabled = settings.isSoundEnabled,
                 onSoundEnabledChange = { enabled -> viewModel.updateSetting { viewModel.saveSoundEnabled(enabled) } },
                 isVibrateTapEnabled = settings.isVibrateTapEnabled,

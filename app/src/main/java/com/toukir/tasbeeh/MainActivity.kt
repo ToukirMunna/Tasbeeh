@@ -95,7 +95,10 @@ class MainActivity : AppCompatActivity() {
                 minSplashElapsed = true
             }
 
-            TasbeehTheme(theme = settings.theme) {
+            TasbeehTheme(
+                theme = settings.theme,
+                colorTheme = settings.colorTheme
+            ) {
                 Crossfade(
                     targetState = minSplashElapsed,
                     animationSpec = tween(durationMillis = 300),
