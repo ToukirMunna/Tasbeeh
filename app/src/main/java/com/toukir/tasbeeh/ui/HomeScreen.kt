@@ -21,15 +21,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AutoGraph
-import androidx.compose.material.icons.filled.Eco
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Flare
-import androidx.compose.material.icons.filled.NightsStay
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Spa
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon

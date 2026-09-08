@@ -15,9 +15,6 @@ import com.toukir.tasbeeh.TasbeehGoal
 import com.toukir.tasbeeh.data.AdhkarLibrary
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Flip
-import androidx.compose.material.icons.filled.Reorder
 
 @Composable
 fun GoalSectionContent(
@@ -46,7 +43,7 @@ fun GoalSectionContent(
                 GoalProgressItem(
                     goal = goal,
                     displayName = localizedName,
-                    icon = iconInfo.first,
+                    iconRes = iconInfo.first,
                     iconColor = iconInfo.second,
                     showDurationChip = isCustom,
                     isCompact = isCompact,

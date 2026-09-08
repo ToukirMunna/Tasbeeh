@@ -14,39 +14,24 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Eco
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Flare
-import androidx.compose.material.icons.filled.NightsStay
-import androidx.compose.material.icons.filled.Spa
-import androidx.compose.material.icons.filled.Flip
-import androidx.compose.material.icons.filled.Reorder
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.annotation.DrawableRes
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.toukir.tasbeeh.GoalDuration
 import com.toukir.tasbeeh.TasbeehGoal
-import androidx.compose.animation.*
-import androidx.compose.animation.core.*
-import androidx.compose.material.icons.outlined.CloudDone
-import androidx.compose.material.icons.outlined.CloudOff
-import androidx.compose.material.icons.outlined.Sync
-import androidx.compose.runtime.*
-import androidx.compose.ui.draw.rotate
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import com.toukir.tasbeeh.utils.formatNumber
 import java.util.Locale
 
@@ -78,24 +63,24 @@ fun SyncStatusIcon(
         ) {
             when (status) {
                 SyncStatus.SYNCING -> {
-                    Icon(
-                        imageVector = androidx.compose.material.icons.Icons.Outlined.Sync,
+                    StudioIcon(
+                        iconRes = StudioIcons.Refresh,
                         contentDescription = "Syncing",
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp).rotate(rotation)
                     )
                 }
                 SyncStatus.SYNCED -> {
-                    Icon(
-                        imageVector = androidx.compose.material.icons.Icons.Outlined.CloudDone,
+                    StudioIcon(
+                        iconRes = StudioIcons.CheckCircle,
                         contentDescription = "Synced",
-                        tint = Color(0xFF4CAF50), // Green for success
+                        tint = Color(0xFF4CAF50),
                         modifier = Modifier.size(20.dp)
                     )
                 }
                 SyncStatus.ERROR -> {
-                    Icon(
-                        imageVector = androidx.compose.material.icons.Icons.Outlined.CloudOff,
+                    StudioIcon(
+                        iconRes = StudioIcons.Block,
                         contentDescription = "Offline/Error",
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.size(20.dp)
@@ -146,7 +131,7 @@ fun HeaderSection(
     ) {
         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 8.dp)) {
             Text(
-                text = "Assalamu Alaikum, $userName 👋",
+                text = "Assalamu Alaikum, $userName",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -166,8 +151,8 @@ fun HeaderSection(
                 onClick = onFlip,
                 modifier = Modifier.size(32.dp).pressClickEffect()
             ) {
-                Icon(
-                    imageVector = androidx.compose.material.icons.Icons.Default.Flip,
+                StudioIcon(
+                    iconRes = StudioIcons.Refresh,
                     contentDescription = "Switch View",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(20.dp)
@@ -177,8 +162,8 @@ fun HeaderSection(
                 onClick = onManageGoals,
                 modifier = Modifier.size(32.dp).pressClickEffect()
             ) {
-                Icon(
-                    imageVector = androidx.compose.material.icons.Icons.Default.Reorder,
+                StudioIcon(
+                    iconRes = StudioIcons.Checklist,
                     contentDescription = "Edit Order",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(20.dp)
@@ -194,7 +179,12 @@ fun HeaderSection(
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(text = "🔥", fontSize = 14.sp)
+                    StudioIcon(
+                        iconRes = StudioIcons.LocalFireDepartment,
+                        contentDescription = "Streak",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(16.dp)
+                    )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = formatNumber(streak, currentLanguage),
@@ -209,15 +199,15 @@ fun HeaderSection(
 }
 
 @Composable
-fun getIconForGoal(name: String): Pair<ImageVector, Color> {
+fun getIconForGoal(name: String): Pair<Int, Color> {
     val mint = MaterialTheme.colorScheme.primary
     return when {
-        name.contains("Allahu Akbar", true) -> Icons.Default.Flare to mint
-        name.contains("La Ilaha Illallah", true) -> Icons.Default.Eco to mint
-        name.contains("Astaghfirullah", true) -> Icons.Default.Flare to mint
-        name.contains("SubhanAllah", true) -> Icons.Default.Favorite to mint
-        name.contains("Durood", true) -> Icons.Default.NightsStay to mint
-        else -> Icons.Default.Spa to mint
+        name.contains("Allahu Akbar", true) -> StudioIcons.FlashOn to mint
+        name.contains("La Ilaha Illallah", true) -> StudioIcons.Healing to mint
+        name.contains("Astaghfirullah", true) -> StudioIcons.RestartAlt to mint
+        name.contains("SubhanAllah", true) -> StudioIcons.AutoAwesome to mint
+        name.contains("Durood", true) -> StudioIcons.Bookmark to mint
+        else -> StudioIcons.Lightbulb to mint
     }
 }
 
@@ -225,7 +215,7 @@ fun getIconForGoal(name: String): Pair<ImageVector, Color> {
 fun GoalProgressItem(
     goal: TasbeehGoal,
     displayName: String = goal.name,
-    icon: ImageVector = Icons.Default.Spa,
+    @DrawableRes iconRes: Int = StudioIcons.Lightbulb,
     iconColor: Color = MaterialTheme.colorScheme.primary,
     showDurationChip: Boolean = false,
     modifier: Modifier = Modifier,
@@ -259,8 +249,8 @@ fun GoalProgressItem(
                     modifier = Modifier.size(iconSize)
                 ) {
                     Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = icon,
+                        StudioIcon(
+                            iconRes = iconRes,
                             contentDescription = null,
                             tint = iconColor,
                             modifier = Modifier.size(if (isCompact) 18.dp else 22.dp)

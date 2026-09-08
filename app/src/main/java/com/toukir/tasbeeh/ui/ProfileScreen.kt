@@ -5,12 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.History
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Leaderboard
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -137,8 +134,8 @@ fun ProfileScreen(
                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     ) {
-                        Icon(
-                            Icons.Default.DateRange,
+                        StudioIcon(
+                            iconRes = StudioIcons.CalendarMonth,
                             contentDescription = null,
                             modifier = Modifier.size(18.dp)
                         )
@@ -159,8 +156,8 @@ fun ProfileScreen(
                             contentColor = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     ) {
-                        Icon(
-                            imageVector = Icons.Outlined.History,
+                        StudioIcon(
+                            iconRes = StudioIcons.History,
                             contentDescription = null,
                             modifier = Modifier.size(18.dp)
                         )
@@ -185,8 +182,8 @@ fun ProfileScreen(
                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     ) {
-                        Icon(
-                            Icons.Default.Leaderboard,
+                        StudioIcon(
+                            iconRes = StudioIcons.Leaderboard,
                             contentDescription = null,
                             modifier = Modifier.size(18.dp)
                         )
@@ -208,7 +205,7 @@ fun ProfileScreen(
                         contentColor = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 ) {
-                    Icon(Icons.Default.Settings, contentDescription = null, modifier = Modifier.size(18.dp))
+                    StudioIcon(iconRes = StudioIcons.Settings, contentDescription = null, modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(stringResource(R.string.settings_title), fontWeight = FontWeight.SemiBold)
                 }

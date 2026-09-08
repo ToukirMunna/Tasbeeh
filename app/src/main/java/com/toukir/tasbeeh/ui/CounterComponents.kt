@@ -14,11 +14,9 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.Translate
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -124,7 +122,7 @@ fun CounterHeader(
             modifier = Modifier.weight(1f)
         ) {
             IconButton(onClick = onBack) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                StudioIcon(StudioIcons.ArrowBack, contentDescription = "Back")
             }
             Text(
                 text = goalName,
@@ -137,15 +135,15 @@ fun CounterHeader(
 
         Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = onMeaningClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Translate,
+                StudioIcon(
+                    iconRes = StudioIcons.Translate,
                     contentDescription = "Show Meaning",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             IconButton(onClick = { onDetailsClick() }) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
+                StudioIcon(
+                    iconRes = StudioIcons.Info,
                     contentDescription = "Details",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )

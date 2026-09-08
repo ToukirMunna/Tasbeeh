@@ -9,12 +9,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowBackIos
-import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,7 +49,7 @@ fun HistoryScreen(
                 title = { Text(stringResource(R.string.history_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        StudioIcon(StudioIcons.ArrowBack, contentDescription = "Back")
                     }
                 }
             )
@@ -133,7 +130,7 @@ fun DailyHistoryList(history: List<TasbeehHistory>, language: String = "en") {
                         enabled = currentPage > 0,
                         contentPadding = PaddingValues(horizontal = 12.dp)
                     ) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBackIos, contentDescription = null, modifier = Modifier.size(16.dp))
+                        StudioIcon(StudioIcons.ArrowBack, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(stringResource(R.string.previous))
                     }
@@ -151,7 +148,7 @@ fun DailyHistoryList(history: List<TasbeehHistory>, language: String = "en") {
                     ) {
                         Text(stringResource(R.string.next))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Icon(Icons.AutoMirrored.Filled.ArrowForwardIos, contentDescription = null, modifier = Modifier.size(16.dp))
+                        StudioIcon(StudioIcons.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp))
                     }
                 }
             }
@@ -292,8 +289,8 @@ fun YearExpandableGroup(
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
-                Icon(
-                    imageVector = Icons.Default.ExpandMore,
+                StudioIcon(
+                    iconRes = StudioIcons.ExpandMore,
                     contentDescription = null,
                     modifier = Modifier.rotate(rotationState)
                 )

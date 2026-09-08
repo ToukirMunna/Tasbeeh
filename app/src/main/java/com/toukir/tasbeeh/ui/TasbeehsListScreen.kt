@@ -10,11 +10,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.History
-import androidx.compose.material.icons.outlined.Today
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -183,8 +181,8 @@ fun TasbeehListCard(
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     // Today Stat
-                    Icon(
-                        imageVector = Icons.Outlined.Today,
+                    StudioIcon(
+                        iconRes = StudioIcons.CalendarMonth,
                         contentDescription = null,
                         modifier = Modifier.size(14.dp),
                         tint = MaterialTheme.colorScheme.primary
@@ -200,8 +198,8 @@ fun TasbeehListCard(
                     Spacer(modifier = Modifier.width(16.dp))
                     
                     // All Time Stat
-                    Icon(
-                        imageVector = Icons.Outlined.History,
+                    StudioIcon(
+                        iconRes = StudioIcons.History,
                         contentDescription = null,
                         modifier = Modifier.size(14.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
@@ -243,8 +241,8 @@ fun TasbeehListCard(
                 modifier = Modifier.size(38.dp)
             ) {
                 Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = Icons.Outlined.Edit,
+                    StudioIcon(
+                        iconRes = StudioIcons.Edit,
                         contentDescription = "Edit",
                         modifier = Modifier.size(18.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant

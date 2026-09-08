@@ -11,11 +11,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.Message
-import androidx.compose.material.icons.automirrored.outlined.VolumeUp
-import androidx.compose.material.icons.outlined.*
+import androidx.annotation.DrawableRes
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -165,7 +164,7 @@ fun LanguageSettings(
     SettingsGroup(title = stringResource(R.string.group_language)) {
         SettingsItem(
             title = stringResource(R.string.setting_language),
-            icon = Icons.Outlined.Translate
+            icon = StudioIcons.Translate
         ) {
             Row(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -227,7 +226,7 @@ fun AppearanceSettings(
     SettingsGroup(title = stringResource(R.string.group_appearance)) {
         SettingsItem(
             title = stringResource(R.string.setting_theme),
-            icon = Icons.Outlined.Palette
+            icon = StudioIcons.AutoAwesome
         ) {
             Row(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -249,7 +248,7 @@ fun AppearanceSettings(
         SettingsSwitchItem(
             title = stringResource(R.string.setting_show_circle),
             subtitle = stringResource(R.string.setting_show_circle_desc),
-            icon = Icons.Outlined.RadioButtonChecked,
+            icon = StudioIcons.CheckCircle,
             checked = showCounterCircle,
             onCheckedChange = onShowCounterCircleChange
         )
@@ -297,7 +296,7 @@ fun SoundSettings(
     SettingsGroup(title = stringResource(R.string.group_sound)) {
         SettingsSwitchItem(
             title = stringResource(R.string.setting_tap_sound),
-            icon = Icons.AutoMirrored.Outlined.VolumeUp,
+            icon = StudioIcons.VolumeUp,
             checked = isSoundEnabled,
             onCheckedChange = onSoundEnabledChange
         )
@@ -307,7 +306,7 @@ fun SoundSettings(
         SettingsSwitchItem(
             title = stringResource(R.string.setting_vibrate_tap),
             subtitle = stringResource(R.string.setting_vibrate_tap_desc),
-            icon = Icons.Outlined.TouchApp,
+            icon = StudioIcons.PlayArrow,
             checked = isVibrateTapEnabled,
             onCheckedChange = onVibrateTapChange
         )
@@ -317,7 +316,7 @@ fun SoundSettings(
         SettingsSwitchItem(
             title = stringResource(R.string.setting_vibrate_100),
             subtitle = stringResource(R.string.setting_vibrate_100_desc),
-            icon = Icons.Outlined.Vibration,
+            icon = StudioIcons.FlashOn,
             checked = isVibrate100Enabled,
             onCheckedChange = onVibrate100Change
         )
@@ -337,7 +336,7 @@ fun ToastReminderSettings(
         SettingsSwitchItem(
             title = stringResource(R.string.setting_toast_enable),
             subtitle = stringResource(R.string.setting_toast_desc),
-            icon = Icons.Outlined.NotificationsActive,
+            icon = StudioIcons.Timer,
             checked = isEnabled,
             onCheckedChange = onEnabledChange
         )
@@ -357,7 +356,7 @@ fun ToastReminderSettings(
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     shape = RoundedCornerShape(16.dp),
-                    leadingIcon = { Icon(Icons.AutoMirrored.Outlined.Message, contentDescription = null) }
+                    leadingIcon = { StudioIcon(StudioIcons.FormatQuote, contentDescription = null) }
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -368,7 +367,7 @@ fun ToastReminderSettings(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
-                        Icon(Icons.Outlined.Timer, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                        StudioIcon(StudioIcons.Timer, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = stringResource(R.string.setting_toast_interval),
@@ -416,7 +415,7 @@ fun DataSettings(
                     modifier = Modifier.weight(1f).height(52.dp),
                     shape = RoundedCornerShape(16.dp)
                 ) {
-                    Icon(Icons.Outlined.CloudUpload, contentDescription = null, modifier = Modifier.size(20.dp))
+                    StudioIcon(StudioIcons.FileUpload, contentDescription = null, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(stringResource(R.string.btn_backup))
                 }
@@ -425,7 +424,7 @@ fun DataSettings(
                     modifier = Modifier.weight(1f).height(52.dp),
                     shape = RoundedCornerShape(16.dp)
                 ) {
-                    Icon(Icons.Outlined.CloudDownload, contentDescription = null, modifier = Modifier.size(20.dp))
+                    StudioIcon(StudioIcons.FileDownload, contentDescription = null, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(stringResource(R.string.btn_restore))
                 }
@@ -458,7 +457,7 @@ fun CloudSyncSettings(
                     modifier = Modifier.fillMaxWidth().height(52.dp),
                     shape = RoundedCornerShape(16.dp)
                 ) {
-                    Icon(Icons.Outlined.Cloud, contentDescription = null)
+                    StudioIcon(StudioIcons.Storage, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("Login with Google")
                 }
@@ -480,8 +479,8 @@ fun CloudSyncSettings(
                             )
                         } else {
                             Box(contentAlignment = Alignment.Center) {
-                                Icon(
-                                    Icons.Outlined.Person,
+                                StudioIcon(
+                                    iconRes = StudioIcons.AccountCircle,
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.onPrimaryContainer
                                 )
@@ -532,8 +531,8 @@ fun CloudSyncSettings(
                             modifier = Modifier.padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(
-                                Icons.Outlined.Sync,
+                            StudioIcon(
+                                iconRes = StudioIcons.Refresh,
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.secondary,
                                 modifier = Modifier.size(16.dp)
@@ -570,7 +569,7 @@ fun LeaderboardSettings(
         SettingsSwitchItem(
             title = stringResource(R.string.leaderboard_toggle_label),
             subtitle = if (isEnabled) "Active" else "Inactive",
-            icon = Icons.Outlined.Leaderboard,
+            icon = StudioIcons.Leaderboard,
             checked = isEnabled,
             onCheckedChange = onEnabledChange
         )
@@ -634,8 +633,8 @@ fun AboutSettings() {
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.VerifiedUser,
+                    StudioIcon(
+                        iconRes = StudioIcons.Security,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp)
@@ -701,13 +700,13 @@ fun AboutSettings() {
 @Composable
 fun SettingsItem(
     title: String,
-    icon: ImageVector,
+    @DrawableRes icon: Int,
     content: @Composable () -> Unit
 ) {
     Column {
         ListItem(
             headlineContent = { Text(title, fontWeight = FontWeight.Medium) },
-            leadingContent = { Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
+            leadingContent = { StudioIcon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
             colors = ListItemDefaults.colors(containerColor = Color.Transparent)
         )
         content()
@@ -718,14 +717,14 @@ fun SettingsItem(
 fun SettingsSwitchItem(
     title: String,
     subtitle: String? = null,
-    icon: ImageVector,
+    @DrawableRes icon: Int,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
     ListItem(
         headlineContent = { Text(title, fontWeight = FontWeight.Medium) },
         supportingContent = subtitle?.let { { Text(it) } },
-        leadingContent = { Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
+        leadingContent = { StudioIcon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
         trailingContent = {
             Switch(
                 checked = checked,

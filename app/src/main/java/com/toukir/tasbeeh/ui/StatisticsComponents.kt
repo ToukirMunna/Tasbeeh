@@ -4,9 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,8 +37,8 @@ fun StatCard(
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(value, style = MaterialTheme.typography.headlineMedium, color = textColor)
             }
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+            StudioIcon(
+                iconRes = StudioIcons.ArrowForward,
                 contentDescription = null,
                 tint = textColor,
                 modifier = Modifier.align(Alignment.BottomEnd)

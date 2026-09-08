@@ -10,12 +10,9 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Assessment
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -188,7 +185,7 @@ fun TasbeehApp(
                           )
 
                           NavigationBarItem(
-                              icon = { Icon(Icons.Default.Home, contentDescription = null) },
+                              icon = { StudioIcon(StudioIcons.Home, contentDescription = null) },
                               label = { Text(stringResource(R.string.nav_home), fontWeight = if (currentScreen == "home") FontWeight.Bold else FontWeight.Normal) },
                               selected = currentScreen == "home",
                               colors = navItemColors,
@@ -199,7 +196,7 @@ fun TasbeehApp(
                               }
                           )
                           NavigationBarItem(
-                              icon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = null) },
+                              icon = { StudioIcon(StudioIcons.Checklist, contentDescription = null) },
                               label = { Text(stringResource(R.string.nav_tasbeehs), fontWeight = if (currentScreen == "tasbeehs") FontWeight.Bold else FontWeight.Normal) },
                               selected = currentScreen == "tasbeehs",
                               colors = navItemColors,
@@ -210,7 +207,7 @@ fun TasbeehApp(
                               }
                           )
                           NavigationBarItem(
-                              icon = { Icon(Icons.Default.Assessment, contentDescription = null) },
+                              icon = { StudioIcon(StudioIcons.Analytics, contentDescription = null) },
                               label = { Text(stringResource(R.string.nav_profile), fontWeight = if (currentScreen == "dashboard") FontWeight.Bold else FontWeight.Normal) },
                               selected = currentScreen == "dashboard",
                               colors = navItemColors,
@@ -232,7 +229,7 @@ fun TasbeehApp(
                      containerColor = MaterialTheme.colorScheme.primary,
                      contentColor = MaterialTheme.colorScheme.onPrimary
                  ) {
-                     Icon(Icons.Default.Add, contentDescription = "Add Tasbeeh")
+                     StudioIcon(StudioIcons.Add, contentDescription = "Add Tasbeeh")
                  }
              }
          }

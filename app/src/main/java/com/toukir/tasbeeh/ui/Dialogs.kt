@@ -21,10 +21,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Menu
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -110,7 +108,7 @@ fun AddToGoalDialog(
                         color = MaterialTheme.colorScheme.primary
                     )
                     IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
-                        Icon(Icons.Default.Close, contentDescription = "Close")
+                        StudioIcon(StudioIcons.Close, contentDescription = "Close")
                     }
                 }
                 
@@ -211,7 +209,7 @@ fun AddGoalDialog(
                         color = MaterialTheme.colorScheme.primary
                     )
                     IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
-                        Icon(Icons.Default.Close, contentDescription = "Close")
+                        StudioIcon(StudioIcons.Close, contentDescription = "Close")
                     }
                 }
 
@@ -299,7 +297,7 @@ fun EditGoalDialog(
                         color = MaterialTheme.colorScheme.primary
                     )
                     IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
-                        Icon(Icons.Default.Close, contentDescription = "Close")
+                        StudioIcon(StudioIcons.Close, contentDescription = "Close")
                     }
                 }
                 
@@ -453,7 +451,7 @@ fun ManageGoalsDialog(
                         color = MaterialTheme.colorScheme.primary
                     )
                     IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
-                        Icon(Icons.Default.Close, contentDescription = "Close")
+                        StudioIcon(StudioIcons.Close, contentDescription = "Close")
                     }
                 }
                 
@@ -491,8 +489,8 @@ fun ManageGoalsDialog(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                                 ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Menu, 
+                                    StudioIcon(
+                                        iconRes = StudioIcons.Checklist, 
                                         contentDescription = "Reorder",
                                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                         modifier = Modifier
@@ -557,7 +555,7 @@ fun ManageGoalsDialog(
                                         onClick = { removeGoal(goal) },
                                         modifier = Modifier.size(36.dp)
                                     ) {
-                                        Icon(Icons.Default.Delete, "Remove", tint = MaterialTheme.colorScheme.error)
+                                        StudioIcon(StudioIcons.Delete, "Remove", tint = MaterialTheme.colorScheme.error)
                                     }
                                 }
                                 
@@ -624,7 +622,7 @@ fun EditTasbeehDetailsDialog(
                         color = MaterialTheme.colorScheme.primary
                     )
                     IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
-                        Icon(Icons.Default.Close, contentDescription = "Close")
+                        StudioIcon(StudioIcons.Close, contentDescription = "Close")
                     }
                 }
                 

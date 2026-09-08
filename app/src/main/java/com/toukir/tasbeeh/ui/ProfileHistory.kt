@@ -10,9 +10,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -99,8 +99,8 @@ fun MonthItem(
                         )
                     }
                     Spacer(modifier = Modifier.width(8.dp))
-                    Icon(
-                        imageVector = Icons.Default.ExpandMore,
+                    StudioIcon(
+                        iconRes = StudioIcons.ExpandMore,
                         contentDescription = null,
                         modifier = Modifier.rotate(rotationState),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant

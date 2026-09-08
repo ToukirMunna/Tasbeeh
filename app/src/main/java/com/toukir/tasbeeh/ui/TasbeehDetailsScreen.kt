@@ -11,10 +11,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.outlined.*
+import androidx.annotation.DrawableRes
 import androidx.compose.material3.*
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -78,7 +78,7 @@ fun TasbeehDetailsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(onClick = onBack) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    StudioIcon(StudioIcons.ArrowBack, contentDescription = "Back")
                 }
                 Text(
                     text = displayGoalName,
@@ -89,7 +89,7 @@ fun TasbeehDetailsScreen(
                 IconButton(onClick = { 
                     onEditDetails(adhkarInfo ?: AdhkarInfo(goal.name, "", "", ""))
                 }) {
-                    Icon(Icons.Outlined.Edit, contentDescription = "Edit Details")
+                    StudioIcon(StudioIcons.Edit, contentDescription = "Edit Details")
                 }
             }
         },
@@ -116,7 +116,7 @@ fun TasbeehDetailsScreen(
                         ButtonDefaults.elevatedButtonElevation(defaultElevation = 4.dp, pressedElevation = 2.dp)
                     }
                 ) {
-                    Icon(Icons.Outlined.PlayArrow, contentDescription = null)
+                    StudioIcon(StudioIcons.PlayArrow, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = stringResource(R.string.recite_now),
@@ -194,13 +194,13 @@ fun TasbeehDetailsScreen(
                     DetailsStatCard(
                         title = stringResource(R.string.details_total_count),
                         value = formatNumber(goal.totalCount, currentLanguage),
-                        icon = Icons.Outlined.AllInclusive,
+                        iconRes = StudioIcons.Analytics,
                         modifier = Modifier.weight(1f)
                     )
                     DetailsStatCard(
                         title = stringResource(R.string.details_days_used),
                         value = formatNumber(usageHistory.size, currentLanguage),
-                        icon = Icons.Outlined.CalendarToday,
+                        iconRes = StudioIcons.CalendarMonth,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -225,8 +225,8 @@ fun TasbeehDetailsScreen(
                         modifier = Modifier.fillMaxWidth().padding(vertical = 32.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Icon(
-                            Icons.Outlined.History, 
+                        StudioIcon(
+                            iconRes = StudioIcons.History, 
                             contentDescription = null, 
                             modifier = Modifier.size(48.dp),
                             tint = MaterialTheme.colorScheme.outlineVariant
@@ -242,6 +242,7 @@ fun TasbeehDetailsScreen(
             } else {
                 items(usageHistory) { (date, count) ->
                     HistoryLogItem(date = date, count = count, language = currentLanguage)
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
             
@@ -263,7 +264,7 @@ private fun SectionLabel(text: String) {
 }
 
 @Composable
-fun DetailsStatCard(title: String, value: String, icon: ImageVector, modifier: Modifier = Modifier) {
+fun DetailsStatCard(title: String, value: String, @DrawableRes iconRes: Int, modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(20.dp),
@@ -275,8 +276,8 @@ fun DetailsStatCard(title: String, value: String, icon: ImageVector, modifier: M
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(
-                imageVector = icon, 
+            StudioIcon(
+                iconRes = iconRes, 
                 contentDescription = null, 
                 modifier = Modifier.size(20.dp),
                 tint = MaterialTheme.colorScheme.primary

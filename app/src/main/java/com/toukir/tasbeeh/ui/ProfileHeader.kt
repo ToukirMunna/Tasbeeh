@@ -21,6 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.toukir.tasbeeh.R
+import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.theme.StudioIcons
 import com.toukir.tasbeeh.utils.formatNumber
 import java.util.Locale
 
@@ -115,7 +117,13 @@ fun ProfileHeaderSection(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Text("🔥", fontSize = 24.sp)
+                    StudioIcon(
+                        iconRes = StudioIcons.LocalFireDepartment,
+                        contentDescription = "Streak",
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.size(26.dp)
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         formatNumber(currentStreak, language),
                         style = MaterialTheme.typography.titleLarge,
