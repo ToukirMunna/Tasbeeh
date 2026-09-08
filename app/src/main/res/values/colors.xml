@@ -11,4 +11,8 @@
     <color name="wood_brown">#5D4037</color>
     <color name="wood_dark">#3E2723</color>
     <color name="wood_light">#8D6E63</color>
+    
+    <!-- Splash Screen Color Tokens (Light Mode) -->
+    <color name="splash_background">#F8F9FA</color>
+    <color name="splash_bar_color">#1A1C1E</color>
 </resources>

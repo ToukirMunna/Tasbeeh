@@ -1,8 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:drawable="@drawable/tasbeeh_logo"
-        android:width="72dp"
-        android:height="72dp"
-        android:gravity="center" />
-</layer-list>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- U-Shape: Ha and Lam 2 Connected Base -->
+    <path
+        android:pathData="M30.5,59 L30.5,71 A8,8 0 0,0 46.5,71 L46.5,51"
+        android:strokeWidth="12"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="38.5"
+                android:startY="45"
+                android:endX="38.5"
+                android:endY="85"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#2A2C30" />
+                <item android:offset="1.0" android:color="#141517" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Lam 1: Middle Pillar -->
+    <path
+        android:pathData="M62.5,48 L62.5,79"
+        android:strokeWidth="12"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="62.5"
+                android:startY="42"
+                android:endX="62.5"
+                android:endY="85"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#2A2C30" />
+                <item android:offset="1.0" android:color="#141517" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Alif: Rightmost Tall Pillar -->
+    <path
+        android:pathData="M78.5,37 L78.5,79"
+        android:strokeWidth="12"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="78.5"
+                android:startY="31"
+                android:endX="78.5"
+                android:endY="85"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#2D3035" />
+                <item android:offset="0.5" android:color="#1E2023" />
+                <item android:offset="1.0" android:color="#121315" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Floating Elevated Diamond Prayer Jewel (Rotated 45°) -->
+    <group
+        android:rotation="45"
+        android:pivotX="55.65"
+        android:pivotY="31.93">
+        <path
+            android:pathData="M51.7,25.18 h7.9 a2.8,2.8 0 0,1 2.8,2.8 v7.9 a2.8,2.8 0 0,1 -2.8,2.8 h-7.9 a2.8,2.8 0 0,1 -2.8,-2.8 v-7.9 a2.8,2.8 0 0,1 2.8,-2.8 z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="48.9"
+                    android:startY="25.18"
+                    android:endX="62.4"
+                    android:endY="38.68"
+                    android:type="linear">
+                    <item android:offset="0.0" android:color="#FF5E3A" />
+                    <item android:offset="1.0" android:color="#E03E1A" />
+                </gradient>
+            </aapt:attr>
+        </path>
+    </group>
+
+</vector>

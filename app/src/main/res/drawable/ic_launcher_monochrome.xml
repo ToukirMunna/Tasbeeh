@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- U-Shape: Ha and Lam 2 Connected Base -->
+    <path
+        android:pathData="M30.5,59 L30.5,71 A8,8 0 0,0 46.5,71 L46.5,51"
+        android:strokeWidth="12"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Lam 1: Middle Pillar -->
+    <path
+        android:pathData="M62.5,48 L62.5,79"
+        android:strokeWidth="12"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+
+    <!-- Alif: Rightmost Tall Pillar -->
+    <path
+        android:pathData="M78.5,37 L78.5,79"
+        android:strokeWidth="12"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+
+    <!-- Floating Elevated Diamond Prayer Jewel (Rotated 45°) -->
+    <group
+        android:rotation="45"
+        android:pivotX="55.65"
+        android:pivotY="31.93">
+        <path
+            android:pathData="M51.7,25.18 h7.9 a2.8,2.8 0 0,1 2.8,2.8 v7.9 a2.8,2.8 0 0,1 -2.8,2.8 h-7.9 a2.8,2.8 0 0,1 -2.8,-2.8 v-7.9 a2.8,2.8 0 0,1 2.8,-2.8 z"
+            android:fillColor="#FFFFFF" />
+    </group>
+
+</vector>

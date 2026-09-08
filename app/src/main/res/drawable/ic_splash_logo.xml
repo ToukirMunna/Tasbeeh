@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="288dp"
+    android:height="288dp"
+    android:viewportWidth="288"
+    android:viewportHeight="288">
+
+    <!-- U-Shape: Ha and Lam 2 Connected Base (Bound to @color/splash_bar_color) -->
+    <path
+        android:pathData="M81.3,157.3 L81.3,189.3 A21.33,21.33 0 0,0 124,189.3 L124,136"
+        android:strokeWidth="32"
+        android:strokeColor="@color/splash_bar_color"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Lam 1: Middle Pillar (Bound to @color/splash_bar_color) -->
+    <path
+        android:pathData="M166.7,128 L166.7,210.7"
+        android:strokeWidth="32"
+        android:strokeColor="@color/splash_bar_color"
+        android:strokeLineCap="round" />
+
+    <!-- Alif: Rightmost Tall Pillar (Bound to @color/splash_bar_color) -->
+    <path
+        android:pathData="M209.3,98.7 L209.3,210.7"
+        android:strokeWidth="32"
+        android:strokeColor="@color/splash_bar_color"
+        android:strokeLineCap="round" />
+
+    <!-- Floating Elevated Diamond Prayer Jewel (Rotated 45°) -->
+    <group
+        android:rotation="45"
+        android:pivotX="148.4"
+        android:pivotY="85.1">
+        <path
+            android:pathData="M137.9,67.1 h21 a7.5,7.5 0 0,1 7.5,7.5 v21 a7.5,7.5 0 0,1 -7.5,7.5 h-21 a7.5,7.5 0 0,1 -7.5,-7.5 v-21 a7.5,7.5 0 0,1 7.5,-7.5 z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="130.4"
+                    android:startY="67.1"
+                    android:endX="166.4"
+                    android:endY="103.1"
+                    android:type="linear">
+                    <item android:offset="0.0" android:color="#FF5E3A" />
+                    <item android:offset="1.0" android:color="#E03E1A" />
+                </gradient>
+            </aapt:attr>
+        </path>
+    </group>
+
+</vector>
