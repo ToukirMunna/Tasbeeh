@@ -136,8 +136,21 @@
     <string name="logout_confirm_title">Logout</string>
     <string name="logout_confirm_message">Are you sure you want to logout? Automatic cloud sync will be disabled until you login again.</string>
     <string name="logout_btn">Logout</string>
+    <string name="setting_cloud_sync">Cloud Sync</string>
+    <string name="setting_cloud_sync_desc">Login with Google to sync your data automatically across devices.</string>
+    <string name="setting_login_google">Login with Google</string>
+    <string name="setting_restoring_cloud">Restoring data from cloud...</string>
+    <string name="setting_sync_auto_desc">Syncing automatically when you close the app.</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="leaderboard_status_active">Active</string>
+    <string name="leaderboard_status_inactive">Inactive</string>
     <string name="group_about">About</string>
     <string name="setting_version">App Version</string>
+    <string name="about_studio_name">Toukir Studio</string>
+    <string name="about_app_build">Tasbeeh • v4.1.0 (TDS Build)</string>
+    <string name="about_privacy_pledge">Zero Ads. Zero Telemetry. Crafted by Toukir Studio.</string>
+    <string name="about_fleet_title">TOUKIR STUDIO APPS FLEET</string>
     <string name="about_text">This Tasbeeh &amp; Adhkar app is designed to support daily remembrance through a calm, distraction-free experience. With a minimal and elegant interface, it helps users maintain consistency in dhikr and adhkar with ease and focus.\n\nDeveloped with care and attention to detail by Toukir Ahmed, this app prioritizes simplicity, reliability, and a peaceful spiritual experience.</string>
     <string name="group_language">Language</string>
     <string name="setting_language">App Language</string>
@@ -146,6 +159,13 @@
     
     <!-- Dialogs -->
     <string name="dialog_add_goal_title">Add Goal</string>
+    <string name="dialog_add_to_goals_title">Add to Goals</string>
+    <string name="dialog_configure_goal">Configure your goal for: %1$s</string>
+    <string name="dialog_duration_frequency">Duration Frequency</string>
+    <string name="dialog_target_count">Target Count</string>
+    <string name="dialog_target_count_placeholder">e.g. 100</string>
+    <string name="dialog_confirm_goal">Confirm Goal</string>
+    <string name="dialog_reorder_content_desc">Reorder</string>
     <string name="dialog_create_tasbeeh_title">Create New Tasbeeh</string>
     <string name="dialog_from_library">From Your Library</string>
     <string name="btn_activate">Activate</string>
