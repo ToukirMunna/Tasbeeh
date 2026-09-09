@@ -29,9 +29,9 @@ fun TasbeehDetailsScreen(
     customDetails: Map<String, AdhkarInfo> = emptyMap(),
     onBack: () -> Unit,
     onCountClick: () -> Unit,
-    onEditDetails: (AdhkarInfo) -> Unit
+    onEditDetails: (AdhkarInfo) -> Unit,
+    language: String = "en"
 ) {
-    val currentLanguage = Locale.getDefault().language
     val usageHistory = remember(history, goal.name) {
         history.mapNotNull { entry ->
             val count = entry.details[goal.name]
@@ -40,10 +40,10 @@ fun TasbeehDetailsScreen(
     }
 
     val context = LocalContext.current
-    val adhkarInfo = remember(goal.name, customDetails) {
+    val adhkarInfo = remember(goal.name, customDetails, language, context) {
         customDetails[goal.name] ?: AdhkarLibrary.getLocalizedInfo(context, goal.name) ?: AdhkarLibrary.getInfo(goal.name)
     }
-    val displayGoalName = remember(goal.name) {
+    val displayGoalName = remember(goal.name, language, context) {
         AdhkarLibrary.getLocalizedName(context, goal.name)
     }
 
@@ -62,7 +62,7 @@ fun TasbeehDetailsScreen(
             adhkarInfo = adhkarInfo,
             totalCount = goal.totalCount,
             usageHistory = usageHistory,
-            language = currentLanguage
+            language = language
         )
     }
 }

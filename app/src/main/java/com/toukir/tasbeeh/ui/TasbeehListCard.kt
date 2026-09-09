@@ -30,10 +30,11 @@ fun TasbeehListCard(
     onClick: () -> Unit,
     onEditClick: () -> Unit,
     onAddToGoal: () -> Unit,
+    language: String = "",
     modifier: Modifier = Modifier
 ) {
     val activeDurations = allGoalsForThisName.filter { it.isGoal }.map { it.duration }
-    val currentLanguage = Locale.getDefault().language
+    val currentLanguage = language.ifEmpty { Locale.getDefault().language }
 
     Surface(
         modifier = modifier

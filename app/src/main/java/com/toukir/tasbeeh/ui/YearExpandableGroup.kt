@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.toukir.tasbeeh.data.TasbeehHistory
 import com.toukir.tasbeeh.ui.common.StudioIcon
 import com.toukir.tasbeeh.ui.theme.StudioIcons
+import com.toukir.tasbeeh.utils.formatNumber
 import java.time.YearMonth
 
 @Composable
@@ -45,7 +46,7 @@ fun YearExpandableGroup(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = year.toString(),
+                    text = formatNumber(year, language),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )

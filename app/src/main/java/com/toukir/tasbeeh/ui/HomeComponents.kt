@@ -86,7 +86,8 @@ fun HeaderSection(
     syncStatus: SyncStatus,
     onSyncClick: () -> Unit,
     onFlip: () -> Unit,
-    onManageGoals: () -> Unit
+    onManageGoals: () -> Unit,
+    language: String = "en"
 ) {
     Box(modifier = Modifier.fillMaxWidth()) {
         HeaderGreeting(userName = userName)
@@ -96,6 +97,7 @@ fun HeaderSection(
             onSyncClick = onSyncClick,
             onFlip = onFlip,
             onManageGoals = onManageGoals,
+            language = language,
             modifier = Modifier.padding(16.dp).align(Alignment.TopEnd)
         )
     }
@@ -121,9 +123,9 @@ private fun HeaderActionsStreak(
     onSyncClick: () -> Unit,
     onFlip: () -> Unit,
     onManageGoals: () -> Unit,
+    language: String = "en",
     modifier: Modifier = Modifier
 ) {
-    val currentLanguage = Locale.getDefault().language
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -163,7 +165,7 @@ private fun HeaderActionsStreak(
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = formatNumber(streak, currentLanguage),
+                    text = formatNumber(streak, language),
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -179,7 +181,8 @@ fun HomeGoalFlipper(
     dailyGoals: List<TasbeehGoal>,
     customGoals: List<TasbeehGoal>,
     onGoalClick: (TasbeehGoal) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    language: String = "en"
 ) {
     Box(modifier = modifier) {
         Column(
@@ -194,14 +197,16 @@ fun HomeGoalFlipper(
                 GoalSectionContent(
                     goals = dailyGoals,
                     onGoalClick = onGoalClick,
-                    isCustom = false
+                    isCustom = false,
+                    language = language
                 )
             } else {
                 Column(Modifier.graphicsLayer { rotationY = 180f }) {
                     GoalSectionContent(
                         goals = customGoals,
                         onGoalClick = onGoalClick,
-                        isCustom = true
+                        isCustom = true,
+                        language = language
                     )
                 }
             }

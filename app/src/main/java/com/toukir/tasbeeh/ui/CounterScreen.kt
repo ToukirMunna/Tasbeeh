@@ -49,10 +49,10 @@ fun CounterScreen(
     val view = LocalView.current
     val sparkles = remember { mutableStateListOf<Sparkle>() }
 
-    val adhkarInfo = remember(goal.name) {
+    val adhkarInfo = remember(goal.name, language, context) {
         AdhkarLibrary.getLocalizedInfo(context, goal.name) ?: AdhkarLibrary.getInfo(goal.name)
     }
-    val displayGoalName = remember(goal.name) {
+    val displayGoalName = remember(goal.name, language, context) {
         AdhkarLibrary.getLocalizedName(context, goal.name)
     }
 

@@ -21,12 +21,13 @@ fun TasbeehsListScreen(
     onGoalClick: (TasbeehGoal) -> Unit,
     onEditGoal: (TasbeehGoal) -> Unit,
     onAddToGoal: (TasbeehGoal) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    language: String = "en"
 ) {
     val context = LocalContext.current
     var searchQuery by remember { mutableStateOf("") }
 
-    val libraryItems = remember(goals, searchQuery) {
+    val libraryItems = remember(goals, searchQuery, language) {
         val distinctGoals = goals.distinctBy { it.name }
         if (searchQuery.isBlank()) {
             distinctGoals
@@ -48,11 +49,14 @@ fun TasbeehsListScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(libraryItems, key = { it.id }) { goal ->
-                    val localizedName = AdhkarLibrary.getLocalizedName(context, goal.name)
+                    val localizedName = remember(goal.name, language, context) {
+                        AdhkarLibrary.getLocalizedName(context, goal.name)
+                    }
                     TasbeehListCard(
                         goal = goal,
                         displayName = localizedName,
                         allGoalsForThisName = goals.filter { it.name == goal.name },
+                        language = language,
                         onClick = { onGoalClick(goal) },
                         onEditClick = { onEditGoal(goal) },
                         onAddToGoal = { onAddToGoal(goal) }

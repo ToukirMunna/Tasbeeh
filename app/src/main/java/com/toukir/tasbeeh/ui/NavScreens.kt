@@ -108,7 +108,8 @@ fun PrimaryTabContent(
             goals = savedGoals,
             onGoalClick = { onSelectDetail(it.id) },
             onEditGoal = onEditGoal,
-            onAddToGoal = onAddToGoal
+            onAddToGoal = onAddToGoal,
+            language = settings.language
         )
         "dashboard" -> DashboardNavScreen(
             combinedHistory = combinedHistory,
@@ -161,7 +162,8 @@ fun DetailAndCounterContent(
             customDetails = customDetails,
             onBack = { onSelectDetail(null) },
             onCountClick = { onSelectGoal(detail.id) },
-            onEditDetails = onEditAdhkarInfo
+            onEditDetails = onEditAdhkarInfo,
+            language = settings.language
         )
     }
 }

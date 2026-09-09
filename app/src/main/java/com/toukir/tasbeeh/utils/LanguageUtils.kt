@@ -32,3 +32,8 @@ fun getLocalizedNumber(number: Int): String {
         number.toString()
     }
 }
+
+fun getLocaleForLanguage(language: String): Locale {
+    return if (language == "bn") Locale.forLanguageTag("bn-BD") else Locale.ENGLISH
+}
+

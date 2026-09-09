@@ -8,13 +8,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.toukir.tasbeeh.R
+import com.toukir.tasbeeh.ui.common.UserAvatar
 
 @Composable
 fun NameInputDialog(
@@ -84,15 +84,15 @@ private fun NameInputContent(
 @Composable
 private fun GenderSelectionRow(isMale: Boolean, onGenderChange: (Boolean) -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-        GenderOption(label = stringResource(R.string.label_male), drawableRes = R.drawable.male, isSelected = isMale, onClick = { onGenderChange(true) }, modifier = Modifier.weight(1f))
-        GenderOption(label = stringResource(R.string.label_female), drawableRes = R.drawable.female, isSelected = !isMale, onClick = { onGenderChange(false) }, modifier = Modifier.weight(1f))
+        GenderOption(label = stringResource(R.string.label_male), isMale = true, isSelected = isMale, onClick = { onGenderChange(true) }, modifier = Modifier.weight(1f))
+        GenderOption(label = stringResource(R.string.label_female), isMale = false, isSelected = !isMale, onClick = { onGenderChange(false) }, modifier = Modifier.weight(1f))
     }
 }
 
 @Composable
 private fun GenderOption(
     label: String,
-    drawableRes: Int,
+    isMale: Boolean,
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -107,7 +107,7 @@ private fun GenderOption(
         border = BorderStroke(2.dp, borderColor)
     ) {
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Icon(painter = painterResource(drawableRes), contentDescription = null, modifier = Modifier.size(48.dp), tint = androidx.compose.ui.graphics.Color.Unspecified)
+            UserAvatar(isMale = isMale, size = 48.dp)
             Spacer(modifier = Modifier.height(8.dp))
             Text(label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
         }

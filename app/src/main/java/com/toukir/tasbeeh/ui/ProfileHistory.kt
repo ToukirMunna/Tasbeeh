@@ -28,6 +28,7 @@ import com.toukir.tasbeeh.R
 import com.toukir.tasbeeh.data.AdhkarLibrary
 import com.toukir.tasbeeh.data.TasbeehHistory
 import com.toukir.tasbeeh.utils.formatNumber
+import com.toukir.tasbeeh.utils.getLocaleForLanguage
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -56,7 +57,7 @@ fun MonthItem(
     val rotationState by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
     val monthTotal = historyItems.sumOf { it.totalCount }
-    val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.getDefault())
+    val formatter = remember(language) { DateTimeFormatter.ofPattern("MMMM yyyy", getLocaleForLanguage(language)) }
     val context = LocalContext.current
 
     Card(

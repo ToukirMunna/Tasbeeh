@@ -17,6 +17,7 @@ import com.toukir.tasbeeh.data.TasbeehHistory
 import com.toukir.tasbeeh.ui.common.StudioIcon
 import com.toukir.tasbeeh.ui.theme.StudioIcons
 import com.toukir.tasbeeh.utils.formatNumber
+import com.toukir.tasbeeh.utils.getLocaleForLanguage
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -31,13 +32,14 @@ fun DetailStatsScreen(
     language: String = "en"
 ) {
     val allTimeText = stringResource(R.string.stats_all_time)
-    val (title, relevantHistory) = remember(period, history, allTimeText) {
+    val (title, relevantHistory) = remember(period, history, allTimeText, language) {
+        val targetLocale = getLocaleForLanguage(language)
         when (period) {
             StatPeriod.Week -> {
                 val today = LocalDate.now()
                 val weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
                 val weekEnd = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY))
-                val formatter = DateTimeFormatter.ofPattern("d MMMM")
+                val formatter = DateTimeFormatter.ofPattern("d MMMM", targetLocale)
                 "${weekStart.format(formatter)} - ${weekEnd.format(formatter)}" to history.filter {
                     val d = LocalDate.parse(it.date)
                     !d.isBefore(weekStart) && !d.isAfter(weekEnd)
@@ -45,7 +47,7 @@ fun DetailStatsScreen(
             }
             StatPeriod.Month -> {
                 val today = LocalDate.now()
-                val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.getDefault())
+                val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", targetLocale)
                 today.format(formatter) to history.filter {
                     val d = LocalDate.parse(it.date)
                     d.year == today.year && d.month == today.month
@@ -111,9 +113,10 @@ private fun LazyListScope.detailWeekDaysBreakdown(
         } ?: 1
         val scale = if (maxDayCount == 0) 1 else maxDayCount
 
+        val targetLocale = getLocaleForLanguage(language)
         days.forEach { day ->
             val count = relevantHistory.find { it.date == day.toString() }?.totalCount ?: 0
-            val dayName = day.format(DateTimeFormatter.ofPattern("EEEE", Locale.getDefault()))
+            val dayName = day.format(DateTimeFormatter.ofPattern("EEEE", targetLocale))
             val dayInitial = dayName.take(1)
             val dayColor = when (day.dayOfWeek) {
                 DayOfWeek.MONDAY -> Color(0xFF4DB6AC)

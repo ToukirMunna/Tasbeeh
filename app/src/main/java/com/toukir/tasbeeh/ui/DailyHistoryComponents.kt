@@ -18,6 +18,7 @@ import com.toukir.tasbeeh.data.TasbeehHistory
 import com.toukir.tasbeeh.ui.common.StudioIcon
 import com.toukir.tasbeeh.ui.theme.StudioIcons
 import com.toukir.tasbeeh.utils.formatNumber
+import com.toukir.tasbeeh.utils.getLocaleForLanguage
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -100,7 +101,9 @@ private fun DailyHistoryPaginationBar(
 
 @Composable
 fun DailyHistoryItem(history: TasbeehHistory, language: String = "en") {
-    val dateFormatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale.getDefault())
+    val dateFormatter = remember(language) {
+        DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", getLocaleForLanguage(language))
+    }
     val date = LocalDate.parse(history.date)
 
     Card(

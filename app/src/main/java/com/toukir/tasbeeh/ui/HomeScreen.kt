@@ -108,6 +108,7 @@ fun HomeScreen(
             dailyGoals = dailyGoals,
             customGoals = customGoals,
             onGoalClick = onGoalClick,
+            language = language,
             modifier = Modifier.fillMaxWidth().weight(1f).padding(bottom = 8.dp)
         )
     }
@@ -167,7 +168,8 @@ private fun HomeHeaderSurface(
                     syncStatus = syncStatus,
                     onSyncClick = onSyncClick,
                     onFlip = onFlip,
-                    onManageGoals = onManageGoals
+                    onManageGoals = onManageGoals,
+                    language = language
                 )
                 HomeCounterDisplay(
                     showCounterCircle = showCounterCircle,

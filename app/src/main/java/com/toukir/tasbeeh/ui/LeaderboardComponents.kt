@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.toukir.tasbeeh.R
 import com.toukir.tasbeeh.data.LeaderboardEntry
+import com.toukir.tasbeeh.ui.common.UserAvatar
 import com.toukir.tasbeeh.utils.formatNumber
 
 @Composable
@@ -97,10 +98,8 @@ private fun LeaderboardRankBadge(rank: Int, language: String) {
 
 @Composable
 private fun LeaderboardUserAvatar(isMale: Boolean) {
-    Image(
-        painter = painterResource(if (isMale) R.drawable.male else R.drawable.female),
-        contentDescription = null,
-        modifier = Modifier.size(40.dp).clip(CircleShape).background(MaterialTheme.colorScheme.surface),
-        contentScale = ContentScale.Crop
+    UserAvatar(
+        isMale = isMale,
+        size = 40.dp
     )
 }

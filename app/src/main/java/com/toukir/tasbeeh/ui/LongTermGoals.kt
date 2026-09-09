@@ -3,6 +3,7 @@ package com.toukir.tasbeeh.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -20,7 +21,8 @@ import androidx.compose.ui.graphics.Color
 fun GoalSectionContent(
     goals: List<TasbeehGoal>,
     onGoalClick: (TasbeehGoal) -> Unit,
-    isCustom: Boolean
+    isCustom: Boolean,
+    language: String = "en"
 ) {
     val context = LocalContext.current
     val isCompact = goals.size > 6
@@ -38,7 +40,9 @@ fun GoalSectionContent(
             )
         } else {
             goals.forEach { goal ->
-                val localizedName = AdhkarLibrary.getLocalizedName(context, goal.name)
+                val localizedName = remember(goal.name, language, context) {
+                    AdhkarLibrary.getLocalizedName(context, goal.name)
+                }
                 val iconInfo = getIconForGoal(goal.name)
                 GoalProgressItem(
                     goal = goal,
@@ -47,6 +51,7 @@ fun GoalSectionContent(
                     iconColor = iconInfo.second,
                     showDurationChip = isCustom,
                     isCompact = isCompact,
+                    language = language,
                     onClick = { onGoalClick(goal) },
                     modifier = Modifier
                         .padding(horizontal = 16.dp)

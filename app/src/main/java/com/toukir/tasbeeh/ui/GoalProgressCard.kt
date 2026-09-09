@@ -71,9 +71,10 @@ fun GoalProgressItem(
     showDurationChip: Boolean = false,
     modifier: Modifier = Modifier,
     isCompact: Boolean = false,
+    language: String = "",
     onClick: () -> Unit
 ) {
-    val currentLanguage = Locale.getDefault().language
+    val currentLanguage = language.ifEmpty { Locale.getDefault().language }
     val verticalPadding = if (isCompact) 6.dp else 12.dp
     val iconSize = if (isCompact) 36.dp else 44.dp
     val spacing = if (isCompact) 8.dp else 14.dp

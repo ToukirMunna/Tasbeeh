@@ -1,4 +1,4 @@
-﻿# AGENT MANDATES & CODING INVARIANTS
+# AGENT MANDATES & CODING INVARIANTS
 
 ### 1. Discussion Gate
 - Q&A/Discussion: NEVER edit project source files or run modifying commands. Chat first. Planning artifacts (`implementation_plan.md`, `walkthrough.md`) are permitted.
@@ -80,3 +80,7 @@
 - `assembleDebug`: For Compose UI, `res/`, manifest, and Gradle changes. Fix test failures immediately.
 - Test Inviolability: Existing tests are immutable. NEVER delete, weaken, or comment out existing tests/assertions to make builds pass. Fix implementation only.
 - Minimal Blast Radius: Surgical edits only. Touch ONLY lines strictly required for the prompt. Never reformat, reorder, or refactor untouched code.
+
+### 13. Contrast & Accessibility Invariant (WCAG AAA / AA)
+- Core content, counters, and primary accents must achieve WCAG AAA (≥ 7.0:1) contrast against canvas and surface backgrounds.
+- All secondary text, icons, controls, and selection states must strictly maintain WCAG AA (≥ 4.5:1) minimum contrast across every light and dark theme palette.

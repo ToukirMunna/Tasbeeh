@@ -14,6 +14,22 @@
 
 <!-- PREPEND NEW ENTRIES BELOW THIS LINE -->
 
+### [2026-09-09 12:25 PM] - Dynamic Language Switching, Zero-Leak Bengali Localization & Theme-Adaptive Vector Avatars
+* **Files Modified**: `app/src/main/java/com/toukir/tasbeeh/MainActivity.kt`, `app/src/main/java/com/toukir/tasbeeh/utils/LanguageUtils.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/common/UserAvatar.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/ProfileHeader.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/LeaderboardComponents.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/dialogs/NameInputDialog.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/HomeScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/HomeComponents.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/LongTermGoals.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/GoalProgressCard.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/TasbeehsListScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/TasbeehListCard.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/TasbeehDetailsScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/DailyHistoryComponents.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/DetailStatsScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/ProfileHistory.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/YearExpandableGroup.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/CounterScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/NavScreens.kt`, `app/src/main/res/drawable/female.jpg`, `app/src/main/res/drawable/male.jpg`
+* **Changes Made**:
+  - **Dynamic 0ms Language Switching**: Wrapped root composition in `MainActivity.kt` with `CompositionLocalProvider(LocalConfiguration provides localizedConfiguration, LocalContext provides localizedContext)` and added dynamic `AppCompatDelegate.setApplicationLocales(...)` synchronization on `settings.language` changes, allowing instant language switching without requiring an app restart.
+  - **Bengali Locale & Numeral Leak Elimination**:
+    - Propagated `language` to `HomeComponents.kt`, `HomeScreen.kt`, `LongTermGoals.kt`, `GoalProgressCard.kt`, `TasbeehListCard.kt`, `TasbeehDetailsScreen.kt`, `TasbeehsListScreen.kt`, and `YearExpandableGroup.kt`.
+    - Converted all remaining English numerals (streaks, years, days active, goal totals) to localized numerals via `formatNumber(..., language)`.
+    - Updated `DateTimeFormatter` instances across `DailyHistoryComponents.kt`, `DetailStatsScreen.kt`, and `ProfileHistory.kt` to dynamically use `getLocaleForLanguage(language)`.
+    - Added reactive `remember` keys `(goal.name, language, context)` to `AdhkarLibrary.getLocalizedName` lookups to eliminate stale cache across language switches.
+  - **Theme-Adaptive Pure Vector Avatars (`UserAvatar.kt`)**:
+    - Created high-fidelity Compose `Canvas` vector avatar system for male (taqiyah prayer cap, beard, kurta) and female (flowing draped hijab, underscarf band, abaya) profiles.
+    - Dynamically takes colors from active `MaterialTheme.colorScheme` tokens (`primary`, `primaryContainer`, `onPrimaryContainer`), adapting in real time to the selected color theme (Gold, Mint, Sapphire, Rose, Amethyst).
+    - Integrated `UserAvatar` into `ProfileHeader.kt`, `LeaderboardComponents.kt`, and `NameInputDialog.kt`.
+    - Deleted legacy raster files `female.jpg` and `male.jpg`.
+* **Rationale & Impact**: Guarantees zero latency on language toggles, ensures complete Bengali localization across all greetings, dates, and numerals without app restarts, and introduces a crisp, scalable, theme-harmonized vector avatar system.
+
 ### [2026-09-09 11:53 AM] - Data Integrity, Cloud Persistence & WCAG AA Color Contrast Remediation
 * **Files Modified**: `app/src/main/java/com/toukir/tasbeeh/data/repository/HistoryDataStore.kt`, `app/src/main/java/com/toukir/tasbeeh/data/repository/BackupRestoreManager.kt`, `app/src/main/java/com/toukir/tasbeeh/data/FirebaseManager.kt`, `app/src/main/java/com/toukir/tasbeeh/data/cloud/FirebaseLeaderboardManager.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/theme/Theme.kt`, `app/src/test/java/com/toukir/tasbeeh/domain/BackupMergeLogicTest.kt`
 * **Changes Made**:

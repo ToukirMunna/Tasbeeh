@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.toukir.tasbeeh.R
 import com.toukir.tasbeeh.ui.common.StudioIcon
+import com.toukir.tasbeeh.ui.common.UserAvatar
 import com.toukir.tasbeeh.ui.theme.StudioIcons
 import com.toukir.tasbeeh.utils.formatNumber
 import java.util.Locale
@@ -43,6 +44,7 @@ fun ProfileHeaderSection(
     ) {
         ProfileWelcomeCard(
             userName = userName,
+            isMale = isMale,
             onNameClick = onNameClick,
             modifier = Modifier
                 .weight(0.65f)
@@ -61,6 +63,7 @@ fun ProfileHeaderSection(
 @Composable
 private fun ProfileWelcomeCard(
     userName: String,
+    isMale: Boolean,
     onNameClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -73,7 +76,7 @@ private fun ProfileWelcomeCard(
             modifier = Modifier.fillMaxSize().padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ProfileAvatar(onClick = onNameClick)
+            ProfileAvatar(isMale = isMale, onClick = onNameClick)
             Spacer(modifier = Modifier.width(12.dp))
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -97,21 +100,17 @@ private fun ProfileWelcomeCard(
 }
 
 @Composable
-private fun ProfileAvatar(onClick: () -> Unit) {
+private fun ProfileAvatar(isMale: Boolean, onClick: () -> Unit) {
     Surface(
         modifier = Modifier.size(54.dp).clickable { onClick() },
         shape = CircleShape,
         color = MaterialTheme.colorScheme.primaryContainer,
         border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
     ) {
-        Box(contentAlignment = Alignment.Center) {
-            StudioIcon(
-                iconRes = StudioIcons.AccountCircle,
-                contentDescription = stringResource(R.string.cd_profile),
-                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.size(32.dp)
-            )
-        }
+        UserAvatar(
+            isMale = isMale,
+            size = 54.dp
+        )
     }
 }
 

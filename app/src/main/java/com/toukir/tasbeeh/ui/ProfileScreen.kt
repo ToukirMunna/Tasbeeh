@@ -170,7 +170,9 @@ fun ProfileScreen(
             } else {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     topTasbeehs.forEach { goal ->
-                        val localizedName = AdhkarLibrary.getLocalizedName(context, goal.name)
+                        val localizedName = remember(goal.name, language, context) {
+                            AdhkarLibrary.getLocalizedName(context, goal.name)
+                        }
                         TopTasbeehItem(goal, localizedName, language)
                     }
                 }

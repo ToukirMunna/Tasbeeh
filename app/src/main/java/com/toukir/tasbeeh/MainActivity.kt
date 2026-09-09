@@ -8,13 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.os.LocaleListCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
@@ -23,12 +25,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.toukir.tasbeeh.data.TasbeehRepository
 import com.toukir.tasbeeh.ui.MainViewModel
 import com.toukir.tasbeeh.ui.TasbeehApp
 import com.toukir.tasbeeh.ui.splash.SplashScreen
 import com.toukir.tasbeeh.ui.theme.AppTheme
 import com.toukir.tasbeeh.ui.theme.TasbeehTheme
+import com.toukir.tasbeeh.utils.getLocaleForLanguage
 import kotlinx.coroutines.delay
 
 class MainActivity : AppCompatActivity() {
@@ -75,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         setContent {
-            val settings by viewModel.settings.collectAsState()
+            val settings by viewModel.settings.collectAsStateWithLifecycle()
             val isDark = when (settings.theme) {
                 AppTheme.Dark -> true
                 AppTheme.Light -> false
@@ -88,6 +92,23 @@ class MainActivity : AppCompatActivity() {
                 onDispose {}
             }
 
+            // Dynamic locale synchronization with AppCompatDelegate
+            LaunchedEffect(settings.language) {
+                val appLocales = AppCompatDelegate.getApplicationLocales()
+                if (appLocales.isEmpty || appLocales.get(0)?.language != settings.language) {
+                    val localeList = LocaleListCompat.forLanguageTags(settings.language)
+                    AppCompatDelegate.setApplicationLocales(localeList)
+                }
+            }
+
+            val currentContext = LocalContext.current
+            val targetLocale = remember(settings.language) { getLocaleForLanguage(settings.language) }
+            val localizedConfiguration = remember(settings.language) {
+                val config = android.content.res.Configuration(currentContext.resources.configuration)
+                config.setLocale(targetLocale)
+                config
+            }
+
             // 5. 0ms Splash intro with pixel-matched initial frame
             var minSplashElapsed by remember { mutableStateOf(false) }
             LaunchedEffect(Unit) {
@@ -95,22 +116,26 @@ class MainActivity : AppCompatActivity() {
                 minSplashElapsed = true
             }
 
-            TasbeehTheme(
-                theme = settings.theme,
-                colorTheme = settings.colorTheme
+            CompositionLocalProvider(
+                LocalConfiguration provides localizedConfiguration
             ) {
-                Crossfade(
-                    targetState = minSplashElapsed,
-                    animationSpec = tween(durationMillis = 300),
-                    label = "SplashCrossfade"
-                ) { ready ->
-                    if (ready) {
-                        TasbeehApp(
-                            viewModel = viewModel,
-                            settings = settings
-                        )
-                    } else {
-                        SplashScreen(isDark = isDark)
+                TasbeehTheme(
+                    theme = settings.theme,
+                    colorTheme = settings.colorTheme
+                ) {
+                    Crossfade(
+                        targetState = minSplashElapsed,
+                        animationSpec = tween(durationMillis = 300),
+                        label = "SplashCrossfade"
+                    ) { ready ->
+                        if (ready) {
+                            TasbeehApp(
+                                viewModel = viewModel,
+                                settings = settings
+                            )
+                        } else {
+                            SplashScreen(isDark = isDark)
+                        }
                     }
                 }
             }
