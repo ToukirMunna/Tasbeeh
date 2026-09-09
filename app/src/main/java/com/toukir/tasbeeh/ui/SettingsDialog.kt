@@ -98,7 +98,7 @@ fun SettingsDialog(
                     title = { Text(stringResource(R.string.settings_title)) },
                     navigationIcon = {
                         IconButton(onClick = onDismiss) {
-                            StudioIcon(StudioIcons.ArrowBack, contentDescription = "Back")
+                            StudioIcon(StudioIcons.ArrowBack, contentDescription = stringResource(R.string.cd_back))
                         }
                     },
                     scrollBehavior = scrollBehavior

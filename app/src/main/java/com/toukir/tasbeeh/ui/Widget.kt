@@ -130,8 +130,8 @@ class TasbeehWidget : AppWidgetProvider() {
         val views = RemoteViews(context.packageName, R.layout.widget_layout)
         
         // Update Text
-        views.setTextViewText(R.id.widget_streak_text, "Streak: $streak")
-        views.setTextViewText(R.id.widget_today_text, "Today: $todayCount")
+        views.setTextViewText(R.id.widget_streak_text, context.getString(R.string.widget_streak, streak))
+        views.setTextViewText(R.id.widget_today_text, context.getString(R.string.widget_today, todayCount))
         
         // Draw Chart
         val bitmap = drawChart(context, weeklyCounts, weeklyLabels)

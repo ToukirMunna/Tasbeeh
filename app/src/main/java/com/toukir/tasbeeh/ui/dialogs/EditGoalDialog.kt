@@ -1,25 +1,9 @@
-package com.toukir.tasbeeh.ui
+package com.toukir.tasbeeh.ui.dialogs
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -41,15 +25,13 @@ fun EditGoalDialog(
     onRename: (String) -> Unit
 ) {
     var text by remember { mutableStateOf(goal.name) }
-    
+
     Dialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Surface(
-            modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .padding(vertical = 16.dp),
+            modifier = Modifier.fillMaxWidth(0.9f).padding(vertical = 16.dp),
             shape = RoundedCornerShape(28.dp),
             color = MaterialTheme.colorScheme.surface,
             tonalElevation = 6.dp
@@ -76,28 +58,11 @@ private fun EditGoalContent(
     onRename: (String) -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(24.dp),
+        modifier = Modifier.fillMaxWidth().padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = if (isHomeSource) stringResource(R.string.dialog_manage_goal) else stringResource(R.string.dialog_edit_tasbeeh),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
-            )
-            IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
-                StudioIcon(StudioIcons.Close, contentDescription = stringResource(R.string.close))
-            }
-        }
-        
+        EditGoalHeader(isHomeSource = isHomeSource, onDismiss = onDismiss)
         if (!isHomeSource) {
             OutlinedTextField(
                 value = text,
@@ -108,41 +73,53 @@ private fun EditGoalContent(
                 shape = RoundedCornerShape(16.dp)
             )
         } else {
-            Text(
-                stringResource(R.string.dialog_remove_confirm), 
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            Text(stringResource(R.string.dialog_remove_confirm), style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
+        EditGoalActionButtons(isHomeSource = isHomeSource, text = text, onDelete = onDelete, onRename = onRename)
+    }
+}
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+@Composable
+private fun EditGoalHeader(isHomeSource: Boolean, onDismiss: () -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = if (isHomeSource) stringResource(R.string.dialog_manage_goal) else stringResource(R.string.dialog_edit_tasbeeh),
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+        IconButton(onClick = onDismiss, modifier = Modifier.size(32.dp)) {
+            StudioIcon(StudioIcons.Close, contentDescription = stringResource(R.string.close))
+        }
+    }
+}
+
+@Composable
+private fun EditGoalActionButtons(isHomeSource: Boolean, text: String, onDelete: () -> Unit, onRename: (String) -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Button(
+            onClick = onDelete,
+            modifier = Modifier.weight(1f).height(48.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.errorContainer, contentColor = MaterialTheme.colorScheme.onErrorContainer)
         ) {
+            Text(if (isHomeSource) stringResource(R.string.btn_remove_goal) else stringResource(R.string.delete), fontWeight = FontWeight.Bold)
+        }
+        if (!isHomeSource) {
             Button(
-                onClick = onDelete,
+                onClick = { if (text.isNotBlank()) onRename(text) },
                 modifier = Modifier.weight(1f).height(48.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer
-                )
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Text(
-                    if (isHomeSource) stringResource(R.string.btn_remove_goal) else stringResource(R.string.delete),
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            
-            if (!isHomeSource) {
-                Button(
-                    onClick = { if (text.isNotBlank()) onRename(text) },
-                    modifier = Modifier.weight(1f).height(48.dp),
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Text(stringResource(R.string.save), fontWeight = FontWeight.Bold)
-                }
+                Text(stringResource(R.string.save), fontWeight = FontWeight.Bold)
             }
         }
     }

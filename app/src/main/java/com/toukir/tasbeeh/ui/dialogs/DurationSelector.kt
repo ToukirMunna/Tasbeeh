@@ -10,8 +10,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.toukir.tasbeeh.GoalDuration
+import com.toukir.tasbeeh.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,14 +26,20 @@ fun DurationSelector(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         GoalDuration.entries.forEach { duration ->
+            val textRes = when (duration) {
+                GoalDuration.DAILY -> R.string.duration_daily
+                GoalDuration.WEEKLY -> R.string.duration_weekly
+                GoalDuration.MONTHLY -> R.string.duration_monthly
+                GoalDuration.YEARLY -> R.string.duration_yearly
+            }
             FilterChip(
                 selected = selectedDuration == duration,
                 onClick = { onDurationSelected(duration) },
-                label = { 
+                label = {
                     Text(
-                        duration.name.lowercase().replaceFirstChar { it.uppercase() },
+                        stringResource(textRes),
                         style = MaterialTheme.typography.labelSmall
-                    ) 
+                    )
                 },
                 colors = FilterChipDefaults.filterChipColors(
                     selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,

@@ -1,5 +1,7 @@
 package com.toukir.tasbeeh.ui
 
+import com.toukir.tasbeeh.ui.dialogs.ManageGoalRowItem
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -45,32 +47,6 @@ fun ManageGoalsDialog(
 ) {
     var currentGoals by remember { mutableStateOf(goals) }
 
-    fun updateTargetCount(index: Int, newCount: String) {
-        val count = newCount.toIntOrNull() ?: return
-        val newList = currentGoals.toMutableList()
-        newList[index] = newList[index].copy(targetCount = count)
-        currentGoals = newList
-    }
-
-    fun updateDuration(index: Int, duration: GoalDuration) {
-        val newList = currentGoals.toMutableList()
-        newList[index] = newList[index].copy(duration = duration)
-        currentGoals = newList
-    }
-
-    fun removeGoal(goal: TasbeehGoal) {
-        val updatedList = currentGoals.toMutableList()
-        updatedList.remove(goal)
-        currentGoals = updatedList
-    }
-
-    fun moveItem(from: Int, to: Int) {
-        if (from == to || to < 0 || to >= currentGoals.size) return
-        val newList = currentGoals.toMutableList()
-        Collections.swap(newList, from, to)
-        currentGoals = newList
-    }
-
     Dialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
@@ -86,10 +62,7 @@ fun ManageGoalsDialog(
             ManageGoalsContent(
                 currentGoals = currentGoals,
                 onDismiss = onDismiss,
-                onUpdateTargetCount = ::updateTargetCount,
-                onUpdateDuration = ::updateDuration,
-                onRemoveGoal = ::removeGoal,
-                onMoveItem = ::moveItem,
+                onGoalsChange = { currentGoals = it },
                 onSave = { onUpdateGoals(currentGoals) }
             )
         }
@@ -100,16 +73,9 @@ fun ManageGoalsDialog(
 private fun ManageGoalsContent(
     currentGoals: List<TasbeehGoal>,
     onDismiss: () -> Unit,
-    onUpdateTargetCount: (Int, String) -> Unit,
-    onUpdateDuration: (Int, GoalDuration) -> Unit,
-    onRemoveGoal: (TasbeehGoal) -> Unit,
-    onMoveItem: (Int, Int) -> Unit,
+    onGoalsChange: (List<TasbeehGoal>) -> Unit,
     onSave: () -> Unit
 ) {
-    val listState = rememberLazyListState()
-    var draggingItemIndex by remember { mutableStateOf<Int?>(null) }
-    var draggingItemOffset by remember { mutableStateOf(0f) }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -124,49 +90,13 @@ private fun ManageGoalsContent(
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
-        LazyColumn(
-            state = listState,
+        ManageGoalsLazyList(
+            currentGoals = currentGoals,
+            onGoalsChange = onGoalsChange,
             modifier = Modifier
                 .weight(1f, fill = false)
-                .heightIn(max = 550.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            itemsIndexed(currentGoals, key = { _, goal -> goal.id }) { index, goal ->
-                val currentIndex by rememberUpdatedState(index)
-                val isDragging = index == draggingItemIndex
-
-                ManageGoalRowItem(
-                    goal = goal,
-                    index = index,
-                    isDragging = isDragging,
-                    draggingOffset = draggingItemOffset,
-                    onStartDrag = {
-                        draggingItemIndex = currentIndex
-                        draggingItemOffset = 0f
-                    },
-                    onDragChange = { dragAmountY ->
-                        draggingItemOffset += dragAmountY
-                        val currentOffset = draggingItemOffset
-                        if (kotlin.math.abs(currentOffset) > 66f) {
-                            val direction = if (currentOffset > 0) 1 else -1
-                            val targetIndex = currentIndex + direction
-                            if (targetIndex in currentGoals.indices) {
-                                onMoveItem(currentIndex, targetIndex)
-                                draggingItemIndex = targetIndex
-                                draggingItemOffset = 0f
-                            }
-                        }
-                    },
-                    onStopDrag = {
-                        draggingItemIndex = null
-                        draggingItemOffset = 0f
-                    },
-                    onUpdateTargetCount = { onUpdateTargetCount(index, it) },
-                    onUpdateDuration = { onUpdateDuration(index, it) },
-                    onRemove = { onRemoveGoal(goal) }
-                )
-            }
-        }
+                .heightIn(max = 550.dp)
+        )
 
         Button(
             onClick = onSave,
@@ -180,6 +110,100 @@ private fun ManageGoalsContent(
             )
         }
     }
+}
+
+@Composable
+private fun ManageGoalsLazyList(
+    currentGoals: List<TasbeehGoal>,
+    onGoalsChange: (List<TasbeehGoal>) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val listState = rememberLazyListState()
+    var draggingItemIndex by remember { mutableStateOf<Int?>(null) }
+    var draggingItemOffset by remember { mutableStateOf(0f) }
+
+    LazyColumn(
+        state = listState,
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        itemsIndexed(currentGoals, key = { _, goal -> goal.id }) { index, goal ->
+            val currentIndex by rememberUpdatedState(index)
+            ManageGoalRowItem(
+                goal = goal,
+                index = index,
+                isDragging = index == draggingItemIndex,
+                draggingOffset = draggingItemOffset,
+                onStartDrag = {
+                    draggingItemIndex = currentIndex
+                    draggingItemOffset = 0f
+                },
+                onDragChange = { dragAmountY ->
+                    val (newIdx, newOff) = handleDragStep(draggingItemOffset, dragAmountY, currentIndex, currentGoals, onGoalsChange)
+                    draggingItemIndex = newIdx
+                    draggingItemOffset = newOff
+                },
+                onStopDrag = {
+                    draggingItemIndex = null
+                    draggingItemOffset = 0f
+                },
+                onUpdateTargetCount = { countStr ->
+                    updateGoalTarget(index, countStr, currentGoals, onGoalsChange)
+                },
+                onUpdateDuration = { duration ->
+                    updateGoalDuration(index, duration, currentGoals, onGoalsChange)
+                },
+                onRemove = {
+                    val updatedList = currentGoals.toMutableList().apply { remove(goal) }
+                    onGoalsChange(updatedList)
+                }
+            )
+        }
+    }
+}
+
+private fun handleDragStep(
+    offset: Float,
+    dragAmount: Float,
+    currentIndex: Int,
+    goals: List<TasbeehGoal>,
+    onGoalsChange: (List<TasbeehGoal>) -> Unit
+): Pair<Int?, Float> {
+    val newOffset = offset + dragAmount
+    if (kotlin.math.abs(newOffset) > 66f) {
+        val direction = if (newOffset > 0) 1 else -1
+        val target = currentIndex + direction
+        if (target in goals.indices) {
+            val newList = goals.toMutableList()
+            Collections.swap(newList, currentIndex, target)
+            onGoalsChange(newList)
+            return Pair(target, 0f)
+        }
+    }
+    return Pair(currentIndex, newOffset)
+}
+
+private fun updateGoalTarget(
+    index: Int,
+    newCount: String,
+    goals: List<TasbeehGoal>,
+    onGoalsChange: (List<TasbeehGoal>) -> Unit
+) {
+    val count = newCount.toIntOrNull() ?: return
+    val newList = goals.toMutableList()
+    newList[index] = newList[index].copy(targetCount = count)
+    onGoalsChange(newList)
+}
+
+private fun updateGoalDuration(
+    index: Int,
+    duration: GoalDuration,
+    goals: List<TasbeehGoal>,
+    onGoalsChange: (List<TasbeehGoal>) -> Unit
+) {
+    val newList = goals.toMutableList()
+    newList[index] = newList[index].copy(duration = duration)
+    onGoalsChange(newList)
 }
 
 @Composable

@@ -273,4 +273,71 @@
     <string name="ach_platinum">প্লাটিনাম কাউন্টার</string>
     <string name="ach_platinum_desc">৫০০,০০০ মোট গণনা অর্জন করুন</string>
 
+    <!-- Parity Fixes: Previously missing keys in Bangla -->
+    <string name="theme_light">লাইট</string>
+    <string name="theme_dark">ডার্ক</string>
+    <string name="setting_accent_color">অ্যাকসেন্ট কালার</string>
+    <string name="days_active">%1$s দিন সক্রিয়</string>
+    <string name="leaderboard_status_active">সক্রিয়</string>
+    <string name="leaderboard_status_inactive">নিষ্ক্রিয়</string>
+    <string name="setting_cloud_sync">ক্লাউড সিঙ্ক</string>
+    <string name="setting_cloud_sync_desc">অন্য ডিভাইসে তথ্য সংরক্ষিত রাখতে গুগল দিয়ে সাইন-ইন করুন।</string>
+    <string name="setting_login_google">গুগল দিয়ে সাইন-ইন করুন</string>
+    <string name="setting_restoring_cloud">ক্লাউড থেকে তথ্য পুনরুদ্ধার করা হচ্ছে...</string>
+    <string name="setting_sync_auto_desc">অ্যাপ বন্ধ করলে তথ্য স্বয়ংক্রিয়ভাবে সংরক্ষিত হবে।</string>
+    <string name="about_studio_name">তৌকির স্টুডিও</string>
+    <string name="about_app_build">তাসবীহ • ৪.১.০ (টিডিএস সংস্করণ)</string>
+    <string name="about_privacy_pledge">বিজ্ঞাপনহীন। ট্র্যাকিংহীন। তৌকির স্টুডিওর আন্তরিক সৃষ্টি।</string>
+    <string name="about_fleet_title">তৌকির স্টুডিও অ্যাপস বহর</string>
+    <string name="dialog_add_to_goals_title">লক্ষ্যে যুক্ত করুন</string>
+    <string name="dialog_configure_goal">%1$s এর জন্য লক্ষ্য নির্ধারণ করুন</string>
+    <string name="dialog_confirm_goal">লক্ষ্য নিশ্চিত করুন</string>
+    <string name="dialog_duration_frequency">সময়সীমা</string>
+    <string name="dialog_reorder_content_desc">ক্রম পরিবর্তন</string>
+    <string name="dialog_target_count">লক্ষ্য মাত্রা</string>
+    <string name="dialog_target_count_placeholder">যেমন: ১০০</string>
+
+    <!-- Newly added strings for zero-hardcoded UI invariants -->
+    <string name="retry">পুনরায় চেষ্টা করুন</string>
+    <string name="toast_login_restore">সফলভাবে সাইন-ইন হয়েছে। তথ্য রিস্টোর করা হচ্ছে...</string>
+    <string name="toast_data_restored">ক্লাউড থেকে তথ্য পুনরুদ্ধার সম্পন্ন হয়েছে</string>
+    <string name="toast_login_failed">সাইন-ইন ব্যর্থ হয়েছে: %1$s</string>
+    <string name="toast_backup_saved">ব্যাকআপ সফলভাবে সংরক্ষিত হয়েছে</string>
+    <string name="toast_backup_failed">ব্যাকআপ ব্যর্থ হয়েছে</string>
+    <string name="toast_restore_success">তথ্য সফলভাবে পুনরুদ্ধার করা হয়েছে</string>
+    <string name="toast_restore_failed">পুনরুদ্ধার ব্যর্থ হয়েছে</string>
+    <string name="no_long_term_goals">এখনো কোনো মাসিক বা বাৎসরিক লক্ষ্য নেই।</string>
+    <string name="default_reminder_text">জিকিরের সময় হয়েছে</string>
+    <string name="widget_streak">স্ট্রিক: %1$d</string>
+    <string name="widget_today">আজ: %1$d</string>
+    <string name="cd_back">পেছনে</string>
+    <string name="cd_meaning">অর্থ দেখুন</string>
+    <string name="cd_details">বিস্তারিত</string>
+    <string name="cd_syncing">সিঙ্ক হচ্ছে</string>
+    <string name="cd_synced">সিঙ্ক হয়েছে</string>
+    <string name="cd_offline">অফলাইন/ত্রুটি</string>
+    <string name="cd_switch_view">ভিউ পরিবর্তন করুন</string>
+    <string name="cd_edit_order">ক্রম পরিবর্তন</string>
+    <string name="cd_add_tasbeeh">তাসবীহ যোগ করুন</string>
+    <string name="cd_streak">স্ট্রিক</string>
+    <string name="cd_profile">প্রোফাইল</string>
+    <string name="cd_edit_details">বিস্তারিত সম্পাদনা</string>
+    <string name="cd_edit">সম্পাদনা</string>
+    <string name="cd_settings">সেটিংস</string>
+    <string name="cd_refresh">রিফ্রেশ</string>
+    <string name="cd_close">বন্ধ করুন</string>
+    <string name="search_adhkar">যিকির খুঁজুন...</string>
+    <string name="stats_all_time">সর্বকালের</string>
+    <string name="duration_daily">দৈনিক</string>
+    <string name="duration_weekly">সাপ্তাহিক</string>
+    <string name="duration_monthly">মাসিক</string>
+    <string name="duration_yearly">বার্ষিক</string>
+    <string name="leaderboard_you">%1$s (আপনি)</string>
+    <string name="error_something_went_wrong">কিছু ভুল হয়েছে</string>
+    <string name="action_add_to_goals">+ %1$s</string>
+    <string name="badge_daily">দৈ</string>
+    <string name="badge_weekly">সা</string>
+    <string name="badge_monthly">মা</string>
+    <string name="badge_yearly">বা</string>
+
 </resources>

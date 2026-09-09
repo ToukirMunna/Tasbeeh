@@ -94,12 +94,10 @@ fun RedesignedCircularProgress(
     size: Dp = 220.dp
 ) {
     val colorScheme = MaterialTheme.colorScheme
+    val strokeWidth = 14.dp
     val primaryGradient = Brush.linearGradient(
         colors = listOf(colorScheme.primary, colorScheme.primaryContainer)
     )
-    val backgroundGray = colorScheme.onSurface.copy(alpha = 0.05f)
-    val strokeWidth = 14.dp
-    
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = tween(durationMillis = 600, easing = FastOutSlowInEasing),
@@ -110,51 +108,67 @@ fun RedesignedCircularProgress(
         modifier = modifier.size(size),
         contentAlignment = Alignment.Center
     ) {
-        // Outer Glow/Shadow effect with TDS 1dp tactile rim
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(10.dp)
-                .shadow(8.dp, CircleShape, spotColor = colorScheme.primary.copy(alpha = 0.2f))
-                .border(1.dp, colorScheme.outlineVariant, CircleShape)
-                .background(colorScheme.surface, CircleShape)
+        CircularProgressTrackAndGlow(
+            strokeWidth = strokeWidth,
+            trackColor = colorScheme.surfaceVariant,
+            primaryGradient = primaryGradient,
+            progress = animatedProgress
         )
+        CircularProgressCenterCount(currentCount = currentCount)
+    }
+}
 
-        Canvas(modifier = Modifier.fillMaxSize().padding(strokeWidth / 2 + 10.dp)) {
-            // Background track (TDS Inset)
-            drawArc(
-                color = colorScheme.surfaceVariant,
-                startAngle = -90f,
-                sweepAngle = 360f,
-                useCenter = false,
-                style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
-            )
-            // Progress arc (Toukir Mint)
-            drawArc(
-                brush = primaryGradient,
-                startAngle = -90f,
-                sweepAngle = 360 * animatedProgress,
-                useCenter = false,
-                style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
-            )
-        }
+@Composable
+private fun CircularProgressTrackAndGlow(
+    strokeWidth: Dp,
+    trackColor: androidx.compose.ui.graphics.Color,
+    primaryGradient: Brush,
+    progress: Float
+) {
+    val colorScheme = MaterialTheme.colorScheme
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
+            .shadow(8.dp, CircleShape, spotColor = colorScheme.primary.copy(alpha = 0.2f))
+            .border(1.dp, colorScheme.outlineVariant, CircleShape)
+            .background(colorScheme.surface, CircleShape)
+    )
 
-        // Inner content
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = currentCount,
-                style = MaterialTheme.typography.displayMedium.copy(
-                    fontSize = if (currentCount.length > 5) 
-                        MaterialTheme.typography.displayMedium.fontSize * 0.7f 
-                    else 
-                        MaterialTheme.typography.displayMedium.fontSize
-                ),
-                fontWeight = FontWeight.Bold,
-                color = colorScheme.onSurface,
-                maxLines = 1,
-                softWrap = false
-            )
-        }
+    Canvas(modifier = Modifier.fillMaxSize().padding(strokeWidth / 2 + 10.dp)) {
+        drawArc(
+            color = trackColor,
+            startAngle = -90f,
+            sweepAngle = 360f,
+            useCenter = false,
+            style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+        )
+        drawArc(
+            brush = primaryGradient,
+            startAngle = -90f,
+            sweepAngle = 360 * progress,
+            useCenter = false,
+            style = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+        )
+    }
+}
+
+@Composable
+private fun CircularProgressCenterCount(currentCount: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = currentCount,
+            style = MaterialTheme.typography.displayMedium.copy(
+                fontSize = if (currentCount.length > 5) 
+                    MaterialTheme.typography.displayMedium.fontSize * 0.7f 
+                else 
+                    MaterialTheme.typography.displayMedium.fontSize
+            ),
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface,
+            maxLines = 1,
+            softWrap = false
+        )
     }
 }
 

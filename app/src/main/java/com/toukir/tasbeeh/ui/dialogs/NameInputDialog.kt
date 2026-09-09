@@ -1,33 +1,13 @@
-package com.toukir.tasbeeh.ui
+package com.toukir.tasbeeh.ui.dialogs
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,19 +21,17 @@ fun NameInputDialog(
     currentName: String,
     currentIsMale: Boolean,
     onConfirm: (String, Boolean) -> Unit,
-    onDismiss: () -> Unit = {}
+    onDismiss: () -> Unit
 ) {
     var name by remember { mutableStateOf(currentName) }
     var isMale by remember { mutableStateOf(currentIsMale) }
-    
+
     Dialog(
-        onDismissRequest = { onDismiss() },
+        onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Surface(
-            modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .padding(vertical = 16.dp),
+            modifier = Modifier.fillMaxWidth(0.9f).padding(vertical = 16.dp),
             shape = RoundedCornerShape(28.dp),
             color = MaterialTheme.colorScheme.surface,
             tonalElevation = 6.dp
@@ -78,39 +56,12 @@ private fun NameInputContent(
     onConfirm: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(24.dp),
+        modifier = Modifier.fillMaxWidth().padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = stringResource(R.string.edit_profile),
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            GenderOption(
-                label = stringResource(R.string.label_male),
-                drawableRes = R.drawable.male,
-                isSelected = isMale,
-                onClick = { onGenderChange(true) },
-                modifier = Modifier.weight(1f)
-            )
-            GenderOption(
-                label = stringResource(R.string.label_female),
-                drawableRes = R.drawable.female,
-                isSelected = !isMale,
-                onClick = { onGenderChange(false) },
-                modifier = Modifier.weight(1f)
-            )
-        }
-        
+        Text(stringResource(R.string.edit_profile), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+        GenderSelectionRow(isMale = isMale, onGenderChange = onGenderChange)
         OutlinedTextField(
             value = name,
             onValueChange = onNameChange,
@@ -119,7 +70,6 @@ private fun NameInputContent(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp)
         )
-
         Button(
             onClick = onConfirm,
             enabled = name.isNotBlank(),
@@ -132,6 +82,14 @@ private fun NameInputContent(
 }
 
 @Composable
+private fun GenderSelectionRow(isMale: Boolean, onGenderChange: (Boolean) -> Unit) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        GenderOption(label = stringResource(R.string.label_male), drawableRes = R.drawable.male, isSelected = isMale, onClick = { onGenderChange(true) }, modifier = Modifier.weight(1f))
+        GenderOption(label = stringResource(R.string.label_female), drawableRes = R.drawable.female, isSelected = !isMale, onClick = { onGenderChange(false) }, modifier = Modifier.weight(1f))
+    }
+}
+
+@Composable
 private fun GenderOption(
     label: String,
     drawableRes: Int,
@@ -139,25 +97,19 @@ private fun GenderOption(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .clip(RoundedCornerShape(16.dp))
-            .clickable(onClick = onClick)
-            .background(if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f) else Color.Transparent)
-            .padding(12.dp)
+    val borderColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant
+    val containerColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+
+    Surface(
+        modifier = modifier.clickable { onClick() },
+        shape = RoundedCornerShape(16.dp),
+        color = containerColor,
+        border = BorderStroke(2.dp, borderColor)
     ) {
-        Image(
-            painter = painterResource(drawableRes),
-            contentDescription = label,
-            modifier = Modifier.size(64.dp).clip(CircleShape),
-            contentScale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = label, 
-            style = MaterialTheme.typography.labelLarge,
-            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-        )
+        Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(painter = painterResource(drawableRes), contentDescription = null, modifier = Modifier.size(48.dp), tint = androidx.compose.ui.graphics.Color.Unspecified)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+        }
     }
 }

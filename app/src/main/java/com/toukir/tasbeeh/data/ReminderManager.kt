@@ -14,7 +14,7 @@ class ToastReminderService : Service() {
     private var handler: Handler? = null
     private var runnable: Runnable? = null
     private var intervalMinutes: Int = 15
-    private var reminderText: String = "Time for Dhikr"
+    private var reminderText: String = ""
     private var isScreenReceiverRegistered = false
     
     // Receiver to detect screen state
@@ -30,9 +30,12 @@ class ToastReminderService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val defaultText = getString(com.toukir.tasbeeh.R.string.default_reminder_text)
         if (intent != null) {
-            reminderText = intent.getStringExtra("text") ?: "Time for Dhikr"
+            reminderText = intent.getStringExtra("text") ?: defaultText
             intervalMinutes = intent.getIntExtra("interval", 15).coerceAtLeast(1)
+        } else if (reminderText.isEmpty()) {
+            reminderText = defaultText
         }
         
         if (!isScreenReceiverRegistered) {

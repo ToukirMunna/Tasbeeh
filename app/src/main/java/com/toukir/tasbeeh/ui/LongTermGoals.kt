@@ -31,7 +31,7 @@ fun GoalSectionContent(
     ) {
         if (goals.isEmpty()) {
             Text(
-                if (isCustom) "No yearly or monthly goals yet." else stringResource(R.string.no_goals),
+                if (isCustom) stringResource(R.string.no_long_term_goals) else stringResource(R.string.no_goals),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally)

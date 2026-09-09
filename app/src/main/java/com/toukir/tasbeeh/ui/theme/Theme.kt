@@ -24,7 +24,7 @@ enum class AppColorTheme(
 ) {
     Gold(
         displayName = "Gold",
-        primaryLight = Color(0xFFD97706),
+        primaryLight = Color(0xFF92400E),
         onPrimaryLight = Color(0xFFFFFFFF),
         containerLight = Color(0xFFFEF3C7),
         onContainerLight = Color(0xFF78350F),
@@ -37,7 +37,7 @@ enum class AppColorTheme(
     ),
     Mint(
         displayName = "Mint",
-        primaryLight = Color(0xFF0D9488),
+        primaryLight = Color(0xFF0F766E),
         onPrimaryLight = Color(0xFFFFFFFF),
         containerLight = Color(0xFFCCFBF1),
         onContainerLight = Color(0xFF134E4A),
@@ -46,7 +46,7 @@ enum class AppColorTheme(
         containerDark = Color(0xFF134E4A),
         onContainerDark = Color(0xFFCCFBF1),
         previewColor = Color(0xFF14B8A6),
-        onPreviewColor = Color(0xFFFFFFFF)
+        onPreviewColor = Color(0xFF0C0D0E)
     ),
     Sapphire(
         displayName = "Sapphire",
@@ -59,7 +59,7 @@ enum class AppColorTheme(
         containerDark = Color(0xFF172554),
         onContainerDark = Color(0xFFDBEAFE),
         previewColor = Color(0xFF3B82F6),
-        onPreviewColor = Color(0xFFFFFFFF)
+        onPreviewColor = Color(0xFF0C0D0E)
     ),
     Amethyst(
         displayName = "Amethyst",
@@ -72,11 +72,11 @@ enum class AppColorTheme(
         containerDark = Color(0xFF3B0764),
         onContainerDark = Color(0xFFF3E8FF),
         previewColor = Color(0xFFA855F7),
-        onPreviewColor = Color(0xFFFFFFFF)
+        onPreviewColor = Color(0xFF0C0D0E)
     ),
     Rose(
         displayName = "Rose",
-        primaryLight = Color(0xFFE11D48),
+        primaryLight = Color(0xFFBE123C),
         onPrimaryLight = Color(0xFFFFFFFF),
         containerLight = Color(0xFFFFE4E6),
         onContainerLight = Color(0xFF881337),
@@ -85,7 +85,7 @@ enum class AppColorTheme(
         containerDark = Color(0xFF4C0519),
         onContainerDark = Color(0xFFFFE4E6),
         previewColor = Color(0xFFFB7185),
-        onPreviewColor = Color(0xFFFFFFFF)
+        onPreviewColor = Color(0xFF0C0D0E)
     )
 }
 

@@ -1,5 +1,7 @@
 package com.toukir.tasbeeh.ui
 
+import android.content.Context
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
@@ -68,86 +70,118 @@ fun MonthItem(
         border = if (expanded) BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant) else null
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Text(
-                        text = yearMonth.format(formatter),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                    Text(
-                        text = stringResource(R.string.days_active, formatNumber(historyItems.size, language)),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                    )
-                }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Surface(
-                        color = MaterialTheme.colorScheme.primaryContainer,
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = formatNumber(monthTotal, language),
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-                            style = MaterialTheme.typography.labelLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        )
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    StudioIcon(
-                        iconRes = StudioIcons.ExpandMore,
-                        contentDescription = null,
-                        modifier = Modifier.rotate(rotationState),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
+            MonthItemHeader(
+                yearMonth = yearMonth,
+                formatter = formatter,
+                daysActive = historyItems.size,
+                monthTotal = monthTotal,
+                language = language,
+                rotationState = rotationState
+            )
 
             AnimatedVisibility(
                 visible = expanded,
                 enter = expandVertically(),
                 exit = shrinkVertically()
             ) {
-                Column(modifier = Modifier.padding(top = 16.dp)) {
-                    val tasbeehCounts = mutableMapOf<String, Int>()
-                    historyItems.forEach { dayHistory ->
-                        dayHistory.details.forEach { (name, count) ->
-                            tasbeehCounts[name] = (tasbeehCounts[name] ?: 0) + count
-                        }
-                    }
+                MonthItemExpandedDetails(
+                    historyItems = historyItems,
+                    language = language,
+                    context = context
+                )
+            }
+        }
+    }
+}
 
-                    tasbeehCounts.entries.sortedByDescending { it.value }.forEach { (name, count) ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 6.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(6.dp)
-                                        .clip(CircleShape)
-                                        .background(MaterialTheme.colorScheme.primary)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                val localizedName = AdhkarLibrary.getLocalizedName(context, name)
-                                Text(localizedName, style = MaterialTheme.typography.bodyMedium)
-                            }
-                            Text(
-                                text = formatNumber(count, language),
-                                style = MaterialTheme.typography.bodyMedium,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-                    }
+@Composable
+private fun MonthItemHeader(
+    yearMonth: YearMonth,
+    formatter: DateTimeFormatter,
+    daysActive: Int,
+    monthTotal: Int,
+    language: String,
+    rotationState: Float
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column {
+            Text(
+                text = yearMonth.format(formatter),
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.SemiBold
+            )
+            Text(
+                text = stringResource(R.string.days_active, formatNumber(daysActive, language)),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            )
+        }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Surface(
+                color = MaterialTheme.colorScheme.primaryContainer,
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    text = formatNumber(monthTotal, language),
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            StudioIcon(
+                iconRes = StudioIcons.ExpandMore,
+                contentDescription = null,
+                modifier = Modifier.rotate(rotationState),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+private fun MonthItemExpandedDetails(
+    historyItems: List<TasbeehHistory>,
+    language: String,
+    context: Context
+) {
+    Column(modifier = Modifier.padding(top = 16.dp)) {
+        val tasbeehCounts = mutableMapOf<String, Int>()
+        historyItems.forEach { dayHistory ->
+            dayHistory.details.forEach { (name, count) ->
+                tasbeehCounts[name] = (tasbeehCounts[name] ?: 0) + count
+            }
+        }
+
+        tasbeehCounts.entries.sortedByDescending { it.value }.forEach { (name, count) ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 6.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.primary)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    val localizedName = AdhkarLibrary.getLocalizedName(context, name)
+                    Text(localizedName, style = MaterialTheme.typography.bodyMedium)
                 }
+                Text(
+                    text = formatNumber(count, language),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
             }
         }
     }

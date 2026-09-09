@@ -41,105 +41,127 @@ fun ProfileHeaderSection(
             .height(IntrinsicSize.Min),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Welcome Card
-        Card(
+        ProfileWelcomeCard(
+            userName = userName,
+            onNameClick = onNameClick,
             modifier = Modifier
                 .weight(0.65f)
-                .fillMaxHeight(),
-            shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Surface(
-                    modifier = Modifier
-                        .size(54.dp)
-                        .clickable { onNameClick() },
-                    shape = CircleShape,
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        StudioIcon(
-                            iconRes = StudioIcons.AccountCircle,
-                            contentDescription = "Profile",
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.width(12.dp))
-
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = stringResource(R.string.greeting),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                    )
-                    Text(
-                        text = userName.ifEmpty { stringResource(R.string.user) },
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        modifier = Modifier.clickable { onNameClick() }
-                    )
-                }
-            }
-        }
-
-        // Streak Card
-        Card(
+                .fillMaxHeight()
+        )
+        ProfileStreakCard(
+            currentStreak = currentStreak,
+            language = language,
             modifier = Modifier
                 .weight(0.35f)
-                .fillMaxHeight(),
-            shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
+                .fillMaxHeight()
+        )
+    }
+}
+
+@Composable
+private fun ProfileWelcomeCard(
+    userName: String,
+    onNameClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize().padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
-                            )
-                        )
-                    ),
-                contentAlignment = Alignment.Center
+            ProfileAvatar(onClick = onNameClick)
+            Spacer(modifier = Modifier.width(12.dp))
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.weight(1f)
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    StudioIcon(
-                        iconRes = StudioIcons.LocalFireDepartment,
-                        contentDescription = "Streak",
-                        tint = MaterialTheme.colorScheme.onPrimary,
-                        modifier = Modifier.size(26.dp)
+                Text(
+                    text = stringResource(R.string.greeting),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                )
+                Text(
+                    text = userName.ifEmpty { stringResource(R.string.user) },
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    modifier = Modifier.clickable { onNameClick() }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProfileAvatar(onClick: () -> Unit) {
+    Surface(
+        modifier = Modifier.size(54.dp).clickable { onClick() },
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.primaryContainer,
+        border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            StudioIcon(
+                iconRes = StudioIcons.AccountCircle,
+                contentDescription = stringResource(R.string.cd_profile),
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.size(32.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun ProfileStreakCard(
+    currentStreak: Int,
+    language: String,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(
+                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
+                        )
                     )
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        formatNumber(currentStreak, language),
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Black,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                    Text(
-                        stringResource(R.string.day_streak),
-                        style = MaterialTheme.typography.labelMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                StudioIcon(
+                    iconRes = StudioIcons.LocalFireDepartment,
+                    contentDescription = stringResource(R.string.cd_streak),
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.size(26.dp)
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = formatNumber(currentStreak, language),
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Black,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+                Text(
+                    text = stringResource(R.string.day_streak),
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
     }

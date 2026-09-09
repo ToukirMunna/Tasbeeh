@@ -1,4 +1,4 @@
-﻿# 🏗️ System Architecture & Technical Reference
+# 🏗️ System Architecture & Technical Reference
 
 **Project Name**: Tasbeeh Pro  
 **Package Name**: `com.toukir.tasbeeh`  
@@ -47,29 +47,40 @@
 ```text
 com.toukir.tasbeeh/
 ├── data/
-│   ├── AdhkarData.kt              <-- Curated Islamic Adhkar Library
 │   ├── AchievementsData.kt        <-- Milestone & Streak Achievements
-│   ├── DataStoreProvider.kt       <-- Jetpack DataStore Instance
-│   ├── FirebaseManager.kt         <-- Firebase Auth & Firestore Sync
+│   ├── AdhkarData.kt              <-- Curated Islamic Adhkar Library
+│   ├── DataStoreProvider.kt       <-- Jetpack DataStore Instances
+│   ├── FirebaseManager.kt         <-- Firebase Auth & Orchestrator Facade
 │   ├── LeaderboardEntry.kt        <-- Community Leaderboard Model
 │   ├── ReminderManager.kt         <-- Periodic Toast / Worker Reminders
 │   ├── TasbeehHistory.kt          <-- Historical Recitation Entity
-│   └── TasbeehRepository.kt       <-- Core Persistence & Goal Orchestrator
+│   ├── TasbeehRepository.kt       <-- Facade delegating to specialized data stores
+│   ├── repository/
+│   │   ├── GoalsDataStore.kt      <-- Goals persistence, defaults & distinct aggregation
+│   │   ├── HistoryDataStore.kt    <-- Daily history records, streaks, period totals & migration
+│   │   ├── BackupRestoreManager.kt<-- JSON Export/Import & Non-destructive backup merging
+│   │   ├── AchievementManager.kt  <-- Achievement criteria evaluation & unlock storage
+│   │   └── SettingsDataStore.kt   <-- DataStore preferences facade
+│   └── cloud/
+│       └── FirebaseLeaderboardManager.kt <-- Firestore leaderboard queries & cloud submissions
 ├── utils/
 │   ├── LanguageUtils.kt           <-- Language & Localization Helpers
 │   └── NetworkUtils.kt            <-- Connectivity Verification
 ├── ui/
 │   ├── common/                    <-- Shared StudioIcon, Cards, Rims
 │   ├── theme/                     <-- Color.kt, Theme.kt, Type.kt, StudioIcons.kt
-│   └── features/
-│       ├── home/                  <-- HomeScreen, CounterRing, GoalCards
-│       ├── counter/               <-- CounterScreen, TapZone, FullscreenHost
-│       ├── library/               <-- TasbeehsListScreen, TasbeehDetailsScreen
-│       ├── profile/               <-- ProfileScreen, ProfileHeader, Stats
-│       ├── history/               <-- HistoryScreen, CalendarMonthView
-│       ├── statistics/            <-- StatisticsScreen, RecitationCharts
-│       ├── leaderboard/           <-- LeaderboardScreen, LeaderboardSettingsDialog
-│       ├── settings/              <-- SettingsDialog, Appearance, Sound, Backup
-│       └── dialogs/               <-- AddGoalDialog, CustomTasbeehDialog, etc.
-└── MainActivity.kt                <-- Single-Activity Host
+│   ├── dialogs/                   <-- Modularized dialog components (<250 lines)
+│   ├── AppNavHost.kt              <-- Navigation graph orchestrator
+│   ├── AppNavTransitions.kt       <-- Nav animated slide/fade transition specs
+│   ├── NavScreens.kt              <-- Top-level navigation destination routers
+│   ├── NavWrappers.kt             <-- Nav destination wrappers & tab containers
+│   ├── TasbeehScaffoldContent.kt  <-- Scaffold layout & inner content sub-composables
+│   ├── TasbeehAppState.kt         <-- Navigation & lifecycle state containers
+│   └── (Feature Screens)          <-- All screens decomposed into surgical sub-composables
+├── MainActivity.kt                <-- Single-Activity Host
+└── (test) domain/
+    ├── GoalsCalculationTest.kt    <-- Distinct dhikr aggregation unit tests
+    ├── StreakCalculationLogicTest.kt <-- Daily streak calculation test suite
+    ├── PeriodAggregationLogicTest.kt <-- Daily/Weekly/Monthly interval aggregation tests
+    └── BackupMergeLogicTest.kt    <-- Non-destructive backup/restore merge invariant tests
 ```

@@ -34,7 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -68,24 +68,17 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     language: String = "en"
 ) {
-    val goals by viewModel.savedGoals.collectAsState()
-    val syncStatus by viewModel.syncStatus.collectAsState()
-    val settings by viewModel.settings.collectAsState()
+    val goals by viewModel.savedGoals.collectAsStateWithLifecycle()
+    val syncStatus by viewModel.syncStatus.collectAsStateWithLifecycle()
+    val settings by viewModel.settings.collectAsStateWithLifecycle()
 
-    val dailyGoals = goals.filter { it.isGoal && it.duration == GoalDuration.DAILY }
-    val customGoals = goals.filter { it.isGoal && it.duration != GoalDuration.DAILY }
-    
-    val totalDailyCount = dailyGoals.sumOf { it.currentCount }
-    val totalDailyTarget = dailyGoals.sumOf { it.targetCount }
-    
-    val totalCustomCount = customGoals.sumOf { it.currentCount }
-    val totalCustomTarget = customGoals.sumOf { it.targetCount }
+    val dailyGoals = remember(goals) { goals.filter { it.isGoal && it.duration == GoalDuration.DAILY } }
+    val customGoals = remember(goals) { goals.filter { it.isGoal && it.duration != GoalDuration.DAILY } }
+    var isDailyVisible by remember { mutableStateOf(true) }
 
-    var isDailyVisible by remember { mutableStateOf(value = true) }
-    
-    val displayCount = if (isDailyVisible) totalDailyCount else totalCustomCount
-    val displayTarget = if (isDailyVisible) totalDailyTarget else totalCustomTarget
-    val progress = if (displayTarget > 0) (displayCount.toFloat() / displayTarget.toFloat()) else 0f
+    val (displayCount, progress) = remember(dailyGoals, customGoals, isDailyVisible) {
+        calculateHomeDisplayStats(dailyGoals, customGoals, isDailyVisible)
+    }
 
     val rotation by animateFloatAsState(
         targetValue = if (isDailyVisible) 0f else 180f,
@@ -94,110 +87,130 @@ fun HomeScreen(
     )
 
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-            .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+        modifier = modifier.fillMaxSize().statusBarsPadding().background(MaterialTheme.colorScheme.background),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colorScheme.background,
-            tonalElevation = 2.dp
-        ) {
-            Box(modifier = Modifier.fillMaxWidth()) {
-                // Mosque Background
-                Image(
-                    painter = painterResource(id = R.drawable.mosque),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(140.dp)
-                        .align(Alignment.BottomCenter)
-                        .alpha(0.2f),
-                    contentScale = ContentScale.FillWidth,
-                    colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
-                        MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-                    )
-                )
+        HomeHeaderSurface(
+            userName = userName,
+            streak = streak,
+            syncStatus = syncStatus,
+            displayCount = displayCount,
+            progress = progress,
+            showCounterCircle = settings.showCounterCircle,
+            language = language,
+            onSyncClick = { viewModel.syncToCloud() },
+            onFlip = { isDailyVisible = !isDailyVisible },
+            onManageGoals = { onManageGoals(isDailyVisible) }
+        )
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    HeaderSection(
-                        userName = userName,
-                        streak = streak,
-                        syncStatus = syncStatus,
-                        onSyncClick = { viewModel.syncToCloud() },
-                        onFlip = { isDailyVisible = !isDailyVisible },
-                        onManageGoals = { onManageGoals(isDailyVisible) }
-                    )
+        HomeGoalFlipper(
+            rotation = rotation,
+            dailyGoals = dailyGoals,
+            customGoals = customGoals,
+            onGoalClick = onGoalClick,
+            modifier = Modifier.fillMaxWidth().weight(1f).padding(bottom = 8.dp)
+        )
+    }
+}
 
-                    Box(
-                        modifier = Modifier.padding(bottom = if (settings.showCounterCircle) 0.dp else 24.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        if (settings.showCounterCircle) {
-                            RedesignedCircularProgress(
-                                progress = progress,
-                                currentCount = formatNumber(displayCount, language),
-                                size = 170.dp
-                            )
-                        } else {
-                            Text(
-                                text = formatNumber(displayCount, language),
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Center,
-                                maxLines = 1,
-                                softWrap = false,
-                                style = MaterialTheme.typography.displayLarge.copy(
-                                    fontSize = 84.sp,
-                                    fontWeight = FontWeight.Black,
-                                    letterSpacing = (-4).sp
-                                ),
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                }
-            }
-        }
+private fun calculateHomeDisplayStats(
+    dailyGoals: List<TasbeehGoal>,
+    customGoals: List<TasbeehGoal>,
+    isDailyVisible: Boolean
+): Pair<Int, Float> {
+    val count = if (isDailyVisible) dailyGoals.sumOf { it.currentCount } else customGoals.sumOf { it.currentCount }
+    val target = if (isDailyVisible) dailyGoals.sumOf { it.targetCount } else customGoals.sumOf { it.targetCount }
+    val progress = if (target > 0) (count.toFloat() / target.toFloat()) else 0f
+    return Pair(count, progress)
+}
 
-        // Goal list container takes all remaining space
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(bottom = 8.dp) // Small padding to avoid touching the nav bar directly
-        ) {
-            Column(
+@Composable
+private fun HomeHeaderSurface(
+    userName: String,
+    streak: Int,
+    syncStatus: SyncStatus,
+    displayCount: Int,
+    progress: Float,
+    showCounterCircle: Boolean,
+    language: String,
+    onSyncClick: () -> Unit,
+    onFlip: () -> Unit,
+    onManageGoals: () -> Unit
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.background,
+        tonalElevation = 2.dp
+    ) {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            Image(
+                painter = painterResource(id = R.drawable.mosque),
+                contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .graphicsLayer {
-                        rotationY = rotation
-                        cameraDistance = 12f * density
-                    }
+                    .height(140.dp)
+                    .align(Alignment.BottomCenter)
+                    .alpha(0.2f),
+                contentScale = ContentScale.FillWidth,
+                colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
+                    MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                )
+            )
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
             ) {
-                if (rotation <= 90f) {
-                    // Front side: Daily Goals
-                    GoalSectionContent(
-                        goals = dailyGoals,
-                        onGoalClick = onGoalClick,
-                        isCustom = false
-                    )
-                } else {
-                    // Back side: Custom Goals
-                    Column(Modifier.graphicsLayer { rotationY = 180f }) {
-                        GoalSectionContent(
-                            goals = customGoals,
-                            onGoalClick = onGoalClick,
-                            isCustom = true
-                        )
-                    }
-                }
+                HeaderSection(
+                    userName = userName,
+                    streak = streak,
+                    syncStatus = syncStatus,
+                    onSyncClick = onSyncClick,
+                    onFlip = onFlip,
+                    onManageGoals = onManageGoals
+                )
+                HomeCounterDisplay(
+                    showCounterCircle = showCounterCircle,
+                    progress = progress,
+                    displayCount = displayCount,
+                    language = language
+                )
             }
+        }
+    }
+}
+
+@Composable
+private fun HomeCounterDisplay(
+    showCounterCircle: Boolean,
+    progress: Float,
+    displayCount: Int,
+    language: String
+) {
+    Box(
+        modifier = Modifier.padding(bottom = if (showCounterCircle) 0.dp else 24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        if (showCounterCircle) {
+            RedesignedCircularProgress(
+                progress = progress,
+                currentCount = formatNumber(displayCount, language),
+                size = 170.dp
+            )
+        } else {
+            Text(
+                text = formatNumber(displayCount, language),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                softWrap = false,
+                style = MaterialTheme.typography.displayLarge.copy(
+                    fontSize = 84.sp,
+                    fontWeight = FontWeight.Black,
+                    letterSpacing = (-4).sp
+                ),
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }

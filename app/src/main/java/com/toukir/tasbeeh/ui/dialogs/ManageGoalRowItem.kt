@@ -1,23 +1,10 @@
-package com.toukir.tasbeeh.ui
+package com.toukir.tasbeeh.ui.dialogs
 
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +22,7 @@ import com.toukir.tasbeeh.GoalDuration
 import com.toukir.tasbeeh.R
 import com.toukir.tasbeeh.TasbeehGoal
 import com.toukir.tasbeeh.data.AdhkarLibrary
+import com.toukir.tasbeeh.ui.DurationSelector
 import com.toukir.tasbeeh.ui.common.StudioIcon
 import com.toukir.tasbeeh.ui.theme.StudioIcons
 
@@ -51,15 +39,9 @@ fun ManageGoalRowItem(
     onUpdateDuration: (GoalDuration) -> Unit,
     onRemove: () -> Unit
 ) {
-    val context = LocalContext.current
     val rowModifier = if (isDragging) {
-        Modifier
-            .zIndex(1f)
-            .graphicsLayer { translationY = draggingOffset }
-            .shadow(8.dp, RoundedCornerShape(16.dp))
-    } else {
-        Modifier
-    }
+        Modifier.zIndex(1f).graphicsLayer { translationY = draggingOffset }.shadow(8.dp, RoundedCornerShape(16.dp))
+    } else Modifier
 
     Surface(
         modifier = rowModifier.fillMaxWidth(),
@@ -68,62 +50,70 @@ fun ManageGoalRowItem(
         border = if (isDragging) androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                StudioIcon(
-                    iconRes = StudioIcons.Checklist, 
-                    contentDescription = stringResource(R.string.dialog_reorder_content_desc),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier
-                        .size(24.dp)
-                        .pointerInput(goal.id) {
-                            detectDragGesturesAfterLongPress(
-                                onDragStart = { onStartDrag() },
-                                onDrag = { change, dragAmount ->
-                                    change.consume()
-                                    onDragChange(dragAmount.y)
-                                },
-                                onDragEnd = { onStopDrag() },
-                                onDragCancel = { onStopDrag() }
-                            )
-                        }
-                )
-
-                Text(
-                    AdhkarLibrary.getLocalizedName(context, goal.name), 
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    modifier = Modifier.weight(1f),
-                    maxLines = 1
-                )
-                
-                OutlinedTextField(
-                    value = goal.targetCount.toString(),
-                    onValueChange = onUpdateTargetCount,
-                    placeholder = { Text(stringResource(R.string.dialog_target_count_placeholder), style = MaterialTheme.typography.bodySmall) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    modifier = Modifier.width(75.dp).height(50.dp),
-                    singleLine = true,
-                    shape = RoundedCornerShape(12.dp),
-                    textStyle = MaterialTheme.typography.bodyMedium,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedContainerColor = Color.Transparent
-                    )
-                )
-                
-                IconButton(onClick = onRemove, modifier = Modifier.size(36.dp)) {
-                    StudioIcon(StudioIcons.Delete, stringResource(R.string.remove), tint = MaterialTheme.colorScheme.error)
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(8.dp))
-            DurationSelector(
-                selectedDuration = goal.duration,
-                onDurationSelected = onUpdateDuration
+            ManageGoalRowHeader(
+                goal = goal,
+                onStartDrag = onStartDrag,
+                onDragChange = onDragChange,
+                onStopDrag = onStopDrag,
+                onUpdateTargetCount = onUpdateTargetCount,
+                onRemove = onRemove
             )
+            Spacer(modifier = Modifier.height(8.dp))
+            DurationSelector(selectedDuration = goal.duration, onDurationSelected = onUpdateDuration)
+        }
+    }
+}
+
+@Composable
+private fun ManageGoalRowHeader(
+    goal: TasbeehGoal,
+    onStartDrag: () -> Unit,
+    onDragChange: (Float) -> Unit,
+    onStopDrag: () -> Unit,
+    onUpdateTargetCount: (String) -> Unit,
+    onRemove: () -> Unit
+) {
+    val context = LocalContext.current
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        StudioIcon(
+            iconRes = StudioIcons.Checklist,
+            contentDescription = stringResource(R.string.dialog_reorder_content_desc),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(24.dp).pointerInput(goal.id) {
+                detectDragGesturesAfterLongPress(
+                    onDragStart = { onStartDrag() },
+                    onDrag = { change, dragAmount ->
+                        change.consume()
+                        onDragChange(dragAmount.y)
+                    },
+                    onDragEnd = { onStopDrag() },
+                    onDragCancel = { onStopDrag() }
+                )
+            }
+        )
+        Text(
+            AdhkarLibrary.getLocalizedName(context, goal.name),
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier.weight(1f),
+            maxLines = 1
+        )
+        OutlinedTextField(
+            value = goal.targetCount.toString(),
+            onValueChange = onUpdateTargetCount,
+            placeholder = { Text(stringResource(R.string.dialog_target_count_placeholder), style = MaterialTheme.typography.bodySmall) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            modifier = Modifier.width(75.dp).height(50.dp),
+            singleLine = true,
+            shape = RoundedCornerShape(12.dp),
+            textStyle = MaterialTheme.typography.bodyMedium,
+            colors = OutlinedTextFieldDefaults.colors(unfocusedContainerColor = Color.Transparent, focusedContainerColor = Color.Transparent)
+        )
+        IconButton(onClick = onRemove, modifier = Modifier.size(36.dp)) {
+            StudioIcon(StudioIcons.Delete, stringResource(R.string.remove), tint = MaterialTheme.colorScheme.error)
         }
     }
 }

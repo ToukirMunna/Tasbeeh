@@ -72,7 +72,7 @@ fun DayStatItem(
                     .background(color),
                 contentAlignment = Alignment.Center
             ) {
-                Text(initial, color = Color.White, fontWeight = FontWeight.Bold)
+                Text(initial, color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
             }
             
             Spacer(modifier = Modifier.width(12.dp))
@@ -124,7 +124,7 @@ fun TasbeehStatItem(
                     .background(color),
                 contentAlignment = Alignment.Center
             ) {
-                Text(rank, color = Color.White, fontWeight = FontWeight.Bold)
+                Text(rank, color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
             }
             
             Spacer(modifier = Modifier.width(16.dp))
