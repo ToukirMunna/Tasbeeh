@@ -1,8 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
+}
+
+val localPropsProvider = providers.fileContents(
+    rootProject.layout.projectDirectory.file("local.properties")
+).asText.map { content ->
+    Properties().apply { load(content.reader()) }
 }
 
 android {
@@ -19,10 +27,24 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            val keystoreFile = rootProject.layout.projectDirectory.file("release-key-TKR.jks").asFile
+            if (keystoreFile.exists()) {
+                val localProps = localPropsProvider.orNull
+                storeFile = keystoreFile
+                storePassword = localProps?.getProperty("RELEASE_STORE_PASSWORD").orEmpty()
+                keyAlias = localProps?.getProperty("RELEASE_KEY_ALIAS").orEmpty()
+                keyPassword = localProps?.getProperty("RELEASE_KEY_PASSWORD").orEmpty()
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
