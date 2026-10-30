@@ -2,6 +2,11 @@
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
 
+# Optimization & Obfuscation Flags:
+# Disable bytecode optimization passes and class/member renaming for fast shrinking builds
+-dontoptimize
+-dontobfuscate
+
 # Essential attributes for Gson and Runtime checks
 -keepattributes SourceFile,LineNumberTable,Signature,InnerClasses,EnclosingMethod,*Annotation*
 
