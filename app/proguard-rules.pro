@@ -23,7 +23,7 @@
 # Keep ALL of your own code. We only want to shrink the libraries (Compose, AndroidX).
 # This prevents the minifier from breaking your logic or data classes.
 # ----------------------------------------------------------------------------
--keep class com.toukir.tasbeeh.** { *; }
+-keep class com.toukirstudio.tasbeeh.** { *; }
 
 # If you use other libraries that need keeping, add them here.
 # But usually, just keeping your own package is enough to prevent logical breaks

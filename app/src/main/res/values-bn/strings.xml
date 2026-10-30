@@ -1,5 +1,6 @@
-<resources>
+﻿<resources>
     <string name="app_name">তাসবীহ</string>
+    <string name="app_name_debug">তাসবীহ (ডিবাগ)</string>
     
     <!-- Navigation -->
     <string name="nav_home">হোম</string>

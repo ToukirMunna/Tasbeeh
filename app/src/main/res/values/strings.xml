@@ -1,5 +1,6 @@
-<resources>
+﻿<resources>
     <string name="app_name">Tasbeeh</string>
+    <string name="app_name_debug">Tasbeeh (Debug)</string>
     
     <!-- Navigation -->
     <string name="nav_home">Home</string>

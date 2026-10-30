@@ -18,9 +18,9 @@
 - Author: `Toukir Munna <toukirahmhedmunna@gmail.com>`, default branch: `main`.
 
 ### 4. Architecture & Line Ceilings
-- Max 50 lines per `@Composable` function body (excluding parameter signatures).
-- Max 250 lines per production kt file (`app/src/main/`). Never exceed this limit.
-- If a Composable exceeds 50 lines, extract logical sections into `private` sub-composables or separate component files.
+- Max 100 lines per `@Composable` function body (excluding parameter signatures).
+- Max 350 lines per production kt file (`app/src/main/`). Never exceed this limit.
+- If a Composable exceeds 80 lines, extract logical sections into `private` sub-composables or separate component files.
 - Test suites (`app/src/test/`): If approaching 250 lines, split into domain-specific test classes rather than reducing test coverage.
 - UDF Layer Purity:
   - `ui/`: Rendering & state collection only. Zero business logic. Always collect via lifecycle-aware flows.
@@ -64,14 +64,14 @@
   1. Device Check: If `$dev` is empty: report "No active ADB device detected" immediately and STOP. No retry loops.
   2. Build APK: `.\gradlew.bat --daemon assembleDebug`
   3. Install: `& $adb -s $dev install -r app\build\outputs\apk\debug\app-debug.apk`
-  4. Launch: `& $adb -s $dev shell am start -n com.toukir.tasbeeh.pro/com.toukir.tasbeeh.MainActivity`
+  4. Launch: `& $adb -s $dev shell am start -n com.toukirstudio.tasbeeh.debug/com.toukirstudio.tasbeeh.MainActivity`
 - Zero Polling Loops: Never poll progress, loop, or sleep on background tasks/builds/subagents. Stop tools and await reactive notifications.
 
 ### 11. Pinned Toolchain & Application Identifiers
 - Target Hardware: Physical devices via wireless ADB (ARM64 target).
-- Package Name: `com.toukir.tasbeeh`
-- ApplicationId: `com.toukir.tasbeeh.pro`
-- Main Activity: `com.toukir.tasbeeh.MainActivity`
+- Package Name: `com.toukirstudio.tasbeeh`
+- ApplicationId: `com.toukirstudio.tasbeeh` (Debug: `com.toukirstudio.tasbeeh.debug`)
+- Main Activity: `com.toukirstudio.tasbeeh.MainActivity`
 - Java Target: `JavaVersion.VERSION_17` (using OpenJDK 21 at `C:\Java\jdk-21`).
 - Dependencies: Do not add or replace dependencies without explicit instructions.
 

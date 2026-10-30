@@ -14,11 +14,11 @@ val localPropsProvider = providers.fileContents(
 }
 
 android {
-    namespace = "com.toukir.tasbeeh"
+    namespace = "com.toukirstudio.tasbeeh"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.toukir.tasbeeh.pro"
+        applicationId = "com.toukirstudio.tasbeeh"
         minSdk = 29
         targetSdk = 36
         versionCode = 1
@@ -41,7 +41,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+            manifestPlaceholders["appLabel"] = "@string/app_name_debug"
+        }
         release {
+            manifestPlaceholders["appLabel"] = "@string/app_name"
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")

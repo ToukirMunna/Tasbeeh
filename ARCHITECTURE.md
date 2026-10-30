@@ -1,8 +1,9 @@
 # 🏗️ System Architecture & Technical Reference
 
-**Project Name**: Tasbeeh Pro  
-**Package Name**: `com.toukir.tasbeeh`  
-**Application ID**: `com.toukir.tasbeeh.pro`  
+**Project Name**: Tasbeeh  
+**Package Name**: `com.toukirstudio.tasbeeh`  
+**Application ID (Release)**: `com.toukirstudio.tasbeeh`  
+**Application ID (Debug)**: `com.toukirstudio.tasbeeh.debug`  
 
 ---
 
@@ -45,7 +46,7 @@
 ## 3. Target Package Hierarchy (Decomposition Roadmap)
 
 ```text
-com.toukir.tasbeeh/
+com.toukirstudio.tasbeeh/
 ├── data/
 │   ├── AchievementsData.kt        <-- Milestone & Streak Achievements
 │   ├── AdhkarData.kt              <-- Curated Islamic Adhkar Library

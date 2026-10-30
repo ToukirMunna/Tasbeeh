@@ -14,6 +14,16 @@
 
 <!-- PREPEND NEW ENTRIES BELOW THIS LINE -->
 
+### [2026-10-30 11:15 AM] - Refactor Package Name to `com.toukirstudio.tasbeeh` & Configure Dedicated Debug Flavor
+* **Files Modified**: `app/build.gradle.kts`, `app/src/main/AndroidManifest.xml`, `app/proguard-rules.pro`, `app/google-services.json`, `app/src/main/res/values/strings.xml`, `app/src/main/res/values-bn/strings.xml`, `ARCHITECTURE.md`, `AGENTS.md`, and all 85+ production and test Kotlin source files moved from `com.toukir.tasbeeh` to `com.toukirstudio.tasbeeh`
+* **Changes Made**:
+  - **Namespace & Package Migration**: Refactored root package name and namespace from `com.toukir.tasbeeh` to `com.toukirstudio.tasbeeh` across main, test, and androidTest source roots. Batch-migrated all package declarations and imports.
+  - **Dedicated Debug Flavor (`.debug`)**: Configured `applicationIdSuffix = ".debug"` and `versionNameSuffix = "-debug"` in `buildTypes.debug`. Production builds retain root `com.toukirstudio.tasbeeh`.
+  - **Dynamic Application Labels**: Added manifest placeholders so debug builds are labeled `Tasbeeh (Debug)` / `তাসবীহ (ডিবাগ)` and release builds are labeled `Tasbeeh` / `তাসবীহ`.
+  - **ProGuard & Google Services Preparedness**: Updated `-keep class com.toukirstudio.tasbeeh.**` in `proguard-rules.pro`, and registered interim client identifiers in `google-services.json` so both `debug` and `release` compile cleanly.
+  - **Verification**: Attached to warm Gradle daemon and ran `testDebugUnitTest` and `assembleDebug` with 100% pass rate.
+* **Rationale & Impact**: Establishes proper namespace branding under `com.toukirstudio.tasbeeh`, enables simultaneous side-by-side device installations of debug and production builds without APK package collision, and sets up clean separation for Firebase project integration.
+
 ### [2026-09-09 12:25 PM] - Dynamic Language Switching, Zero-Leak Bengali Localization & Theme-Adaptive Vector Avatars
 * **Files Modified**: `app/src/main/java/com/toukir/tasbeeh/MainActivity.kt`, `app/src/main/java/com/toukir/tasbeeh/utils/LanguageUtils.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/common/UserAvatar.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/ProfileHeader.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/LeaderboardComponents.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/dialogs/NameInputDialog.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/HomeScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/HomeComponents.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/LongTermGoals.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/GoalProgressCard.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/TasbeehsListScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/TasbeehListCard.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/TasbeehDetailsScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/DailyHistoryComponents.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/DetailStatsScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/ProfileHistory.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/YearExpandableGroup.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/CounterScreen.kt`, `app/src/main/java/com/toukir/tasbeeh/ui/NavScreens.kt`, `app/src/main/res/drawable/female.jpg`, `app/src/main/res/drawable/male.jpg`
 * **Changes Made**:
